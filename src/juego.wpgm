@@ -3,12 +3,17 @@ import mario.*
 import juego.*
 import kong.*
 import pauline.*
-
+import barriles.*
 program tablero {
-	game.addVisual(escenario1)
+	game.addVisual(escenario2)
+	//game.addVisual(barrilEnMovimiento)
+	game.addVisual(barril)
 	game.addVisual(kong)
 	game.addVisual(pauline)
 	game.addVisualCharacter(mario)
+	//barrilEnMovimiento.movete()
+	mario.iniciarMario()
+	kong.iniciarKong()
 	game.width(18)
 	game.height(18)
 	game.cellSize(50)

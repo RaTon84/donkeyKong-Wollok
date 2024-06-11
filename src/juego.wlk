@@ -1,7 +1,7 @@
 import wollok.game.*
 
 
-object escenario1{
+object escenario2{
 	method position(){
 		return game.at(0,0)
 	}
