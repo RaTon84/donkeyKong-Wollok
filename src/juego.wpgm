@@ -5,6 +5,7 @@ import kong.*
 import pauline.*
 import barriles.*
 program tablero {
+	const rain = game.sound("assets/sonidos/background-1.mp3")
 	game.addVisual(escenario2)
 	//game.addVisual(barrilEnMovimiento)
 	game.addVisual(barril)
@@ -18,6 +19,8 @@ program tablero {
 	game.height(18)
 	game.cellSize(50)
 	game.title("Donkey Kong (wollok Version)")
+	rain.shouldLoop(true)
+	game.schedule(500, { rain.play()} )
 	game.start()
 }
  
