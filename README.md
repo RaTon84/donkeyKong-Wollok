@@ -1,1 +1,1 @@
-PUSHEAR EN LA BRANCH DE CADA UNO
+Preguntar antes de pushear
