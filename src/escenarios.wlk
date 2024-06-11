@@ -7,5 +7,7 @@ object stage1{
 	}
 	method image(){return "assets/fondo/fondoNvl1.png"
 	}
+	  
+	
 }
 

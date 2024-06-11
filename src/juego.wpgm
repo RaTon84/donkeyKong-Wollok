@@ -1,8 +1,5 @@
-import wollok.game.*
-import mario.*
 import juego.*
-import kong.*
-import pauline.*
+
 
 program jugar {
 	juego.iniciar()
