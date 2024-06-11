@@ -4,18 +4,7 @@ import juego.*
 import kong.*
 import pauline.*
 
-program tablero {
-	game.title("Donkey Kong (wollok Version)")
-	game.addVisual(escenario1)
-	game.addVisual(kong)
-	game.addVisual(pauline)
-	game.addVisual(mario)
-
-	game.width(18)
-	game.height(18)
-	game.cellSize(50)
-
-	mario.inicioMario()
-	game.start()
+program jugar {
+	juego.iniciar()
 }
  

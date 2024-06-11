@@ -1,11 +1,26 @@
 import wollok.game.*
+import mario.*
+import kong.*
+import pauline.*
+import escenarios.*
 
+object juego{
+	method iniciar(){
+	game.title("Donkey Kong (wollok Version)")
+	game.addVisual(stage1)
+	game.addVisual(kong)
+	game.addVisual(pauline)
+	game.addVisual(mario)
 
-object escenario1{
-	method position(){
-		return game.at(0,0)
+	game.width(18)
+	game.height(18)
+	game.cellSize(50)
+
+	mario.inicioMario()
+	game.start()
 	}
-	method image(){return "assets/fondo/fondoNvl1.png"
-	}
-	
 }
+
+
+
+
