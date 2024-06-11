@@ -18,7 +18,6 @@ object juego{
 
 	mario.inicioMario()
 	game.start()
-	}
 }
 
 

@@ -3,13 +3,11 @@ import animacion.*
 
 object mario {
 	var property position=game.at(0,1)
-	
+  
 	method image()= animacionMario.image()
 	
 	
 	method inicioMario(){
-		
-		
 		keyboard.right().onPressDo{
 			self.moverDerecha()
 		}
@@ -26,6 +24,7 @@ object mario {
 			self.saltar()
 		}
 }
+
 	method moverDerecha(){
 		const ancho = game.width()
 		position = game.at(if(position.x()+1<ancho)position.x()+1 else position.x() ,position.y())
@@ -54,10 +53,8 @@ object mario {
 	
 	method saltar(){
 	}
-
-	
-
 }
+
 
 
 

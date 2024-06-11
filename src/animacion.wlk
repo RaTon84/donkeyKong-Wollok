@@ -1,5 +1,4 @@
 object animacionMario {
-	
 	var direccion="derecha"
 	var fotogramaActual=0
 	
@@ -14,9 +13,6 @@ object animacionMario {
 	method image(){
 		return "assets/personajes/mario/"+direccion+"-"+fotogramaActual.toString()+".png"
 	}
-	
-
-	
-	
 }
 	
+
