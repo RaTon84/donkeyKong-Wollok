@@ -1,3 +1,6 @@
+import mario.*
+import escenarios.*
+
 object animacionMario {
 	
 	var direccion="derecha"
@@ -13,10 +16,36 @@ object animacionMario {
 	
 	method image(){
 		return "assets/personajes/mario/"+direccion+"-"+fotogramaActual.toString()+".png"
+	}	
+	
+	
+	//ANIMAR DIRECCION SI SE PUEDE
+	
+	method animarAbajo(){
+		self.direccion("abajo")
+		self.siguienteFotograma()
+	}
+
+	method animarArriba(){
+		self.direccion("arriba")
+		self.siguienteFotograma()
+	}
+
+	method animarIzquierda(){
+		self.direccion("izquierda")
+		self.siguienteFotograma()
+	}
+	
+	method animarDerecha(){
+		self.direccion("derecha")
+		self.siguienteFotograma()
+	}
+	
+	method animarSalto(){
+		self.direccion("salto")
+		self.siguienteFotograma()
 	}
 	
 
-	
-	
 }
 	
