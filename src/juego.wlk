@@ -8,10 +8,11 @@ import barriles.*
 
 object juego{
 	// solo pruebo los barriles-----------------------
-	const barril1 = new Barril()
 	method tirarBarril(){
+		const barril1 = new Barril()
 		game.addVisual(barril1)
-		barril1.animacion(barril1.barriles())
+		barril1.animacion()
+		barril1.recorrerEscenario()
 	}
 	//---------------------------------------------
 	method iniciar(){
@@ -21,7 +22,7 @@ object juego{
 	game.addVisual(mario)
 	mario.inicioMario()
 	game.addVisual(kong)
-	kong.animacion(kong.tirarBarriles())
+	kong.animacion()
 	game.addVisual(barriles)
 	game.schedule(2500,{self.tirarBarril()})
 	
