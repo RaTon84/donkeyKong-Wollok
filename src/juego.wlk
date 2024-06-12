@@ -18,12 +18,14 @@ object juego{
 	method iniciar(){
 	game.title("Donkey Kong (wollok Version)")
 	game.addVisual(stage1)
+	game.addVisual(elementoStage)
 	game.addVisual(pauline)
 	game.addVisual(mario)
-	mario.inicioMario()
+	mario.inicioMario() 
 	game.addVisual(kong)
 	kong.animacion()
 	game.addVisual(barriles)
+	pauline.animacion()
 	game.schedule(2500,{self.tirarBarril()})
 	
 	musica.activarMusica()

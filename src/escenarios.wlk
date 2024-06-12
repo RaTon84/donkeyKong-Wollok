@@ -26,3 +26,9 @@ object stage1{
 	method hayEscaleraArriba()= escaleras.any{v=>v==mario.obtenerPosicionDeYMas1()}
 }
 
+
+object elementoStage{
+	var property image = "assets/objects/88.png"
+	var property position = game.at(0,1)
+}
+
