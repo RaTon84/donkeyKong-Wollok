@@ -8,12 +8,18 @@ import barriles.*
 
 object juego{
 	// solo pruebo los barriles-----------------------
-	method tirarBarril(){
-		const barril1 = new Barril()
-		game.addVisual(barril1)
-		barril1.animacion()
-		barril1.recorrerEscenario()
-	}
+	const b1 = new Barril()
+	const b2 = new Barril()
+	const b3 = new Barril()
+	const b4 = new Barril()
+	const b5 = new Barril()
+	const b6 = new Barril()
+	
+	method tirarBarril(barril){		
+		game.addVisual(barril)
+		barril.animacion()
+		barril.recorrerEscenario()
+	}	
 	//---------------------------------------------
 	method iniciar(){
 	game.title("Donkey Kong (wollok Version)")
@@ -27,8 +33,12 @@ object juego{
 	kong.animacion()
 	game.addVisual(barriles)
 	pauline.animacion()
-	game.schedule(2500,{self.tirarBarril()})
-	
+	game.schedule(2500,{self.tirarBarril(b1)})	
+	game.schedule(7000,{self.tirarBarril(b2)})
+	game.schedule(11500,{self.tirarBarril(b3)})
+	game.schedule(16000,{self.tirarBarril(b4)})	
+	game.schedule(20500,{self.tirarBarril(b5)})
+	game.schedule(25000,{self.tirarBarril(b6)})
 	musica.activarMusica()
 
 	game.width(18)
