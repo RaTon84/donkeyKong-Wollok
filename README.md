@@ -1,1 +1,1 @@
-PUSHEAR EN LA BRANCH DE CADA UNO
+Avisar al grupo antes de pushear
