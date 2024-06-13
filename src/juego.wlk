@@ -19,6 +19,7 @@ object juego{
 	game.title("Donkey Kong (wollok Version)")
 	game.addVisual(stage1)
 	game.addVisual(elementoStage)
+	game.addVisual(mazo)
 	game.addVisual(pauline)
 	game.addVisual(mario)
 	mario.inicioMario() 

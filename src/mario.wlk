@@ -4,9 +4,19 @@ import animacion.*
 import escenarios.*
 import sonido.*
 object mario {
+	var vidas=2
+	var puntos = 0
 	const velocidad=100
 	var property position=game.at(1,1)
 	method image()= animacionMario.image()
+	
+	method juegoTerminado()= vidas==0
+
+    method perderVida(){vidas=-1}
+
+    method sumaPuntos(cantidad){puntos+=cantidad}
+ 
+   	method eliminarBarril(){self.sumaPuntos(50)} 
 	
 		//KEYBOARD
 	method inicioMario(){
@@ -131,5 +141,28 @@ object mario {
 	}
 	
 
+//// Mazo de Mario
+}
 
+object mazo {
+	
+	var property position= game.at(2,6)
+	
+	method image(){
+	return  "assets/objects/59.png" }
+		
+	
+		
+	method colisionadoPor(personaje){
+		personaje.tieneMazo(true)
+		// personaje.transformar(mario)
+		game.removeVisual(self)
+		
+					
+	}
+	
+	
+	
+	
+	
 }
