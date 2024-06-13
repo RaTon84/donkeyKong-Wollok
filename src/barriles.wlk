@@ -67,4 +67,18 @@ class Barril{
 	}
 	
 	method recorrerEscenario(){game.onTick(velocidad, "recorrido-barril", {self.rodar()})}
-}
+		method colisionadoPor(personaje){
+			if(personaje.tieneMazo()){
+			personaje.eliminarBarril()
+			
+			}
+
+			else {
+				personaje.perderVida()
+			
+			}
+		
+			game.removeVisual(self)
+		
+		}
+	}

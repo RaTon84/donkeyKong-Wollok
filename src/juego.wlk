@@ -7,6 +7,7 @@ import sonido.*
 import barriles.*
 
 object juego{
+	
 	// solo pruebo los barriles-----------------------
 	const b1 = new Barril()
 	const b2 = new Barril()
@@ -15,11 +16,14 @@ object juego{
 	const b5 = new Barril()
 	const b6 = new Barril()
 	
+	
 	method tirarBarril(barril){		
 		game.addVisual(barril)
 		barril.animacion()
 		barril.recorrerEscenario()
+		game.whenCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
 	}	
+	
 	//---------------------------------------------
 	method iniciar(){
 	game.title("Donkey Kong (wollok Version)")

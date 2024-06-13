@@ -6,6 +6,7 @@ import sonido.*
 object mario {
 	var vidas=2
 	var puntos = 0
+	var property tieneMazo=false
 	const velocidad=100
 	var property position=game.at(1,1)
 	method image()= animacionMario.image()
@@ -172,7 +173,7 @@ object mario {
 
 object mazo {
 	
-	var property position= game.at(2,6)
+	var property position= game.at(2,7)
 	
 	method image(){
 	return  "assets/objects/59.png" }
@@ -181,11 +182,12 @@ object mazo {
 		
 	method colisionadoPor(personaje){
 		personaje.tieneMazo(true)
-		// personaje.transformar(mario)
+		//personaje.transformar(mario)
 		game.removeVisual(self)
 		
 					
 	}
+	
 	
 	
 	
