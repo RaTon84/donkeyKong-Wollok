@@ -74,7 +74,8 @@ object mario {
 	
 	method saltarSiSePuede(){
 			if(self.validarSalto()){
-			self.moverArribaSinCondicion()		 																
+			self.moverArribaSinCondicion()
+			animacionMario.animarSalto()		 																
 			game.schedule(velocidad*3,{self.caidaSalto()})	
 		}
 	}
