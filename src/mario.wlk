@@ -51,15 +51,13 @@ object mario {
 	
 	method moverArriba(){
 		self.moverArribaSiSePuede()
-		animacionMario.animarArriba()
+		self.animarArribaSiSePuede()
 	}
 
 	method moverAbajo(){
 		self.moverAbajoSiSePuede()
-		animacionMario.animarAbajo()
+		self.animarAbajoSiSePuede()
 	}
-	
-
 	
 	method saltar(){
 			self.saltarSiSePuede()																									  
@@ -67,16 +65,18 @@ object mario {
 			
 	
 	}
-
 	
 
+	
+
 
 	
-	//OBTIENE POSITION CON Y +- 1
+	//OBTIENE POSITION VIGA Y ESCALERA
 	
-	method obtenerPosicionDeYMenos1()= game.at(position.x(),position.y()-1)
+	method obtenerPosicionAbajo()= game.at(position.x(),position.y()-1)
 	
-	method obtenerPosicionDeYMas1()= game.at(position.x(),position.y()+1)
+	method obtenerPosicionArriba()= game.at(position.x(),position.y()+1)
+	
 	
 	
 	
@@ -89,7 +89,7 @@ object mario {
 			game.schedule(velocidad*3,{self.caidaSalto()})	
 		}
 	}
-		method caidaSalto(){
+	method caidaSalto(){
 		// este metodo hace la animacion de caida del salto															
 		position = game.at(position.x(),if(position.y()-1>=0)position.y()-1 else position.y())				
 		animacionMario.direccion("caidaSalto")
@@ -108,19 +108,22 @@ object mario {
 	}
 	
 	method moverAbajoSiSePuede(){
-		position = game.at(position.x(),if(position.y()-1>=0 and not stage1.hayVigaDebajo())position.y()-1 else position.y())
+		if (stage1.hayEscaleraDebajo())
+		position = game.at(position.x(),if(position.y()-1>=0)position.y()-1 else position.y())
 	}
 	
 	method moverDerechaSiSePuede(){
+		if (stage1.hayVigaDebajo()){
 		const ancho = game.width()
-		position = game.at(if(position.x()+1<ancho)position.x()+1 else position.x() ,position.y())
+		position = game.at(if(position.x()+1<ancho)position.x()+1 else position.x() ,position.y())}
 	}
 	
 	method moverIzquierdaSiSePuede(){
+		if (stage1.hayVigaDebajo())
 		position = game.at(if(position.x()-1>=0)position.x()-1 else position.x() ,position.y())
 	}
 
-		method validarSalto(){
+	method validarSalto(){
 			
 		const posicionParaSaltar = [game.at(0,1),game.at(1,1),game.at(2,1), game.at(3,1), game.at(4,1) ,game.at(5,1),game.at(6,1),game.at(7,1),
 		game.at(8,1), game.at(9,1) ,game.at(10,1),game.at(11,1),game.at(12,1), game.at(13,1),game.at(14,1), 
@@ -138,11 +141,34 @@ object mario {
 		
 		return posicionParaSaltar.any{mensaje => mensaje == position}
 	
+	
+	}
+	
+	
+	// ANIMAR SI SE PUEDE
+	
+	
+	method animarArribaSiSePuede(){
+		if (stage1.hayEscaleraArriba())
+		animacionMario.animarArriba()
+	}
+	
+	method animarAbajoSiSePuede(){
+		if (not stage1.hayVigaDebajo())
+		animacionMario.animarArriba()
 	}
 	
 
+	}
+	
+
+	
+
+	
+	
+
 //// Mazo de Mario
-}
+
 
 object mazo {
 	
