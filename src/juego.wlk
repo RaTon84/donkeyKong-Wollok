@@ -8,7 +8,7 @@ import barriles.*
 
 object juego{
 	
-	// solo pruebo los barriles-----------------------
+ 	// solo pruebo los barriles-----------------------
 	const b1 = new Barril()
 	const b2 = new Barril()
 	const b3 = new Barril()

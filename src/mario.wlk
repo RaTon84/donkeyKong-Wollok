@@ -70,14 +70,14 @@ object mario {
 		self.moverDerechaSiSePuede()
 		sonidoMario.deMovimiento()
 		animacionMario.animarDerecha()
-		if (not stage1.hayVigaDebajo()) self.caer()
+		if (stage1.hayCaidaDebajo()) self.caer()
 	}
 
 	method moverIzquierda(){
 		self.moverIzquierdaSiSePuede()
 		sonidoMario.deMovimiento()
 		animacionMario.animarIzquierda()
-		if (not stage1.hayVigaDebajo()) self.caer()
+		if (stage1.hayCaidaDebajo()) self.caer()
 	}
 	
 	method moverArriba(){

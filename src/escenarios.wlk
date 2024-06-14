@@ -14,6 +14,7 @@ object stage1{
 				game.at(15,7),game.at(15,8),game.at(2,12),game.at(2,10),game.at(2,11),game.at(5,12),game.at(5,10),game.at(5,11), game.at(15,14),game.at(15,13),game.at(5,118),
 				game.at(5,15),game.at(5,16),game.at(5,17),game.at(6,18),game.at(6,15),game.at(6,16),game.at(6,17),game.at(10,16),game.at(10,15)]
 	const property caidaBarril=[game.at(5,4),game.at(15,4),game.at(2,6),game.at(8,6),game.at(9,9),game.at(15,8),game.at(2,12),game.at(5,12),game.at(12,11),game.at(8,14),game.at(15,14)]//(da problemas al barril ,game.at(5,9))
+	const caidas=[game.at(17,3),game.at(0,5),game.at(17,8),game.at(0,11),game.at(17,13),game.at(11,15)]
 	
 	method position(){
 		return game.at(0,0)
@@ -22,6 +23,8 @@ object stage1{
 	}
 	
 	method hayVigaDebajo()= vigas.any{v=>v==mario.obtenerPosicionAbajo()}
+	
+	method hayCaidaDebajo()=caidas.any{c=>c==mario.obtenerPosicionAbajo()}
 	
 	method hayEscaleraArriba()= escaleras.any{v=>v==mario.obtenerPosicionArriba()}
 	
