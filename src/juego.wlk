@@ -24,6 +24,25 @@ object juego{
 		game.whenCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
 	}	
 	
+	/*method activarMazo(){
+		 const rain = game.sound("assets/sonidos/background-3.mp3")
+		 if(mario.tieneMazo()){
+		 	game.schedule(1000,{
+			//sonidoMario.deObjeto()
+		 	mazo.moverDerechaConMazo()
+		 	mazo.moverIzquierdaConMazo()
+		 	mario.saltar()
+		 	mario.caidaSalto()
+		 	rain.shouldLoop(true)
+			game.schedule(500, { rain.play()} )})
+			game.schedule(1, { rain.stop()} )
+			
+			game.removeVisual(mazo)	
+			mario.tieneMazo(false)	
+			}
+			*/
+		 
+	 
 	//---------------------------------------------
 	method iniciar(){
 	game.title("Donkey Kong (wollok Version)")
@@ -43,8 +62,8 @@ object juego{
 	game.schedule(16000,{self.tirarBarril(b4)})	
 	game.schedule(20500,{self.tirarBarril(b5)})
 	game.schedule(25000,{self.tirarBarril(b6)})
+	game.schedule(2500,{self.tirarBarril(b1)})
 	musica.activarMusica()
-
 	game.width(18)
 	game.height(18)
 	game.cellSize(50)

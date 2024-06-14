@@ -1,4 +1,4 @@
-
+import juego.*
 import wollok.game.*
 import animacion.*
 import escenarios.*
@@ -21,20 +21,30 @@ object mario {
 	
 		//KEYBOARD
 	method inicioMario(){
-		keyboard.right().onPressDo{
+		keyboard.d().onPressDo{
+		if(not tieneMazo){
 			self.moverDerecha()
 		}
-		keyboard.left().onPressDo{
-			self.moverIzquierda()		
+		else{mazo.moverDerechaConMazo()}
 		}
-		keyboard.up().onPressDo{
+		keyboard.a().onPressDo{
+		if(not tieneMazo){
+			self.moverIzquierda()
+		}
+		else{mazo.moverIzquierdaConMazo()}
+					
+		}
+		keyboard.w().onPressDo{
 			self.moverArriba()
 		}
-		keyboard.down().onPressDo{
+		keyboard.s().onPressDo{
 			self.moverAbajo()
 		}
 		keyboard.space().onPressDo{
 			self.saltar()
+		}
+		keyboard.enter().onPressDo{
+			juego.activarMazo()
 		}
 }		
 		//MOVIMIENTO
@@ -92,14 +102,18 @@ object mario {
 	method saltarSiSePuede(){
 			if(self.validarSalto()){
 			self.moverArribaSinCondicion()
-			animacionMario.animarSalto()		 																
+			animacionMario.animarSalto()											
 			game.schedule(velocidad*3,{self.caidaSalto()})	
 		}
 	}
 	method caidaSalto(){
 		// este metodo hace la animacion de caida del salto															
 		position = game.at(position.x(),if(position.y()-1>=0)position.y()-1 else position.y())				
-		animacionMario.direccion("caidaSalto")
+			if(not tieneMazo){
+				animacionMario.direccion("caidaSalto")	
+			}	
+			else {animacionMario.direccion("caidaSaltoMazo")}	
+	
 		animacionMario.siguienteFotograma()
 	}
 		
@@ -194,7 +208,19 @@ object mazo {
 					
 	}
 	
+	method moverDerechaConMazo(){
+		mario.moverDerechaSiSePuede()
+		sonidoMario.deMovimiento()
+		animacionMario.animarDerechaConMazo()
+		if (not stage1.hayVigaDebajo()) mario.caer()
+	}
 	
+	method moverIzquierdaConMazo(){
+		mario.moverIzquierdaSiSePuede()
+		sonidoMario.deMovimiento()
+		animacionMario.animarIzquierdaConMazo()
+		if (not stage1.hayVigaDebajo()) mario.caer()
+	}
 	
 	
 	

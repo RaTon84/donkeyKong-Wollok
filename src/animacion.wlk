@@ -46,10 +46,19 @@ object animacionMario {
 		self.direccion("salto")
 		self.siguienteFotograma()
 	}
-	
 	method animarCaida(){
 		self.direccion("caida")
 		self.siguienteFotograma()
 	}
+	
+	method animarDerechaConMazo(){
+		self.direccion("derechaMazo")
+		self.siguienteFotograma()
+	}
+	method animarIzquierdaConMazo(){
+		self.direccion("izquierdaMazo")
+		self.siguienteFotograma()
+	}
+	
 }
 	
