@@ -230,14 +230,14 @@ object mazo {
 		mario.moverDerechaSiSePuede()
 		sonidoMario.deMovimiento()
 		animacionMario.animarDerechaConMazo()
-		if (not stage1.hayVigaDebajo()) mario.caer()
+		if (stage1.hayCaidaDebajo()) mario.caer()
 	}
 	
 	method moverIzquierdaConMazo(){
 		mario.moverIzquierdaSiSePuede()
 		sonidoMario.deMovimiento()
 		animacionMario.animarIzquierdaConMazo()
-		if (not stage1.hayVigaDebajo()) mario.caer()
+		if (stage1.hayCaidaDebajo()) mario.caer()
 	}
 	
 	
