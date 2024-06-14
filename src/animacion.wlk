@@ -11,12 +11,13 @@ object animacionMario {
 	}
 	
 	method siguienteFotograma(){
-		if (direccion=="derecha" or direccion=="izquierda") fotogramaActual=(fotogramaActual+1)%4 else fotogramaActual=(fotogramaActual+1)%2
+		if (direccion=="derecha" or direccion=="izquierda") fotogramaActual=(fotogramaActual+1)%4 else if (direccion=="caida")fotogramaActual= 0 else fotogramaActual=(fotogramaActual+1)%2
 	}
 	
 	method image(){
 		return "assets/personajes/mario/"+direccion+"-"+fotogramaActual.toString()+".png"
-	}	
+	}
+
 	
 	
 	//ANIMAR DIRECCION SI SE PUEDE
@@ -46,6 +47,9 @@ object animacionMario {
 		self.siguienteFotograma()
 	}
 	
-
+	method animarCaida(){
+		self.direccion("caida")
+		self.siguienteFotograma()
+	}
 }
 	

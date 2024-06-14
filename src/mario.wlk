@@ -42,12 +42,14 @@ object mario {
 		self.moverDerechaSiSePuede()
 		sonidoMario.deMovimiento()
 		animacionMario.animarDerecha()
+		if (not stage1.hayVigaDebajo()) self.caer()
 	}
 
 	method moverIzquierda(){
 		self.moverIzquierdaSiSePuede()
 		sonidoMario.deMovimiento()
 		animacionMario.animarIzquierda()
+		if (not stage1.hayVigaDebajo()) self.caer()
 	}
 	
 	method moverArriba(){
@@ -63,10 +65,14 @@ object mario {
 	method saltar(){
 			self.saltarSiSePuede()																									  
 			sonidoMario.deSalto()
-			
-	
 	}
 	
+	method caer(){
+		position=game.at(position.x(),position.y() - if (position.y()==4 or position.y()== 9 or position.y()==12) 3 else 2)
+		animacionMario.animarCaida()}
+
+
+		
 
 	
 
