@@ -22,26 +22,34 @@ object juego{
 		barril.animacion()
 		barril.recorrerEscenario()
 		game.whenCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
+		game.whenCollideDo(barril,{personaje=>personaje.esChocadoPor(barril)})
 	}	
 	
 	/*method activarMazo(){
-		 const rain = game.sound("assets/sonidos/background-3.mp3")
+		 //const rain = game.sound("assets/sonidos/background-3.mp3")
 		 if(mario.tieneMazo()){
-		 	game.schedule(1000,{
+		 	
+		 	game.schedule(400, {
+			
 			//sonidoMario.deObjeto()
 		 	mazo.moverDerechaConMazo()
 		 	mazo.moverIzquierdaConMazo()
 		 	mario.saltar()
 		 	mario.caidaSalto()
-		 	rain.shouldLoop(true)
-			game.schedule(500, { rain.play()} )})
-			game.schedule(1, { rain.stop()} )
+		 	//rain.shouldLoop(true)
+			//game.schedule(5, { rain.play()} )})
+			//game.schedule(1, { rain.stop()} )
+			
 			
 			game.removeVisual(mazo)	
 			mario.tieneMazo(false)	
-			}
-			*/
-		 
+			} 
+		 })*/
+		 	
+			
+			
+	
+	 
 	 
 	//---------------------------------------------
 	method iniciar(){

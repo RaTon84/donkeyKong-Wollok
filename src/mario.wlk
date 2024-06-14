@@ -19,6 +19,24 @@ object mario {
  
    	method eliminarBarril(){self.sumaPuntos(50)} 
 	
+ 	method esColisionadoPor(){
+   		
+   	}
+   	
+   	
+   	method esChocadoPor(otro){
+   		if(self.tieneMazo()){
+   			otro.esEliminado()
+   		}
+   		else {
+   			vidas= vidas - 1
+   			if(self.juegoTerminado()){
+   				game.stop()
+   			}
+   		   
+   		}
+   	}
+	
 		//KEYBOARD
 	method inicioMario(){
 		keyboard.d().onPressDo{
@@ -43,9 +61,9 @@ object mario {
 		keyboard.space().onPressDo{
 			self.saltar()
 		}
-		keyboard.enter().onPressDo{
+		/*keyboard.enter().onPressDo{
 			juego.activarMazo()
-		}
+		}*/
 }		
 		//MOVIMIENTO
 	method moverDerecha(){
