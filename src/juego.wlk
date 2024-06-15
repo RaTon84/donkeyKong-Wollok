@@ -28,7 +28,7 @@ object juego{
 			game.addVisual(nroBarril)
 			nroBarril.animacion()
 			nroBarril.recorrerEscenario()
-			//game.whenCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
+			game.whenCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
 			//game.whenCollideDo(nroBarril,{personaje=>personaje.esChocadoPor(nroBarril)})
 		} catch e : Exception {
   			nroBarril.removerBarril()
@@ -53,22 +53,7 @@ object juego{
 		game.whenCollideDo(barril,{personaje=>personaje.esChocadoPor(barril)})
 	}*/
 	
-	/*method activarMazo(){
-		 //const rain = game.sound("assets/sonidos/background-3.mp3")
-		 if(mario.tieneMazo()){		 	
-		 	game.schedule(400, {			
-			//sonidoMario.deObjeto()
-		 	mazo.moverDerechaConMazo()
-		 	mazo.moverIzquierdaConMazo()
-		 	mario.saltar()
-		 	mario.caidaSalto()
-		 	//rain.shouldLoop(true)
-			//game.schedule(5, { rain.play()} )})
-			//game.schedule(1, { rain.stop()} )			
-			game.removeVisual(mazo)	
-			mario.tieneMazo(false)	
-			} 
-		 })*/	 
+	 
 	//---------------------------------------------
 	method iniciar(){
 	game.title("Donkey Kong (wollok Version)")

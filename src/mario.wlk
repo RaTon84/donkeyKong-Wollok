@@ -25,12 +25,14 @@ object mario {
    	}
    	
    	
-   	method esChocadoPor(otro){
+ method esChocadoPor(otro){
    		if(self.tieneMazo()){
    			otro.esEliminado()
+   			
    		}
    		else {
    			animacionMario.pierdeVida()
+   			game.say(self, "¡Auch!")
    			vidas= vidas - 1
    			if(self.juegoTerminado()){
    				animacionMario.pierdeVida()
@@ -42,18 +44,26 @@ object mario {
 	
 		//KEYBOARD
 	method inicioMario(){
+		 	keyboard.d().onPressDo{
+		if( tieneMazo){
+			mazo.moverDerechaConMazo()
+		}
+		}
+		keyboard.a().onPressDo{
+		if( tieneMazo){
+			mazo.moverIzquierdaConMazo()
+		}
+		}
+	
 		keyboard.d().onPressDo{
 		if(not tieneMazo){
 			self.moverDerecha()
 		}
-		else{mazo.moverDerechaConMazo()}
 		}
 		keyboard.a().onPressDo{
 		if(not tieneMazo){
 			self.moverIzquierda()
 		}
-		else{mazo.moverIzquierdaConMazo()}
-					
 		}
 		keyboard.w().onPressDo{
 			self.moverArriba()
@@ -223,8 +233,9 @@ object mazo {
 		
 	method colisionadoPor(personaje){
 		personaje.tieneMazo(true)
-		//juego.activarMazo()
 		game.removeVisual(self)
+		self.activarMazo()
+		
 		
 					
 	}
@@ -243,7 +254,19 @@ object mazo {
 		if (stage1.hayCaidaDebajo()) mario.caer()
 	}
 	
+	method activarMazo(){
+		const rain = game.sound("assets/sonidos/background-3.mp3")	
+		rain.play()
+		rain.shouldLoop(true)
+	 	game.onTick(8000, "movimiento",{ 
+	 	mario.tieneMazo(false)
+		rain.stop()
 	
+		})
+	 	
+	 	//game.onTick(8000, "activar",{musica.activarMusica()})
+	 	
+	 	}
 	
 	
 }

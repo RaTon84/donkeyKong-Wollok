@@ -1,5 +1,6 @@
 import wollok.game.*
 import escenarios.*
+import mario.*
 
 object barriles {
 	method position()=game.at(0,14)
@@ -85,6 +86,7 @@ class Barril {
 	
     method colisionadoPor(personaje){
 		if(personaje.tieneMazo()){
+			game.say(mario, "¡100 Puntos!")
 			personaje.eliminarBarril()
 		}
 		else {
