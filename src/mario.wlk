@@ -30,8 +30,10 @@ object mario {
    			otro.esEliminado()
    		}
    		else {
+   			animacionMario.pierdeVida()
    			vidas= vidas - 1
    			if(self.juegoTerminado()){
+   				animacionMario.pierdeVida()
    				game.stop()
    			}
    		   
@@ -221,7 +223,7 @@ object mazo {
 		
 	method colisionadoPor(personaje){
 		personaje.tieneMazo(true)
-		//personaje.transformar(mario)
+		//juego.activarMazo()
 		game.removeVisual(self)
 		
 					

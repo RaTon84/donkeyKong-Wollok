@@ -60,5 +60,9 @@ object animacionMario {
 		self.siguienteFotograma()
 	}
 	
+	method pierdeVida(){
+		self.direccion("perdioVida")
+	}
+	
 }
 	

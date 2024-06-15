@@ -71,6 +71,7 @@ object juego{
 	game.schedule(20500,{self.tirarBarril(b5)})
 	game.schedule(25000,{self.tirarBarril(b6)})
 	game.schedule(2500,{self.tirarBarril(b1)})
+	musica.activarMusicaInicial()
 	musica.activarMusica()
 	game.width(18)
 	game.height(18)

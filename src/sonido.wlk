@@ -6,7 +6,17 @@ object musica{
 		rain.shouldLoop(true)
 		game.schedule(500, { rain.play()} )
 	}
-}
+
+
+	method activarMusicaInicial(){
+		const rain = game.sound("assets/sonidos/start-board.wav")
+		rain.shouldLoop(true)
+		game.schedule(500, { rain.play()} )
+		game.schedule(3400, { rain.stop()})
+	}
+	
+	}
+	
 
 
 
@@ -19,11 +29,11 @@ object sonidoMario{
 		
 	}
 	method deSalto(){
-		const rain = game.sound("assets/sonidos/salto.wav")
+		const rain = game.sound("assets/sonidos/jump.wav")
 		rain.shouldLoop(true)
-		keyboard.space().onPressDo({rain.volume(0.1)})
+		keyboard.space().onPressDo({rain.volume(0.5)})
 		game.schedule(1, { rain.play()} )
-		game.schedule(1200, { rain.stop()} )
+		game.schedule(800, { rain.stop()} )
 	}
 		method deObjeto(){
 		const rain = game.sound("assets/sonidos/get-item.wav")
