@@ -63,7 +63,7 @@ object juego{
 	game.addVisual(kong)
 	kong.animacion()
 	game.addVisual(barriles)
-	pauline.animacion()
+	//pauline.animacion()
 	game.schedule(2500,{self.tirarBarril(b1)})	
 	game.schedule(7000,{self.tirarBarril(b2)})
 	game.schedule(11500,{self.tirarBarril(b3)})

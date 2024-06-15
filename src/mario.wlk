@@ -3,6 +3,7 @@ import wollok.game.*
 import animacion.*
 import escenarios.*
 import sonido.*
+
 object mario {
 	var vidas=2
 	var puntos = 0

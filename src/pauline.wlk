@@ -2,8 +2,10 @@ import wollok.game.*
 
 object pauline {
 
-	var property position = game.at(7,16)
-	var fotograma = 0
+	method position() = game.at(7,16)
+	method image()="assets/personajes/pauline/0.png"
+	
+	/*var fotograma = 0
 	const property animacionPauline = [
 	
 		"assets/personajes/pauline/0.png",
@@ -39,6 +41,6 @@ object pauline {
 		}
 		
 	}
-
+*/
 }
 
