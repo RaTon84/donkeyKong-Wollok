@@ -5,6 +5,9 @@ import mario.*
 object barriles {
 	method position()=game.at(0,14)
 	method image() = "assets/objects/2.png" 
+	method esChocadoPor(otro){
+		
+	}
 }
 
 class Barril {
@@ -76,6 +79,9 @@ class Barril {
 	}
 	
 	method recorrerEscenario(){game.onTick(velocidad, "recorrido-barril", {self.rodar()})}
+	method esChocadoPor(otro){
+		
+	}
 	
 	method removerBarril(){			
 		game.removeVisual(self)

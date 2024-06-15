@@ -23,6 +23,7 @@ object musica{
 object sonidoMario{
 	method deMovimiento(){
 		/*const rain = game.sound("assets/sonidos/spring.wav")
+		rain.volume(0.5)
 		rain.shouldLoop(true)
 		game.schedule(10, { rain.play()} )
 		game.schedule(150, { rain.stop()} )	*/
@@ -37,8 +38,7 @@ object sonidoMario{
 	}
 		method deObjeto(){
 		const rain = game.sound("assets/sonidos/get-item.wav")
-		rain.shouldLoop(true)
-		game.schedule(15, { rain.play()} )
-		game.schedule(140, { rain.stop()} )
+		rain.play()
+		
 	}
 }

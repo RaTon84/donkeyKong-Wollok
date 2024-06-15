@@ -22,5 +22,8 @@ object kong{
 		game.onTick(750, "animacion-tirarBarriles", {
 			self.siguienteFotograma(gifKong)
 		})
+	}
+	method esChocadoPor(otro){
+		
 	}	
 }

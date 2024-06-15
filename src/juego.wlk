@@ -6,6 +6,19 @@ import escenarios.*
 import sonido.*
 import barriles.*
 
+object perderNivel {
+	var property image = "assets/fondo/fondoNvl2-boceto.png"
+	method playMuerte(){
+		game.sound("assets/sonidos/death.wav").play()
+		game.addVisual(image)
+		game.addVisual(gameOver)
+	}
+	
+	
+   		
+   		
+   		}
+
 object gameOver {
 	method playMuerte(){
 		game.sound("assets/sonidos/death.wav").play()
@@ -13,7 +26,14 @@ object gameOver {
 	method position() = game.center()
 	method text() = "GAME OVER"
 	method textColor() = paleta.blanco()
-	
+	method colisionadoPor(otro){
+   		
+   	}
+   	
+	method esChocadoPor(otro){
+   		
+   	}
+   	
 	}
 	object paleta {
 	const property blanco = "FFFFFF"
@@ -42,8 +62,8 @@ object juego{
 			game.addVisual(nroBarril)
 			nroBarril.animacion()
 			nroBarril.recorrerEscenario()
-			game.whenCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
-			//game.whenCollideDo(nroBarril,{personaje=>personaje.esChocadoPor(nroBarril)})
+			game.onCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
+  			game.onCollideDo(nroBarril,{personaje=>personaje.esChocadoPor(nroBarril)})
 		} catch e : Exception {
   			nroBarril.removerBarril()
   			game.addVisual(nroBarril)
@@ -53,8 +73,8 @@ object juego{
 		//game.addVisual(nroBarril)
 		//nroBarril.animacion()
 		//nroBarril.recorrerEscenario()
-		//game.whenCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
-		//game.whenCollideDo(nroBarril,{personaje=>personaje.esChocadoPor(nroBarril)})
+		game.onCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
+  		game.onCollideDo(nroBarril,{personaje=>personaje.esChocadoPor(nroBarril)})
 	}
 	
 	method tirarBarriles(){self.tirarBarril() self.siguienteBarril()}
@@ -87,7 +107,7 @@ object juego{
 	game.width(18)
 	game.height(18)
 	game.cellSize(50)
-
+	
 	game.start()
 	}
 }

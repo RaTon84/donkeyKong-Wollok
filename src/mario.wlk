@@ -36,8 +36,10 @@ object mario {
    			vidas= vidas - 1
    			if(self.juegoTerminado()){
    				animacionMario.pierdeVida()
-   				game.addVisual(gameOver)
-   				gameOver.playMuerte()
+   				game.clear()
+   				//game.addVisual(gameOver)
+   				//gameOver.playMuerte()
+   				perderNivel.playMuerte()
    			}
    		   
    		}
@@ -257,6 +259,8 @@ object mazo {
 	
 	method activarMazo(){
 		const rain = game.sound("assets/sonidos/background-3.mp3")	
+		sonidoMario.deObjeto()
+		//game.sound("assets/sonidos/background-1.mp3").pause()
 		rain.play()
 		rain.shouldLoop(true)
 	 	game.onTick(8000, "movimiento",{ 
