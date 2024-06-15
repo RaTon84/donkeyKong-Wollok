@@ -36,7 +36,8 @@ object mario {
    			vidas= vidas - 1
    			if(self.juegoTerminado()){
    				animacionMario.pierdeVida()
-   				game.stop()
+   				game.addVisual(gameOver)
+   				gameOver.playMuerte()
    			}
    		   
    		}

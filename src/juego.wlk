@@ -6,6 +6,20 @@ import escenarios.*
 import sonido.*
 import barriles.*
 
+object gameOver {
+	method playMuerte(){
+		game.sound("assets/sonidos/death.wav").play()
+	}
+	method position() = game.center()
+	method text() = "GAME OVER"
+	method textColor() = paleta.blanco()
+	
+	}
+	object paleta {
+	const property blanco = "FFFFFF"
+	
+	}
+
 object juego{
 	const b1 = new Barril()
 	const b2 = new Barril()
