@@ -7,30 +7,56 @@ import sonido.*
 import barriles.*
 
 object juego{
-	
- 	// solo pruebo los barriles-----------------------
 	const b1 = new Barril()
 	const b2 = new Barril()
 	const b3 = new Barril()
 	const b4 = new Barril()
 	const b5 = new Barril()
 	const b6 = new Barril()
+	const b7 = new Barril()
+	const barriles1 = [b1,b2,b3,b4,b5,b6,b7]
+	var nro=0
+	var nroBarril = barriles1.first()
 	
+	method siguienteBarril(){
+		nro = (nro+1) % barriles1.size()
+		nroBarril = barriles1.get(nro)
+	}
 	
-	method tirarBarril(barril){		
+	method tirarBarril(){
+		try {
+			game.addVisual(nroBarril)
+			nroBarril.animacion()
+			nroBarril.recorrerEscenario()
+			//game.whenCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
+			//game.whenCollideDo(nroBarril,{personaje=>personaje.esChocadoPor(nroBarril)})
+		} catch e : Exception {
+  			nroBarril.removerBarril()
+  			game.addVisual(nroBarril)
+			nroBarril.animacion()
+			nroBarril.recorrerEscenario()
+		}
+		//game.addVisual(nroBarril)
+		//nroBarril.animacion()
+		//nroBarril.recorrerEscenario()
+		//game.whenCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
+		//game.whenCollideDo(nroBarril,{personaje=>personaje.esChocadoPor(nroBarril)})
+	}
+	
+	method tirarBarriles(){self.tirarBarril() self.siguienteBarril()}
+	////metodo viejo
+	/*method tirarBarril(barril){							
 		game.addVisual(barril)
 		barril.animacion()
 		barril.recorrerEscenario()
 		game.whenCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
 		game.whenCollideDo(barril,{personaje=>personaje.esChocadoPor(barril)})
-	}	
+	}*/
 	
 	/*method activarMazo(){
 		 //const rain = game.sound("assets/sonidos/background-3.mp3")
-		 if(mario.tieneMazo()){
-		 	
-		 	game.schedule(400, {
-			
+		 if(mario.tieneMazo()){		 	
+		 	game.schedule(400, {			
 			//sonidoMario.deObjeto()
 		 	mazo.moverDerechaConMazo()
 		 	mazo.moverIzquierdaConMazo()
@@ -38,19 +64,11 @@ object juego{
 		 	mario.caidaSalto()
 		 	//rain.shouldLoop(true)
 			//game.schedule(5, { rain.play()} )})
-			//game.schedule(1, { rain.stop()} )
-			
-			
+			//game.schedule(1, { rain.stop()} )			
 			game.removeVisual(mazo)	
 			mario.tieneMazo(false)	
 			} 
-		 })*/
-		 	
-			
-			
-	
-	 
-	 
+		 })*/	 
 	//---------------------------------------------
 	method iniciar(){
 	game.title("Donkey Kong (wollok Version)")
@@ -64,13 +82,7 @@ object juego{
 	kong.animacion()
 	game.addVisual(barriles)
 	//pauline.animacion()
-	game.schedule(2500,{self.tirarBarril(b1)})	
-	game.schedule(7000,{self.tirarBarril(b2)})
-	game.schedule(11500,{self.tirarBarril(b3)})
-	game.schedule(16000,{self.tirarBarril(b4)})	
-	game.schedule(20500,{self.tirarBarril(b5)})
-	game.schedule(25000,{self.tirarBarril(b6)})
-	game.schedule(2500,{self.tirarBarril(b1)})
+	game.onTick(4575,"lanzamientoDeBarriles",{self.tirarBarriles()})
 	musica.activarMusicaInicial()
 	musica.activarMusica()
 	game.width(18)

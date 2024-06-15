@@ -3,18 +3,22 @@ import escenarios.*
 
 object barriles {
 	method position()=game.at(0,14)
-	method image() = "assets/objects/1.png" 
+	method image() = "assets/objects/2.png" 
 }
 
-class Barril{
-	var property position = game.at(3,14)
+class Barril {
+	var property position = game.at(5,14)
 	var fotograma = 0	
-	const property gifBarril = ["assets/objects/82.png","assets/objects/83.png","assets/objects/84.png","assets/objects/85.png"]
+	const property gifBarril = ["assets/objects/82.png","assets/objects/83.png","assets/objects/84.png","assets/objects/85.png"]	
 	var property image = gifBarril.get(fotograma)
 	var direccion = "derecha"
 	var property velocidad = 250
 	const random = [0,1,2,3]
 	var property estoyBajandoEscalera = false
+	//const property gifDerecha = ["assets/objects/82.png","assets/objects/83.png","assets/objects/84.png","assets/objects/85.png"]
+	//const property gifIzquierda = ["assets/objects/85.png","assets/objects/84.png","assets/objects/83.png","assets/objects/82.png"]
+	//const property gifEscalera = ["assets/objects/86.png","assets/objects/87.png"]
+	//var property image = gifDerecha.get(fotograma)
 	
 	method siguienteFotograma(lista){
 		fotograma = (fotograma+1) % lista.size()
@@ -22,6 +26,9 @@ class Barril{
 	}
 	
 	method animacion(){game.onTick(200, "animacion-tirarBarriles", {self.siguienteFotograma(gifBarril)})}
+	//method animacionDerecha(){game.onTick(200, "animacion-derecha", {self.siguienteFotograma(gifDerecha)})}
+	//method animacionIzquierda(){game.onTick(200, "animacion-izquierda", {self.siguienteFotograma(gifIzquierda)})}	
+	//method animacionEscalera(){game.onTick(200, "animacion-escalera", {self.siguienteFotograma(gifEscalera)})}
 	
 	method rodarDerecha(){position = game.at(position.x()+1,position.y())}
 	
@@ -39,7 +46,7 @@ class Barril{
 	
 	method bajarEscalera(){
 		if(self.hayVigaAbajo() && estoyBajandoEscalera){ //falta cambiar animacion a escalera
-			self.cambiarDireccion()
+			self.cambiarDireccion() //self.animacionIzquierda() game.removeTickEvent("animacion-derecha") (ver donde ponerlo)
 			estoyBajandoEscalera=false
 		} else{
 				self.caer()
@@ -59,34 +66,30 @@ class Barril{
 		}else self.rodarVigas()
 	}
 	
+	
 	method rodar(){
-		if(estoyBajandoEscalera)
-			self.bajarEscalera()
+		if(position==game.at(0,1)){self.removerBarril()}				
+		else if(estoyBajandoEscalera)self.bajarEscalera()
 		else if(self.puedoCaer())self.dicidir()
 		else self.rodarVigas()
 	}
 	
 	method recorrerEscenario(){game.onTick(velocidad, "recorrido-barril", {self.rodar()})}
 	
-		method esEliminado(){
-		
+	method removerBarril(){			
 		game.removeVisual(self)
+		position = game.at(5,14)
+		direccion = "derecha"
+		game.removeTickEvent("recorrido-barril")
 	}
-	
-	
 	
     method colisionadoPor(personaje){
-			if(personaje.tieneMazo()){
+		if(personaje.tieneMazo()){
 			personaje.eliminarBarril()
-			
-			}
-
-			else {
-				personaje.esChocadoPor(self)
-			
-			}
-		
-			self.esEliminado()
-		
 		}
-	}
+		else {
+			personaje.esChocadoPor(self)
+		}		
+		self.removerBarril()
+		}
+}

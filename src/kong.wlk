@@ -1,15 +1,15 @@
 import wollok.game.*
 
 object kong{	
-	var property position = game.at(1,14)
+	var property position = game.at(2,14)
 	var fotograma = 0
 	const property gifKong = [
 		"assets/personajes/donkeyKong/0.png",
+		"assets/personajes/donkeyKong/14.png",
+		"assets/personajes/donkeyKong/0.png",
 		"assets/personajes/donkeyKong/6.png",
 		"assets/personajes/donkeyKong/9.png",
-		"assets/personajes/donkeyKong/7.png",
-		"assets/personajes/donkeyKong/0.png",
-		"assets/personajes/donkeyKong/14.png"
+		"assets/personajes/donkeyKong/7.png"
 		]
 	var property image = gifKong.get(fotograma)	
 		
