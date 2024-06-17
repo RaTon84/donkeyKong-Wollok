@@ -90,7 +90,8 @@ object juego{
 	method iniciar(){
 	game.title("Donkey Kong (wollok Version)")
 	game.addVisual(stage1)
-	game.addVisual(elementoStage)
+	game.addVisual(barrilAzul)
+	game.addVisual(fuegoBarrilAzul)
 	game.addVisual(mazo)
 	game.addVisual(pauline)
 	game.addVisual(mario)

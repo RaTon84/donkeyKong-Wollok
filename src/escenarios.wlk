@@ -50,9 +50,17 @@ const stage1= new Stage(vigas=[game.at(0,0),game.at(1,0),game.at(2,0),game.at(3,
 
 
 
-object elementoStage{
+object barrilAzul{
 	var property image = "assets/objects/88.png"
 	var property position = game.at(0,1)
+	
+    method esChocadoPor(otro){
+		
+	}
+}
+object fuegoBarrilAzul {
+	var property image = "assets/objects/74.png"
+	var property position = game.at(0,2)
 	
     method esChocadoPor(otro){
 		
