@@ -3,7 +3,8 @@ import wollok.game.*
 import animacion.*
 import escenarios.*
 import sonido.*
-
+const musica2 = new Musica()
+const musica1 = new Musica()
 object mario {
 	var vidas=2
 	var puntos = 0
@@ -14,11 +15,12 @@ object mario {
 	
 	method juegoTerminado()= vidas==0
 
-    method perderVida(){vidas=-1}
+    
+	method puntaje()=puntos
 
     method sumaPuntos(cantidad){puntos+=cantidad}
  
-   	method eliminarBarril(){self.sumaPuntos(50)} 
+   	method eliminarBarril(){self.sumaPuntos(100)} 
 	
  	method esColisionadoPor(){
    		
@@ -26,20 +28,23 @@ object mario {
    	
    	
  method esChocadoPor(otro){
+ 	
    		if(self.tieneMazo()){
-   			otro.esEliminado()
-   			
+   		
+   			otro.removerBarril()
    		}
    		else {
    			animacionMario.pierdeVida()
+   			game.sound("assets/sonidos/spring.wav").play()
    			game.say(self, "¡Auch!")
    			vidas= vidas - 1
    			if(self.juegoTerminado()){
    				animacionMario.pierdeVida()
+   				musica1.desactivarMusica()
+   				musica2.desactivarMusica()
    				game.clear()
-   				//game.addVisual(gameOver)
-   				//gameOver.playMuerte()
-   				perderNivel.playMuerte()
+   				perderNivel.muerte()
+   		
    			}
    		   
    		}
@@ -77,9 +82,7 @@ object mario {
 		keyboard.space().onPressDo{
 			self.saltar()
 		}
-		/*keyboard.enter().onPressDo{
-			juego.activarMazo()
-		}*/
+	
 }		
 		//MOVIMIENTO
 	method moverDerecha(){
@@ -259,19 +262,15 @@ object mazo {
 	
 	method activarMazo(){
 		const rain = game.sound("assets/sonidos/background-3.mp3")	
+		musica1.desactivarMusica()
 		sonidoMario.deObjeto()
-		//game.sound("assets/sonidos/background-1.mp3").pause()
 		rain.play()
 		rain.shouldLoop(true)
 	 	game.onTick(8000, "movimiento",{ 
 	 	mario.tieneMazo(false)
-		rain.stop()
-	
-		})
-	 	
-	 	//game.onTick(8000, "activar",{musica.activarMusica()})
-	 	
-	 	}
+		rain.shouldLoop(false)
+		musica2.activarMusica()
+		})}
 	
 	
 }

@@ -8,8 +8,8 @@ import barriles.*
 
 object perderNivel {
 	var property image = "assets/fondo/fondoNvl2-boceto.png"
-	method playMuerte(){
-		game.sound("assets/sonidos/death.wav").play()
+	method muerte(){
+		game.sound("assets/sonidos/muerte.wav").play()
 		game.addVisual(image)
 		game.addVisual(gameOver)
 	}
@@ -20,9 +20,7 @@ object perderNivel {
    		}
 
 object gameOver {
-	method playMuerte(){
-		game.sound("assets/sonidos/death.wav").play()
-	}
+	
 	method position() = game.center()
 	method text() = "GAME OVER"
 	method textColor() = paleta.blanco()
@@ -102,8 +100,8 @@ object juego{
 	game.addVisual(barriles)
 	//pauline.animacion()
 	game.onTick(4575,"lanzamientoDeBarriles",{self.tirarBarriles()})
-	musica.activarMusicaInicial()
-	musica.activarMusica()
+	musicaInicial.activarMusicaInicial()
+	musica1.activarMusica()
 	game.width(18)
 	game.height(18)
 	game.cellSize(50)

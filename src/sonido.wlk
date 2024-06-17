@@ -1,23 +1,30 @@
 import wollok.game.*
 
-object musica{
+class Musica{
+	const rain = game.sound("assets/sonidos/background-1.mp3")
+
 	method activarMusica(){
-		const rain = game.sound("assets/sonidos/background-1.mp3")
 		rain.shouldLoop(true)
 		game.schedule(500, { rain.play()} )
+		
+	}
+	method desactivarMusica(){
+		 rain.shouldLoop(false)
 	}
 
 
-	method activarMusicaInicial(){
-		const rain = game.sound("assets/sonidos/start-board.wav")
+}
+	
+object musicaInicial {
+	const rain = game.sound("assets/sonidos/start-board.wav")
+
+	method activarMusicaInicial() {
 		rain.shouldLoop(true)
 		game.schedule(500, { rain.play()} )
 		game.schedule(3400, { rain.stop()})
 	}
+}		
 	
-	}
-	
-
 
 
 object sonidoMario{
@@ -37,7 +44,7 @@ object sonidoMario{
 		game.schedule(800, { rain.stop()} )
 	}
 		method deObjeto(){
-		const rain = game.sound("assets/sonidos/get-item.wav")
+		const rain = game.sound("assets/sonidos/smash.wav")
 		rain.play()
 		
 	}

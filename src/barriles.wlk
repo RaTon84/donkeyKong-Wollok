@@ -83,7 +83,7 @@ class Barril {
 		
 	}
 	
-	method removerBarril(){			
+	method removerBarril(){
 		game.removeVisual(self)
 		position = game.at(5,14)
 		direccion = "derecha"
@@ -92,6 +92,7 @@ class Barril {
 	
     method colisionadoPor(personaje){
 		if(personaje.tieneMazo()){
+			game.sound("assets/sonidos/get-item.wav").play()	
 			game.say(mario, "¡100 Puntos!")
 			personaje.eliminarBarril()
 		}
