@@ -43,9 +43,27 @@ const stage1= new Stage(vigas=[game.at(0,0),game.at(1,0),game.at(2,0),game.at(3,
 				)
 				
 
-
-
-
+const stage2= new Stage(vigas=[game.at(0,0),game.at(1,0),game.at(2,0),game.at(3,0),game.at(4,0),game.at(5,0),game.at(6,0),game.at(7,0),game.at(8,0),game.at(9,0),game.at(10,0),game.at(11,0),game.at(12,0),game.at(13,0),game.at(14,0),game.at(15,0),game.at(16,0),game.at(17,0),
+				game.at(1,3),game.at(2,3),game.at(3,3),game.at(5,3),game.at(6,3),game.at(7,3),game.at(8,3),game.at(9,3),game.at(10,3),game.at(11,3),game.at(12,3),game.at(14,3),game.at(15,3),game.at(16,3),
+				game.at(1,6),game.at(2,6),game.at(3,6),game.at(5,6),game.at(6,6),game.at(7,6),game.at(8,6),game.at(9,6),game.at(10,6),game.at(11,6),game.at(12,6),game.at(14,6),game.at(15,6),game.at(16,6),
+				game.at(2,10),game.at(3,10),game.at(5,10),game.at(6,10),game.at(7,10),game.at(8,10),game.at(9,10),game.at(10,10),game.at(11,10),game.at(12,10),game.at(14,10),game.at(15,10),
+				game.at(3,13),game.at(5,13),game.at(6,13),game.at(7,13),game.at(8,13),game.at(9,13),game.at(10,13),game.at(11,13),game.at(12,13),game.at(14,13),
+				game.at(5,16),game.at(6,16),game.at(7,16),game.at(8,16),game.at(9,16),game.at(10,16),game.at(11,16),game.at(12,16)],
+				
+				escaleras=[game.at(1,1),game.at(1,2),game.at(1,3),game.at(9,1),game.at(9,2),game.at(9,3),game.at(16,1),game.at(16,2),game.at(16,3),
+				game.at(2,4),game.at(2,5),game.at(2,6),game.at(7,4),game.at(7,5),game.at(7,6),game.at(11,4),game.at(11,5),game.at(11,6),game.at(15,4),game.at(15,5),game.at(15,6),
+				game.at(3,7),game.at(3,8),game.at(3,9),game.at(3,10),game.at(14,7),game.at(14,8),game.at(14,9),game.at(14,10),
+				game.at(9,11),game.at(9,12),game.at(9,13)],
+				
+				caidaBarril=[/*hernan lo tiene que rellenar */],
+				
+				caidas=[game.at(0,3),game.at(4,3),game.at(13,3),game.at(17,3),
+				game.at(0,6),game.at(4,6),game.at(13,6),game.at(17,6),
+				game.at(1,10),game.at(4,10),game.at(13,10),game.at(16,10),
+				game.at(2,13),game.at(4,13),game.at(13,13),game.at(15,13)],
+				
+				image="assets/fondo/fondoNv2-0.png"
+				)
 
 
 
