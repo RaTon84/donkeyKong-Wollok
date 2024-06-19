@@ -5,12 +5,16 @@ import escenarios.*
 import sonido.*
 const musica2 = new Musica()
 const musica1 = new Musica()
+
+
 object mario {
 	var vidas=2
 	var puntos = 0
 	var property tieneMazo=false
 	const velocidad=100
 	var property position=game.at(1,1)
+	var property stageEnQueMeMuevo= stage1
+	
 	method image()= animacionMario.image()
 	
 	method juegoTerminado()= vidas==0
@@ -89,14 +93,14 @@ object mario {
 		self.moverDerechaSiSePuede()
 		sonidoMario.deMovimiento()
 		animacionMario.animarDerecha()
-		if (stage1.hayCaidaDebajo()) self.caer()
+		if (stageEnQueMeMuevo.hayCaidaDebajo()) self.caer()
 	}
 
 	method moverIzquierda(){
 		self.moverIzquierdaSiSePuede()
 		sonidoMario.deMovimiento()
 		animacionMario.animarIzquierda()
-		if (stage1.hayCaidaDebajo()) self.caer()
+		if (stageEnQueMeMuevo.hayCaidaDebajo()) self.caer()
 	}
 	
 	method moverArriba(){
@@ -157,7 +161,7 @@ object mario {
 	
 	method moverArribaSiSePuede(){
 		const alto = game.height()
-		position = game.at(position.x(),if(position.y()+1<alto and stage1.hayEscaleraArriba())position.y()+1 else position.y())
+		position = game.at(position.x(),if(position.y()+1<alto and stageEnQueMeMuevo.hayEscaleraArriba())position.y()+1 else position.y())
 	}
 	
 	method moverArribaSinCondicion(){
@@ -166,18 +170,18 @@ object mario {
 	}
 	
 	method moverAbajoSiSePuede(){
-		if (stage1.hayEscaleraDebajo())
+		if (stageEnQueMeMuevo.hayEscaleraDebajo())
 		position = game.at(position.x(),if(position.y()-1>=0)position.y()-1 else position.y())
 	}
 	
 	method moverDerechaSiSePuede(){
-		if (stage1.hayVigaDebajo()){
+		if (stageEnQueMeMuevo.hayVigaDebajo()){
 		const ancho = game.width()
 		position = game.at(if(position.x()+1<ancho)position.x()+1 else position.x() ,position.y())}
 	}
 	
 	method moverIzquierdaSiSePuede(){
-		if (stage1.hayVigaDebajo())
+		if (stageEnQueMeMuevo.hayVigaDebajo())
 		position = game.at(if(position.x()-1>=0)position.x()-1 else position.x() ,position.y())
 	}
 
@@ -207,12 +211,12 @@ object mario {
 	
 	
 	method animarArribaSiSePuede(){
-		if (stage1.hayEscaleraArriba())
+		if (stageEnQueMeMuevo.hayEscaleraArriba())
 		animacionMario.animarArriba()
 	}
 	
 	method animarAbajoSiSePuede(){
-		if (not stage1.hayVigaDebajo())
+		if (not stageEnQueMeMuevo.hayVigaDebajo())
 		animacionMario.animarArriba()
 	}
 	
@@ -231,6 +235,7 @@ object mario {
 object mazo {
 	
 	var property position= game.at(2,7)
+	const stageEnQueSeMueveMario= mario.stageEnQueMeMuevo()
 	
 	method image(){
 	return  "assets/objects/59.png" }
@@ -250,14 +255,14 @@ object mazo {
 		mario.moverDerechaSiSePuede()
 		sonidoMario.deMovimiento()
 		animacionMario.animarDerechaConMazo()
-		if (stage1.hayCaidaDebajo()) mario.caer()
+		if (stageEnQueSeMueveMario.hayCaidaDebajo()) mario.caer()
 	}
 	
 	method moverIzquierdaConMazo(){
 		mario.moverIzquierdaSiSePuede()
 		sonidoMario.deMovimiento()
 		animacionMario.animarIzquierdaConMazo()
-		if (stage1.hayCaidaDebajo()) mario.caer()
+		if (stageEnQueSeMueveMario.hayCaidaDebajo()) mario.caer()
 	}
 	
 	method activarMazo(){
