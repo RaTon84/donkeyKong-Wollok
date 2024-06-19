@@ -14,14 +14,29 @@ class Musica{
 
 
 }
+
 	
-object musicaInicial {
+object musicaInicioJuego {
 	const rain = game.sound("assets/sonidos/start-board.wav")
 
-	method activarMusicaInicial() {
+	method activarMusicaInicialDelJuego() {
 		rain.shouldLoop(true)
 		game.schedule(500, { rain.play()} )
 		game.schedule(3400, { rain.stop()})
+	}
+}
+
+object musicaInicial {
+
+	const rain = game.sound("assets/sonidos/sonidoInicial.mp3")
+
+	method activarMusicaInicial() {
+		
+		game.schedule(500, { rain.play()} )
+		
+	}
+	method desactivarMusicaInicial(){
+		rain.stop()
 	}
 }		
 	

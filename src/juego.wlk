@@ -58,14 +58,18 @@ class Juego{
 	//---------------------------------------------
 	method iniciar(){
 		const stageInicio = new Stage(image = "assets/pantalla inicio/pantallaInicio-0.png")
+		
 		game.addVisual(stageInicio)
 		game.width(18)
 		game.height(18)
 		game.cellSize(50)
+		musicaInicial.activarMusicaInicial()
 		keyboard.enter().onPressDo{
+			musicaInicial.desactivarMusicaInicial()
 			self.iniciarJuego()
 		}
 		game.start()
+	
 	}
 	method iniciarJuego(){
 	game.title("Donkey Kong (wollok Version)")
@@ -81,7 +85,7 @@ class Juego{
 	game.addVisual(barriles)
 	//pauline.animacion()
 	game.onTick(4575,"lanzamientoDeBarriles",{self.tirarBarriles()})
-	musicaInicial.activarMusicaInicial()
+	musicaInicioJuego.activarMusicaInicialDelJuego()
 	musica1.activarMusica()
 	game.width(18)
 	game.height(18)
