@@ -5,6 +5,7 @@ import escenarios.*
 import sonido.*
 const musica2 = new Musica()
 const musica1 = new Musica()
+const muertePrimerNivel = new GameOver()
 
 
 object mario {
@@ -46,8 +47,7 @@ object mario {
    				animacionMario.pierdeVida()
    				musica1.desactivarMusica()
    				musica2.desactivarMusica()
-   				game.clear()
-   				perderNivel.muerte()
+   				muertePrimerNivel.marioPierde()
    		
    			}
    		   

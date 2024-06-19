@@ -1,7 +1,9 @@
 import wollok.game.*
 import mario.*
+import juego.*
 
 
+const reiniciarJuego = new Juego()
 class Stage{
 	const property vigas=[]
 	const property escaleras=[]
@@ -64,8 +66,32 @@ const stage2= new Stage(vigas=[game.at(0,0),game.at(1,0),game.at(2,0),game.at(3,
 				
 				image="assets/fondo/fondoNv2-0.png"
 				)
+				
+const stageMuerte = new Stage(image = "assets/fondo/gameOver.png")
+
+class GameOver {
+	
+	
+	method marioPierde(){
+		game.sound("assets/sonidos/muerte.wav").play()
+		game.clear()
+		game.addVisual(stageMuerte)
+		keyboard.enter().onPressDo{
+			reiniciarJuego.iniciar()
+		}	
+	}
+	
+	
+	
+   		
+   		}
 
 
+
+object paleta {
+	const property blanco = "FFFFFF"
+	
+	}
 
 	
 

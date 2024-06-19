@@ -6,39 +6,8 @@ import escenarios.*
 import sonido.*
 import barriles.*
 
-object perderNivel {
-	var property image = "assets/fondo/fondoNvl2-boceto.png"
-	method muerte(){
-		game.sound("assets/sonidos/muerte.wav").play()
-		game.addVisual(image)
-		game.addVisual(gameOver)
-	}
-	
-	
-   		
-   		
-   		}
 
-object gameOver {
-	
-	method position() = game.center()
-	method text() = "GAME OVER"
-	method textColor() = paleta.blanco()
-	method colisionadoPor(otro){
-   		
-   	}
-   	
-	method esChocadoPor(otro){
-   		
-   	}
-   	
-	}
-	object paleta {
-	const property blanco = "FFFFFF"
-	
-	}
-
-object juego{
+class Juego{
 	const b1 = new Barril()
 	const b2 = new Barril()
 	const b3 = new Barril()
@@ -88,6 +57,17 @@ object juego{
 	 
 	//---------------------------------------------
 	method iniciar(){
+		const stageInicio = new Stage(image = "assets/pantalla inicio/pantallaInicio-0.png")
+		game.addVisual(stageInicio)
+		game.width(18)
+		game.height(18)
+		game.cellSize(50)
+		keyboard.enter().onPressDo{
+			self.iniciarJuego()
+		}
+		game.start()
+	}
+	method iniciarJuego(){
 	game.title("Donkey Kong (wollok Version)")
 	game.addVisual(stage1)
 	game.addVisual(barrilAzul)
@@ -107,7 +87,6 @@ object juego{
 	game.height(18)
 	game.cellSize(50)
 	
-	game.start()
 	}
 }
 
