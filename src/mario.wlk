@@ -5,7 +5,7 @@ import escenarios.*
 import sonido.*
 const musica2 = new Musica()
 const musica1 = new Musica()
-const muertePrimerNivel = new GameOver()
+
 
 
 object mario {
@@ -40,14 +40,13 @@ object mario {
    		}
    		else {
    			animacionMario.pierdeVida()
-   			game.sound("assets/sonidos/spring.wav").play()
+   			sonidoMario.pierdeVida()
    			game.say(self, "¡Auch!")
    			vidas= vidas - 1
    			if(self.juegoTerminado()){
-   				animacionMario.pierdeVida()
    				musica1.desactivarMusica()
    				musica2.desactivarMusica()
-   				muertePrimerNivel.marioPierde()
+   				gameOver.marioPierde()
    		
    			}
    		   

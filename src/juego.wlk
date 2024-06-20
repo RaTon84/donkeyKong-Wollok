@@ -60,20 +60,37 @@ class Juego{
 		
 		
 		game.addVisual(stageInicio)
-		game.onTick(1000,"cambio imagen",{stageInicio.siguienteFotograma()})
+		game.onTick(700,"cambio imagen",{stageInicio.siguienteFotograma()})
 		game.width(18)
 		game.height(18)
 		game.cellSize(50)
 		musicaInicial.activarMusicaInicial()
 		keyboard.enter().onPressDo{
-			musicaInicial.desactivarMusicaInicial()
-			self.iniciarJuego()
+			self.controles()
+			
 		}
 		game.start()
 	
 	}
+	method controles(){
+		var contador = 0
+		game.onTick(100,"validacion",{contador = contador + 1})
+		game.removeVisual(stageInicio)
+		game.addVisual(stageControles)
+		game.onTick(700,"cambio imagen",{stageControles.siguienteFotograma()})
+		game.width(18)
+		game.height(18)
+		game.cellSize(50)
+		game.schedule(1,{
+			keyboard.enter().onPressDo{
+			musicaInicial.desactivarMusicaInicial()
+			self.iniciarJuego()}
+			})
+	}
+	
 	method iniciarJuego(){
 	game.title("Donkey Kong (wollok Version)")
+	game.removeVisual(stageControles)
 	game.addVisual(stage1)
 	game.addVisual(barrilAzul)
 	game.addVisual(fuegoBarrilAzul)

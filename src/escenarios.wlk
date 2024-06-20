@@ -67,8 +67,25 @@ const stage2= new Stage(vigas=[game.at(0,0),game.at(1,0),game.at(2,0),game.at(3,
 				image="assets/fondo/fondoNv2-0.png"
 				)
 				
-const stageMuerte = new Stage(image = "assets/fondo/gameOver.png")
 
+object stageMuerte {
+	var fotogramaActual=0
+	method position(){
+		return game.at(0,0)
+	}
+	method siguienteFotograma(){
+		
+			if(fotogramaActual == 1){
+				fotogramaActual = fotogramaActual - 1
+			}
+			else {fotogramaActual = fotogramaActual + 1}
+	
+	}
+	
+	method image(){
+		return "assets/pantallaInicio/gameOver"+"-"+fotogramaActual.toString()+".png"
+	}
+}
 object stageInicio {
 		
 	var fotogramaActual=0
@@ -85,17 +102,38 @@ object stageInicio {
 	}
 	
 	method image(){
-		return "assets/pantalla inicio/pantallaInicio"+"-"+fotogramaActual.toString()+".png"
+		return "assets/pantallaInicio/pantallaInicio"+"-"+fotogramaActual.toString()+".png"
 	}	
 }
 
-class GameOver {
+object stageControles {
+		
+	var fotogramaActual=0
+	method position(){
+		return game.at(0,0)
+	}
+	method siguienteFotograma(){
+		
+			if(fotogramaActual == 1){
+				fotogramaActual = fotogramaActual - 1
+			}
+			else {fotogramaActual = fotogramaActual + 1}
+	
+	}
+	
+	method image(){
+		return "assets/pantallaInicio/controles"+"-"+fotogramaActual.toString()+".png"
+	}	
+}
+
+object gameOver {
 	
 	
 	method marioPierde(){
-		game.sound("assets/sonidos/muerte.wav").play()
 		game.clear()
+		game.sound("assets/sonidos/muerte.wav").play()
 		game.addVisual(stageMuerte)
+		game.onTick(1000,"cambio imagen muerte",{stageMuerte.siguienteFotograma()})
 		keyboard.enter().onPressDo{
 			reiniciarJuego.iniciar()
 		}	

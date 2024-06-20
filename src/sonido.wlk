@@ -44,11 +44,10 @@ object musicaInicial {
 
 object sonidoMario{
 	method deMovimiento(){
-		/*const rain = game.sound("assets/sonidos/spring.wav")
+		const rain = game.sound("assets/sonidos/spring.wav")
 		rain.volume(0.5)
-		rain.shouldLoop(true)
 		game.schedule(10, { rain.play()} )
-		game.schedule(150, { rain.stop()} )	*/
+		game.schedule(150, { rain.stop()} )	
 		
 	}
 	method deSalto(){
@@ -62,5 +61,12 @@ object sonidoMario{
 		const rain = game.sound("assets/sonidos/smash.wav")
 		rain.play()
 		
+	}
+	
+	method pierdeVida(){
+		const rain = game.sound("assets/sonidos/pierdeVida.wav")
+		rain.volume(0.5)
+		game.schedule(10, { rain.play()} )
+		game.schedule(900, { rain.stop()} )	
 	}
 }
