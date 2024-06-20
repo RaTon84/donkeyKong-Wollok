@@ -53,9 +53,18 @@ object mario {
    		}
    	}
 	
+	method configuracionInicioMario(){		
+		position=game.at(1,1)
+		vidas=2
+	    puntos = 0
+	    tieneMazo=false
+		animacionMario.animarDerecha()}
+		
+		
 		//KEYBOARD
 	method inicioMario(){
-		 	keyboard.d().onPressDo{
+		self.configuracionInicioMario()
+		keyboard.d().onPressDo{
 		if( tieneMazo){
 			mazo.moverDerechaConMazo()
 		}

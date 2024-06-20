@@ -1,8 +1,7 @@
 import juego.*
 
-const juego = new Juego()
 program jugar {
-	juego.iniciar()
+	juego.iniciarJuego()
 	
 }
  

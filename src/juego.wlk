@@ -7,7 +7,7 @@ import sonido.*
 import barriles.*
 
 
-class Juego{
+object juego{
 	const b1 = new Barril()
 	const b2 = new Barril()
 	const b3 = new Barril()
@@ -56,9 +56,11 @@ class Juego{
 	
 	 
 	//---------------------------------------------
-	method iniciar(){
-		
-		
+	method iniciarJuego(){
+		self.inicio()
+		game.start()}
+
+	method inicio(){
 		game.addVisual(stageInicio)
 		game.onTick(700,"cambio imagen",{stageInicio.siguienteFotograma()})
 		game.width(18)
@@ -67,11 +69,9 @@ class Juego{
 		musicaInicial.activarMusicaInicial()
 		keyboard.enter().onPressDo{
 			self.controles()
-			
 		}
-		game.start()
-	
 	}
+	
 	method controles(){
 		var contador = 0
 		game.onTick(100,"validacion",{contador = contador + 1})
@@ -84,11 +84,11 @@ class Juego{
 		game.schedule(1,{
 			keyboard.enter().onPressDo{
 			musicaInicial.desactivarMusicaInicial()
-			self.iniciarJuego()}
+			self.configuracion()}
 			})
 	}
 	
-	method iniciarJuego(){
+	method configuracion(){
 	game.title("Donkey Kong (wollok Version)")
 	game.removeVisual(stageControles)
 	game.addVisual(stage1)

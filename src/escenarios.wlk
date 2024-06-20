@@ -3,7 +3,6 @@ import mario.*
 import juego.*
 
 
-const reiniciarJuego = new Juego()
 class Stage{
 	const property vigas=[]
 	const property escaleras=[]
@@ -134,8 +133,9 @@ object gameOver {
 		game.sound("assets/sonidos/muerte.wav").play()
 		game.addVisual(stageMuerte)
 		game.onTick(1000,"cambio imagen muerte",{stageMuerte.siguienteFotograma()})
-		keyboard.enter().onPressDo{
-			reiniciarJuego.iniciar()
+		keyboard.r().onPressDo{
+			game.clear()
+			juego.inicio()
 		}	
 	}
 	
