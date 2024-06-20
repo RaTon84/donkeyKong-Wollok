@@ -69,6 +69,26 @@ const stage2= new Stage(vigas=[game.at(0,0),game.at(1,0),game.at(2,0),game.at(3,
 				
 const stageMuerte = new Stage(image = "assets/fondo/gameOver.png")
 
+object stageInicio {
+		
+	var fotogramaActual=0
+	method position(){
+		return game.at(0,0)
+	}
+	method siguienteFotograma(){
+		
+			if(fotogramaActual == 1){
+				fotogramaActual = fotogramaActual - 1
+			}
+			else {fotogramaActual = fotogramaActual + 1}
+	
+	}
+	
+	method image(){
+		return "assets/pantalla inicio/pantallaInicio"+"-"+fotogramaActual.toString()+".png"
+	}	
+}
+
 class GameOver {
 	
 	

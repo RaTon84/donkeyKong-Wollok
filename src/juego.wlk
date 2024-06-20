@@ -57,9 +57,10 @@ class Juego{
 	 
 	//---------------------------------------------
 	method iniciar(){
-		const stageInicio = new Stage(image = "assets/pantalla inicio/pantallaInicio-0.png")
+		
 		
 		game.addVisual(stageInicio)
+		game.onTick(1000,"cambio imagen",{stageInicio.siguienteFotograma()})
 		game.width(18)
 		game.height(18)
 		game.cellSize(50)
