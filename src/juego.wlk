@@ -57,13 +57,30 @@ object juego{
 	method iniciarJuego(){
 		self.inicio()
 		game.start()}
-
-	method inicio(){
-		game.addVisual(pantallaInicio)
-		game.onTick(700,"cambio imagen",{pantallaInicio.siguienteFotograma()})
+	
+	method medidas(){
 		game.width(18)
 		game.height(18)
 		game.cellSize(50)
+	}
+	
+	method cambioImage(unaPantalla){
+		game.onTick(700,"cambio imagen",{unaPantalla.siguienteFotograma()})
+	}
+	
+	method aniadirVisuales(unStage){
+	game.addVisual(unStage)
+	game.addVisual(mazo)
+	game.addVisual(pauline)
+	game.addVisual(mario)
+	game.addVisual(kong)
+	game.addVisual(barriles)
+	}
+	
+	method inicio(){
+		game.addVisual(pantallaInicio)
+		self.cambioImage(pantallaInicio)
+		self.medidas()
 		musicaInicial.activarMusicaInicial()
 		keyboard.enter().onPressDo{
 			self.controles()}}
@@ -73,30 +90,30 @@ object juego{
 		game.onTick(100,"validacion",{contador = contador + 1})
 		game.removeVisual(pantallaInicio)
 		game.addVisual(pantallaControles)
-		game.onTick(700,"cambio imagen",{pantallaControles.siguienteFotograma()})
-		game.width(18)
-		game.height(18)
-		game.cellSize(50)
+		self.cambioImage(pantallaControles)
+		self.medidas()
 		game.schedule(1,{
 			keyboard.enter().onPressDo{
 			musicaInicial.desactivarMusicaInicial()
-			self.configuracion()}})}
-	
-	method configuracion(){
+			self.inicioStage1()}})}
+			
+	method inicioStage1(){
+			game.removeVisual(pantallaControles)
+			game.addVisual(pantallaInicioStage1)
+			self.medidas()
+		game.schedule(2000,{
+			self.configuracionNivel1()})}
+
+	method configuracionNivel1(){
 	game.title("Donkey Kong (wollok Version)")
-	game.removeVisual(pantallaControles)
-	game.addVisual(stage1)
-	game.addVisual(mazo)
-	game.addVisual(pauline)
-	game.addVisual(mario)
+	game.removeVisual(pantallaInicioStage1)
+	self.aniadirVisuales(stage1)
 	mario.inicioMario() 
-	game.addVisual(kong)
 	kong.animacion()
-	game.addVisual(barriles)
 	game.onTick(4575,"lanzamientoDeBarriles",{self.tirarBarriles()})
 	musicaInicioJuego.activarMusicaInicialDelJuego()
 	musica1.activarMusica()
-	game.width(18)
-	game.height(18)
-	game.cellSize(50)
+	self.medidas()
 	}}
+	
+	

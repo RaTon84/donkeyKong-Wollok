@@ -27,6 +27,10 @@ object pantallaGameOver inherits Pantalla{
 	override method image()="assets/pantallaInicio/gameOver"+"-"+fotogramaActual.toString()+".png"
 }
 
+object pantallaInicioStage1 inherits Pantalla{
+	override method image()="assets/pantallaInicio/inicioStage1.png"
+}
+
 
 object gameOver {
 	method marioPierde(){
