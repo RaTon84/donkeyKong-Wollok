@@ -4,8 +4,8 @@ import kong.*
 import pauline.*
 import escenarios.*
 import sonido.*
-import barriles.*
-
+import objects.*
+import pantallas.*
 
 object juego{
 	const b1 = new Barril()
@@ -21,8 +21,7 @@ object juego{
 	
 	method siguienteBarril(){
 		nro = (nro+1) % barriles1.size()
-		nroBarril = barriles1.get(nro)
-	}
+		nroBarril = barriles1.get(nro)}
 	
 	method tirarBarril(){
 		try {
@@ -41,8 +40,7 @@ object juego{
 		//nroBarril.animacion()
 		//nroBarril.recorrerEscenario()
 		game.onCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
-  		game.onCollideDo(nroBarril,{personaje=>personaje.esChocadoPor(nroBarril)})
-	}
+  		game.onCollideDo(nroBarril,{personaje=>personaje.esChocadoPor(nroBarril)})}
 	
 	method tirarBarriles(){self.tirarBarril() self.siguienteBarril()}
 	////metodo viejo
@@ -61,39 +59,33 @@ object juego{
 		game.start()}
 
 	method inicio(){
-		game.addVisual(stageInicio)
-		game.onTick(700,"cambio imagen",{stageInicio.siguienteFotograma()})
+		game.addVisual(pantallaInicio)
+		game.onTick(700,"cambio imagen",{pantallaInicio.siguienteFotograma()})
 		game.width(18)
 		game.height(18)
 		game.cellSize(50)
 		musicaInicial.activarMusicaInicial()
 		keyboard.enter().onPressDo{
-			self.controles()
-		}
-	}
+			self.controles()}}
 	
 	method controles(){
 		var contador = 0
 		game.onTick(100,"validacion",{contador = contador + 1})
-		game.removeVisual(stageInicio)
-		game.addVisual(stageControles)
-		game.onTick(700,"cambio imagen",{stageControles.siguienteFotograma()})
+		game.removeVisual(pantallaInicio)
+		game.addVisual(pantallaControles)
+		game.onTick(700,"cambio imagen",{pantallaControles.siguienteFotograma()})
 		game.width(18)
 		game.height(18)
 		game.cellSize(50)
 		game.schedule(1,{
 			keyboard.enter().onPressDo{
 			musicaInicial.desactivarMusicaInicial()
-			self.configuracion()}
-			})
-	}
+			self.configuracion()}})}
 	
 	method configuracion(){
 	game.title("Donkey Kong (wollok Version)")
-	game.removeVisual(stageControles)
+	game.removeVisual(pantallaControles)
 	game.addVisual(stage1)
-	game.addVisual(barrilAzul)
-	game.addVisual(fuegoBarrilAzul)
 	game.addVisual(mazo)
 	game.addVisual(pauline)
 	game.addVisual(mario)
@@ -101,16 +93,10 @@ object juego{
 	game.addVisual(kong)
 	kong.animacion()
 	game.addVisual(barriles)
-	//pauline.animacion()
 	game.onTick(4575,"lanzamientoDeBarriles",{self.tirarBarriles()})
 	musicaInicioJuego.activarMusicaInicialDelJuego()
 	musica1.activarMusica()
 	game.width(18)
 	game.height(18)
 	game.cellSize(50)
-	
-	}
-}
-
-
-
+	}}

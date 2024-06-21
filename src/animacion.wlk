@@ -1,68 +1,66 @@
 import mario.*
 import escenarios.*
 
+//MARIO
+
 object animacionMario {
 	
 	var direccion="derecha"
 	var fotogramaActual=0
 	
 	method direccion(nuevaDireccion){
-		direccion=nuevaDireccion
-	}
+		direccion=nuevaDireccion}
 	
 	method siguienteFotograma(){
-		if (direccion=="derecha" or direccion=="izquierda") fotogramaActual=(fotogramaActual+1)%4 else if (direccion=="caida")fotogramaActual= 0 else fotogramaActual=(fotogramaActual+1)%2
-	}
+		if (direccion=="derecha" or direccion=="izquierda") fotogramaActual=(fotogramaActual+1)%4 else if (direccion=="caida")fotogramaActual= 0 else fotogramaActual=(fotogramaActual+1)%2}
 	
 	method image(){
-		return "assets/personajes/mario/"+direccion+"-"+fotogramaActual.toString()+".png"
-	}
-
-	
-	
+		return "assets/personajes/mario/"+direccion+"-"+fotogramaActual.toString()+".png"}
+		
 	//ANIMAR DIRECCION SI SE PUEDE
 	
 	method animarAbajo(){
 		self.direccion("abajo")
-		self.siguienteFotograma()
-	}
+		self.siguienteFotograma()}
 
 	method animarArriba(){
 		self.direccion("arriba")
-		self.siguienteFotograma()
-	}
+		self.siguienteFotograma()}
 
 	method animarIzquierda(){
 		self.direccion("izquierda")
-		self.siguienteFotograma()
-	}
+		self.siguienteFotograma()}
 	
 	method animarDerecha(){
 		self.direccion("derecha")
-		self.siguienteFotograma()
-	}
+		self.siguienteFotograma()}
 	
 	method animarSalto(){
 		self.direccion("salto")
-		self.siguienteFotograma()
-	}
+		self.siguienteFotograma()}
+	
+	method animarSaltoCaida(){
+		if(not mario.tieneMazo())
+			self.direccion("caidaSalto")		
+		else 
+			self.direccion("caidaSaltoMazo")
+		self.siguienteFotograma()}
+	
 	method animarCaida(){
 		self.direccion("caida")
-		self.siguienteFotograma()
-	}
+		self.siguienteFotograma()}
 	
 	method animarDerechaConMazo(){
 		self.direccion("derechaMazo")
-		self.siguienteFotograma()
-	}
+		self.siguienteFotograma()}
+		
 	method animarIzquierdaConMazo(){
 		self.direccion("izquierdaMazo")
-		self.siguienteFotograma()
-	}
+		self.siguienteFotograma()}
 	
 	method pierdeVida(){
-		self.direccion("perdioVida")
-	}
-	
+		self.direccion("perdioVida")}	
 }
+
+
 	
