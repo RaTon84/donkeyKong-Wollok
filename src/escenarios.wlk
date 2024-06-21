@@ -9,6 +9,7 @@ class Stage{
 	const property caidaBarril=[]
 	const property caidas=[]
 	const property image=null
+	const property vigaGanadora
 	
 	
 	method hayVigaDebajo()= vigas.any{v=>v==mario.obtenerPosicionAbajo()}
@@ -18,6 +19,8 @@ class Stage{
 	method hayEscaleraArriba()= escaleras.any{v=>v==mario.obtenerPosicionArriba()}
 	
 	method hayEscaleraDebajo()= escaleras.any{v=>v==mario.position()}
+	
+	method puedoPasarAlSiguienteNivel()= vigaGanadora==mario.obtenerPosicionAbajo()
 	
 	method position(){
 		return game.at(0,0)}
@@ -30,7 +33,7 @@ const stage1= new Stage(vigas=[game.at(0,0),game.at(1,0),game.at(2,0),game.at(3,
 				game.at(0,8),game.at(1,8),game.at(2,8),game.at(3,8),game.at(4,8),game.at(5,8),game.at(6,8),game.at(7,8),game.at(8,8),game.at(9,8),game.at(10,8),game.at(11,8),game.at(12,8),game.at(13,8),game.at(14,8),game.at(15,8),game.at(16,8),
 				game.at(17,11),game.at(1,11),game.at(2,11),game.at(3,11),game.at(4,11),game.at(5,11),game.at(6,11),game.at(7,11),game.at(8,11),game.at(9,11),game.at(10,11),game.at(11,11),game.at(12,11),game.at(13,11),game.at(14,11),game.at(15,11),game.at(16,11),
 				game.at(1,13),game.at(2,13),game.at(3,13),game.at(4,13),game.at(5,13),game.at(6,13),game.at(7,13),game.at(8,13),game.at(9,13),game.at(10,13),game.at(11,13),game.at(12,13),game.at(13,13),game.at(14,13),game.at(15,13),game.at(16,13),game.at(0,13),
-				game.at(7,15),game.at(8,15),game.at(9,15)],
+				game.at(7,15),game.at(8,15),game.at(9,15),game.at(10,15)],
 				
 				escaleras=[game.at(15,4),game.at(15,2),game.at(15,3),game.at(2,6),game.at(2,5),game.at(8,6),game.at(8,5),game.at(9,9),game.at(9,7),game.at(9,8),game.at(15,9),
 				game.at(15,7),game.at(15,8),game.at(2,12),game.at(2,10),game.at(2,11),game.at(5,12),game.at(5,10),game.at(5,11), game.at(15,14),game.at(15,13),game.at(5,118),
@@ -40,7 +43,9 @@ const stage1= new Stage(vigas=[game.at(0,0),game.at(1,0),game.at(2,0),game.at(3,
 				
 				caidas=[game.at(17,3),game.at(0,5),game.at(17,8),game.at(0,11),game.at(17,13),game.at(11,15)],
 				
-				image="assets/fondo/fondoNvl1.png"
+				image="assets/fondo/fondoNvl1.png",
+				
+				vigaGanadora=game.at(10,16)
 				)
 				
 
@@ -63,7 +68,8 @@ const stage2= new Stage(vigas=[game.at(0,0),game.at(1,0),game.at(2,0),game.at(3,
 				game.at(1,10),game.at(4,10),game.at(13,10),game.at(16,10),
 				game.at(2,13),game.at(4,13),game.at(13,13),game.at(15,13)],
 				
-				image="assets/fondo/fondoNv2-0.png"
+				image="assets/fondo/fondoNv2-0.png",
+				vigaGanadora=null
 				)
 				
 

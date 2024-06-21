@@ -5,6 +5,7 @@ import escenarios.*
 import sonido.*
 import objects.*
 import pantallas.*
+import pauline.*
 
 const musica2 = new Musica()
 const musica1 = new Musica()
@@ -21,43 +22,23 @@ object mario {
 	
 	method image()= animacionMario.image()
 	
-	method juegoTerminado()= vidas==0
-    
-	method puntaje()=puntos
-
-    method sumaPuntos(cantidad){puntos+=cantidad}
- 
-   	method eliminarBarril(){self.sumaPuntos(100)} 
-	
- 	method esColisionadoPor(){
-}
-   	
-   	
- method esChocadoPor(otro){
- 	
-   		if(self.tieneMazo())
-   			otro.removerBarril()
-   		else 
-   			animacionMario.pierdeVida()
-   			sonidoMario.pierdeVida()
-   			game.say(self, "¡Auch!")
-   			vidas= vidas - 1
-   			if(self.juegoTerminado())
-   				musica1.desactivarMusica()
-   				musica2.desactivarMusica()
-   				gameOver.marioPierde()}
-   	
 	method configuracionInicioMario(){		
 		position=game.at(1,1)
-		vidas=2
+		vidas=20
 	    puntos = 0
 	    tieneMazo=false
 		animacionMario.animarDerecha()}
 		
-		
 		//KEYBOARD
 	method inicioMario(){
 		self.configuracionInicioMario()
+		
+		keyboard.m().onPressDo{
+			tieneMazo=true
+		}                                     ////prueba hasta que se arregle las vidas
+		keyboard.n().onPressDo{
+			tieneMazo=false
+		}
 		
 		keyboard.d().onPressDo{
 		if(tieneMazo)
@@ -82,9 +63,34 @@ object mario {
 			self.moverAbajo()}
 			
 		keyboard.space().onPressDo{
-			self.saltar()}
+			self.saltar()}	
+}
 	
-}		
+	method juegoTerminado()= vidas==0
+    
+	method puntaje()=puntos
+
+    method sumaPuntos(cantidad){puntos+=cantidad}
+ 
+   	method eliminarBarril(){self.sumaPuntos(100)} 
+	
+ 	method esColisionadoPor(){}
+   		
+ 	method esChocadoPor(otro){
+ 	
+   		if(self.tieneMazo())
+   			otro.removerBarril()
+   		else 
+   			animacionMario.pierdeVida()
+   			sonidoMario.pierdeVida()
+   			game.say(self, "¡Auch!")
+   			vidas= vidas - 1
+   			if(self.juegoTerminado())
+   				musica1.desactivarMusica()
+   				musica2.desactivarMusica()
+   				gameOver.marioPierde()}
+   	
+		
 		//MOVIMIENTO
 	method moverDerecha(){
 		self.moverDerechaSiSePuede()
@@ -95,6 +101,7 @@ object mario {
 
 	method moverIzquierda(){
 		self.moverIzquierdaSiSePuede()
+		self.verificarSiEstaPauline()
 		sonidoMario.deMovimiento()
 		animacionMario.animarIzquierda()
 		if (stageEnQueMeMuevo.hayCaidaDebajo()) self.caer()
@@ -125,6 +132,8 @@ object mario {
 	
 	method obtenerPosicionArriba()= game.at(position.x(),position.y()+1)
 	
+	method obtenerPosicionIzquierda()= game.at(position.x()-1,position.y()+1)
+	
 
 	//MUEVE DIRECCION SI SE PUEDE
 	
@@ -140,8 +149,9 @@ object mario {
 		
 	method moverArribaSiSePuede(){
 		const alto = game.height()
-		position = game.at(position.x(),if(position.y()+1<alto and stageEnQueMeMuevo.hayEscaleraArriba())position.y()+1 else position.y())}
-	
+		position = game.at(position.x(),if(position.y()+1<alto and stageEnQueMeMuevo.hayEscaleraArriba())position.y()+1 else position.y())
+		//if (stageEnQueMeMuevo.puedoPasarAlSiguienteNivel())
+		}
 	method moverArribaSinCondicion(){
 		const alto = game.height()
 		position = game.at(position.x(),if(position.y()+1<alto)position.y()+1 else position.y())}
@@ -149,7 +159,7 @@ object mario {
 	method moverAbajoSiSePuede(){
 		if (stageEnQueMeMuevo.hayEscaleraDebajo())
 		position = game.at(position.x(),if(position.y()-1>=0)position.y()-1 else position.y())}
-	
+		
 	method moverDerechaSiSePuede(){
 		if (stageEnQueMeMuevo.hayVigaDebajo()){
 		const ancho = game.width()
@@ -157,7 +167,8 @@ object mario {
 	
 	method moverIzquierdaSiSePuede(){
 		if (stageEnQueMeMuevo.hayVigaDebajo())
-		position = game.at(if(position.x()-1>=0)position.x()-1 else position.x() ,position.y())}
+			position = game.at(if(position.x()-1>=0)position.x()-1 else position.x() ,position.y())
+			}
 
 	method validarSalto(){
 		const posicionParaSaltar = [game.at(0,1),game.at(1,1),game.at(2,1), game.at(3,1), game.at(4,1) ,game.at(5,1),game.at(6,1),game.at(7,1),
@@ -184,13 +195,16 @@ object mario {
 	
 	method animarAbajoSiSePuede(){
 		if (not stageEnQueMeMuevo.hayVigaDebajo())
-		animacionMario.animarArriba()}}
+		animacionMario.animarArriba()}
 	
+
+	method verificarSiEstaPauline(){
+		if (position==pauline.posicionGanadora())
+			juego.pasarNivel()
+	}
 
 	
 
-	
-	
 
-
+}
 

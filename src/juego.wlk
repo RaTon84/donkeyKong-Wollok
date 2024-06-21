@@ -77,6 +77,15 @@ object juego{
 	game.addVisual(barriles)
 	}
 	
+	method removerVisuales(unStage){
+	game.removeVisual(unStage)
+	game.removeVisual(mazo)
+	game.removeVisual(pauline)
+	game.removeVisual(mario)
+	game.removeVisual(kong)
+	game.removeVisual(barriles)
+	}
+	
 	method inicio(){
 		game.addVisual(pantallaInicio)
 		self.cambioImage(pantallaInicio)
@@ -103,6 +112,7 @@ object juego{
 			self.medidas()
 		game.schedule(2000,{
 			self.configuracionNivel1()})}
+			
 
 	method configuracionNivel1(){
 	game.title("Donkey Kong (wollok Version)")
@@ -114,6 +124,15 @@ object juego{
 	musicaInicioJuego.activarMusicaInicialDelJuego()
 	musica1.activarMusica()
 	self.medidas()
-	}}
+	}
 	
 	
+	method pasarNivel(){
+		game.clear()
+		game.addVisual(pantallaInicioStage2)
+		self.medidas()
+		game.schedule(2000,{
+			self.inicio()})}           //aca iría la configuracion del nivel 2
+
+
+}
