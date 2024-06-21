@@ -132,7 +132,16 @@ object juego{
 		game.addVisual(pantallaInicioStage2)
 		self.medidas()
 		game.schedule(2000,{
-			self.inicio()})}           //aca iría la configuracion del nivel 2
+			self.configuracionNivel2()})}           //aca iría la configuracion del nivel 2
 
-
+method configuracionNivel2(){
+	game.removeVisual(pantallaInicioStage2)
+	self.aniadirVisuales(stage2)
+	mario.inicioMario() 
+	//kong.animacion()
+	//game.onTick(4575,"lanzamientoDeBarriles",{self.tirarBarriles()})
+	//musicaInicioJuego.activarMusicaInicialDelJuego()
+	//musica1.activarMusica()
+	self.medidas()
+	}
 }

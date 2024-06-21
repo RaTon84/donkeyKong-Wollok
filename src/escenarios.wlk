@@ -68,7 +68,7 @@ const stage2= new Stage(vigas=[game.at(0,0),game.at(1,0),game.at(2,0),game.at(3,
 				game.at(1,10),game.at(4,10),game.at(13,10),game.at(16,10),
 				game.at(2,13),game.at(4,13),game.at(13,13),game.at(15,13)],
 				
-				image="assets/fondo/fondoNv2-0.png",
+				image="assets/fondo/fondoNvl2-0.png",
 				vigaGanadora=null
 				)
 				
