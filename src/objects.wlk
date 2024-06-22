@@ -7,9 +7,12 @@ import sonido.*
 //BARRILES
 
 object barriles {
-	method position()=game.at(0,14)
+	var property position=game.at(0,14)
 	method image() = "assets/objects/2.png" 
 	method esChocadoPor(otro){}
+	method positionSegundoNivel(){
+		self.position(game.at(6,14))
+	}
 }
 
 class Barril {
@@ -100,7 +103,60 @@ class Barril {
 		else 
 			personaje.esChocadoPor(self)		
 		self.removerBarril()}
+
 }
+
+object prograBarril{
+
+	const b1 = new Barril()
+		const b2 = new Barril()
+		const b3 = new Barril()
+		const b4 = new Barril()
+		const b5 = new Barril()
+		const b6 = new Barril()
+		const b7 = new Barril()
+		const barriles1 = [b1,b2,b3,b4,b5,b6,b7]
+		var nro=0
+		var nroBarril = barriles1.first()
+		
+		method siguienteBarril(){
+			nro = (nro+1) % barriles1.size()
+			nroBarril = barriles1.get(nro)}
+		
+		method tirarBarril(){
+			try {
+				game.addVisual(nroBarril)
+				nroBarril.animacion()
+				nroBarril.recorrerEscenario()
+				game.onCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
+	  			game.onCollideDo(nroBarril,{personaje=>personaje.esChocadoPor(nroBarril)})
+			} catch e : Exception {
+	  			nroBarril.removerBarril()
+	  			game.addVisual(nroBarril)
+				nroBarril.animacion()
+				nroBarril.recorrerEscenario()
+			}
+			//game.addVisual(nroBarril)
+			//nroBarril.animacion()
+			//nroBarril.recorrerEscenario()
+			game.onCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
+	  		game.onCollideDo(nroBarril,{personaje=>personaje.esChocadoPor(nroBarril)})}
+		
+		method tirarBarriles(){self.tirarBarril() self.siguienteBarril()}
+		////metodo viejo
+		/*method tirarBarril(barril){							
+			game.addVisual(barril)
+			barril.animacion()
+			barril.recorrerEscenario()
+			game.whenCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
+			game.whenCollideDo(barril,{personaje=>personaje.esChocadoPor(barril)})
+		}*/
+		
+		 
+		//---------------------------------------------
+
+}
+
 
 
 //MAZO
@@ -125,6 +181,7 @@ object mazo {
 	
 	method moverIzquierdaConMazo(){
 		mario.moverIzquierdaSiSePuede()
+		mario.verificarVigaGanadora()
 		sonidoMario.deMovimiento()
 		animacionMario.animarIzquierdaConMazo()
 		if (stageEnQueSeMueveMario.hayCaidaDebajo()) mario.caer()}

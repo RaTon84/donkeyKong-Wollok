@@ -21,4 +21,8 @@ object kong{
 			self.siguienteFotograma(gifKong)})}
 	
 	method esChocadoPor(otro){}
+	
+	method positionSegundoNivel(){
+		self.position(game.at(8,14))
+	}
 }

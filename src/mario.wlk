@@ -10,8 +10,6 @@ import pauline.*
 const musica2 = new Musica()
 const musica1 = new Musica()
 
-
-
 object mario {
 	var vidas=2
 	var puntos = 0
@@ -80,15 +78,15 @@ object mario {
  	
    		if(self.tieneMazo())
    			otro.removerBarril()
-   		else 
+   		else {
    			animacionMario.pierdeVida()
    			sonidoMario.pierdeVida()
    			game.say(self, "¡Auch!")
    			vidas= vidas - 1
-   			if(self.juegoTerminado())
+   			if(self.juegoTerminado()){
    				musica1.desactivarMusica()
    				musica2.desactivarMusica()
-   				gameOver.marioPierde()}
+   				gameOver.marioPierde()}}}
    	
 		
 		//MOVIMIENTO
@@ -101,7 +99,7 @@ object mario {
 
 	method moverIzquierda(){
 		self.moverIzquierdaSiSePuede()
-		self.verificarSiEstaPauline()
+		self.verificarVigaGanadora()
 		sonidoMario.deMovimiento()
 		animacionMario.animarIzquierda()
 		if (stageEnQueMeMuevo.hayCaidaDebajo()) self.caer()
@@ -198,13 +196,9 @@ object mario {
 		animacionMario.animarArriba()}
 	
 
-	method verificarSiEstaPauline(){
-		if (position==pauline.posicionGanadora())
+	method verificarVigaGanadora(){
+		if (position==stageEnQueMeMuevo.vigaGanadora())
 			juego.pasarNivel()
 	}
-
-	
-
-
 }
 

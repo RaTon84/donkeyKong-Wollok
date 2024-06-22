@@ -8,55 +8,10 @@ import objects.*
 import pantallas.*
 
 object juego{
-	const b1 = new Barril()
-	const b2 = new Barril()
-	const b3 = new Barril()
-	const b4 = new Barril()
-	const b5 = new Barril()
-	const b6 = new Barril()
-	const b7 = new Barril()
-	const barriles1 = [b1,b2,b3,b4,b5,b6,b7]
-	var nro=0
-	var nroBarril = barriles1.first()
 	
-	method siguienteBarril(){
-		nro = (nro+1) % barriles1.size()
-		nroBarril = barriles1.get(nro)}
-	
-	method tirarBarril(){
-		try {
-			game.addVisual(nroBarril)
-			nroBarril.animacion()
-			nroBarril.recorrerEscenario()
-			game.onCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
-  			game.onCollideDo(nroBarril,{personaje=>personaje.esChocadoPor(nroBarril)})
-		} catch e : Exception {
-  			nroBarril.removerBarril()
-  			game.addVisual(nroBarril)
-			nroBarril.animacion()
-			nroBarril.recorrerEscenario()
-		}
-		//game.addVisual(nroBarril)
-		//nroBarril.animacion()
-		//nroBarril.recorrerEscenario()
-		game.onCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
-  		game.onCollideDo(nroBarril,{personaje=>personaje.esChocadoPor(nroBarril)})}
-	
-	method tirarBarriles(){self.tirarBarril() self.siguienteBarril()}
-	////metodo viejo
-	/*method tirarBarril(barril){							
-		game.addVisual(barril)
-		barril.animacion()
-		barril.recorrerEscenario()
-		game.whenCollideDo(mario,{elemento=>elemento.colisionadoPor(mario)})
-		game.whenCollideDo(barril,{personaje=>personaje.esChocadoPor(barril)})
-	}*/
-	
-	 
-	//---------------------------------------------
 	method iniciarJuego(){
 		self.inicio()
-		game.start()}
+		game.start()}												
 	
 	method medidas(){
 		game.width(18)
@@ -71,20 +26,13 @@ object juego{
 	method aniadirVisuales(unStage){
 	game.addVisual(unStage)
 	game.addVisual(mazo)
-	game.addVisual(pauline)
 	game.addVisual(mario)
 	game.addVisual(kong)
 	game.addVisual(barriles)
+	if (unStage==stage1)
+		game.addVisual(pauline)
 	}
 	
-	method removerVisuales(unStage){
-	game.removeVisual(unStage)
-	game.removeVisual(mazo)
-	game.removeVisual(pauline)
-	game.removeVisual(mario)
-	game.removeVisual(kong)
-	game.removeVisual(barriles)
-	}
 	
 	method inicio(){
 		game.addVisual(pantallaInicio)
@@ -112,36 +60,40 @@ object juego{
 			self.medidas()
 		game.schedule(2000,{
 			self.configuracionNivel1()})}
-			
-
-	method configuracionNivel1(){
-	game.title("Donkey Kong (wollok Version)")
-	game.removeVisual(pantallaInicioStage1)
-	self.aniadirVisuales(stage1)
-	mario.inicioMario() 
-	kong.animacion()
-	game.onTick(4575,"lanzamientoDeBarriles",{self.tirarBarriles()})
-	musicaInicioJuego.activarMusicaInicialDelJuego()
-	musica1.activarMusica()
-	self.medidas()
-	}
-	
-	
+		
 	method pasarNivel(){
 		game.clear()
 		game.addVisual(pantallaInicioStage2)
 		self.medidas()
 		game.schedule(2000,{
-			self.configuracionNivel2()})}           //aca iría la configuracion del nivel 2
+			self.configuracionNivel2()})}  
+	
+	
+	//CONFIGURACION DE NIVELES
+	
+	method configuracion(unNivel){
+		if (unNivel==1)
+			game.removeVisual(pantallaInicioStage1)
+		else
+			game.removeVisual(pantallaInicioStage2)	
+		if (unNivel==1)
+			self.aniadirVisuales(stage1)
+		else
+			self.aniadirVisuales(stage2)
+		mario.inicioMario() 
+		kong.animacion()
+		game.onTick(4575,"lanzamientoDeBarriles",{prograBarril.tirarBarriles()})
+		self.medidas()}
+	
+	method configuracionNivel1(){
+	game.title("Donkey Kong (wollok Version)")
+	self.configuracion(1)
+	musicaInicioJuego.activarMusicaInicialDelJuego()
+	musica1.activarMusica()}
+	        
 
-method configuracionNivel2(){
-	game.removeVisual(pantallaInicioStage2)
-	self.aniadirVisuales(stage2)
-	mario.inicioMario() 
-	//kong.animacion()
-	//game.onTick(4575,"lanzamientoDeBarriles",{self.tirarBarriles()})
-	//musicaInicioJuego.activarMusicaInicialDelJuego()
-	//musica1.activarMusica()
-	self.medidas()
-	}
+	method configuracionNivel2(){
+		kong.positionSegundoNivel()
+		barriles.positionSegundoNivel()
+		self.configuracion(2)}
 }
