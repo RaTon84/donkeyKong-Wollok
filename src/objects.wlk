@@ -3,7 +3,7 @@ import escenarios.*
 import mario.*
 import animacion.*
 import sonido.*
-
+import juego.*
 //BARRILES
 
 object barriles {
@@ -178,14 +178,14 @@ object mazo {
 	
 	method activarMazo(){
 		const rain = game.sound("assets/sonidos/background-3.mp3")	
-		musica1.desactivarMusica()
+		juego.musicaFondo().pause()
 		sonidoMario.deObjeto()
 		rain.play()
 		rain.shouldLoop(true)
 	 	game.onTick(8000, "movimiento",{ 
 	 	mario.tieneMazo(false)
 		rain.shouldLoop(false)
-		musica2.activarMusica()})}
+		juego.musicaFondo().play()})}
 }
 
 class Palanca{

@@ -7,8 +7,7 @@ import objects.*
 import pantallas.*
 import pauline.*
 
-const musica2 = new Musica()
-const musica1 = new Musica()
+
 
 object mario {
 	var vidas=2
@@ -85,8 +84,7 @@ object mario {
    			game.say(self, "¡Auch!")
    			vidas= vidas - 1
    			if(self.juegoTerminado()){
-   				musica1.desactivarMusica()
-   				musica2.desactivarMusica()
+   				juego.musicaFondo().pause()
    				gameOver.marioPierde()}}}
    	
 		
