@@ -62,5 +62,19 @@ object animacionMario {
 		self.direccion("perdioVida")}	
 }
 
-
+object animacionNivel2{
+	var property fotogramas=["assets/fondo/fondoNvl2-0.png",
+						"assets/fondo/fondoNvl2-1.png",
+						"assets/fondo/fondoNvl2-2.png",
+						"assets/fondo/fondoNvl2-3.png",
+						"assets/fondo/fondoNvl2-4.png"]
 	
+	method image()=fotogramas.first()
+	
+	
+	method bajarEscaleras(){
+		fotogramas.remove(fotogramas.first())
+		stage2.image(self.image())
+	}
+	
+}

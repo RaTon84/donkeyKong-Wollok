@@ -3,7 +3,6 @@ import escenarios.*
 import mario.*
 import animacion.*
 import sonido.*
-import juego.*
 
 //BARRILES
 
@@ -179,13 +178,30 @@ object mazo {
 	
 	method activarMazo(){
 		const rain = game.sound("assets/sonidos/background-3.mp3")	
-		juego.musicaFondo().pause()
+		musica1.desactivarMusica()
 		sonidoMario.deObjeto()
 		rain.play()
 		rain.shouldLoop(true)
 	 	game.onTick(8000, "movimiento",{ 
 	 	mario.tieneMazo(false)
 		rain.shouldLoop(false)
-		juego.musicaFondo().play()})}
+		musica2.activarMusica()})}
 }
 
+class Palanca{
+	const property position
+	
+	
+	method image (){
+		return "assets/objects/90.png"}		
+		
+	method consecuencias(){
+		game.removeVisual(self)
+		stage2.activarEscaleraNvl2()}
+	}
+
+
+const palanca1= new Palanca(position=game.at(13,1))
+const palanca2= new Palanca(position=game.at(3,4))
+const palanca3= new Palanca(position=game.at(9,7))
+const palanca4= new Palanca(position=game.at(15,11))

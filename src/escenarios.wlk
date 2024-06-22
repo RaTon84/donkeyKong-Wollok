@@ -1,16 +1,16 @@
 import wollok.game.*
 import mario.*
 import juego.*
-
+import animacion.*
 
 class Stage{
 	const property vigas=[]
-	const property escaleras=[]
+	var property escaleras=[]
 	const property caidaBarril=[]
 	const property caidas=[]
-	const property image=null
+	var property image=null
 	const property vigaGanadora
-	
+	var escaleraLvl2=0
 	
 	method hayVigaDebajo()= vigas.any{v=>v==mario.obtenerPosicionAbajo()}
 	
@@ -24,6 +24,26 @@ class Stage{
 	
 	method position(){
 		return game.at(0,0)}
+		
+	method activarEscaleraNvl2(){
+		animacionNivel2.bajarEscaleras()
+		escaleraLvl2+=1
+		self.bajarEscaleras(escaleraLvl2)
+	}
+	
+	method bajarEscaleras(unNumero){
+		if (unNumero==1)
+			escaleras=[game.at(1,4),game.at(1,2),game.at(1,3),game.at(9,4),game.at(9,2),game.at(9,3),game.at(16,4),game.at(16,2),game.at(16,3)]
+		
+		else if (unNumero==2){
+			escaleras+=[game.at(2,7),game.at(2,5),game.at(2,6),game.at(7,7),game.at(7,5),game.at(7,6),game.at(11,7),game.at(11,5),game.at(11,6),game.at(15,7),game.at(15,5),game.at(15,6)]}
+		
+		else if (unNumero==3){
+			escaleras+=[game.at(3,11),game.at(3,8),game.at(3,9),game.at(3,10),game.at(14,11),game.at(14,8),game.at(14,9),game.at(14,10)]}
+				
+		else 
+			escaleras+=[game.at(9,14),game.at(9,12),game.at(9,13)]}
+	
 }
 
 
@@ -55,11 +75,7 @@ const stage2= new Stage(vigas=[game.at(0,0),game.at(1,0),game.at(2,0),game.at(3,
 				game.at(2,10),game.at(3,10),game.at(5,10),game.at(6,10),game.at(7,10),game.at(8,10),game.at(9,10),game.at(10,10),game.at(11,10),game.at(12,10),game.at(14,10),game.at(15,10),
 				game.at(3,13),game.at(5,13),game.at(6,13),game.at(7,13),game.at(8,13),game.at(9,13),game.at(10,13),game.at(11,13),game.at(12,13),game.at(14,13),
 				game.at(5,16),game.at(6,16),game.at(7,16),game.at(8,16),game.at(9,16),game.at(10,16),game.at(11,16),game.at(12,16)],
-				
-				escaleras=[game.at(1,1),game.at(1,2),game.at(1,3),game.at(9,1),game.at(9,2),game.at(9,3),game.at(16,1),game.at(16,2),game.at(16,3),
-				game.at(2,4),game.at(2,5),game.at(2,6),game.at(7,4),game.at(7,5),game.at(7,6),game.at(11,4),game.at(11,5),game.at(11,6),game.at(15,4),game.at(15,5),game.at(15,6),
-				game.at(3,7),game.at(3,8),game.at(3,9),game.at(3,10),game.at(14,7),game.at(14,8),game.at(14,9),game.at(14,10),
-				game.at(9,11),game.at(9,12),game.at(9,13)],
+
 				
 				caidaBarril=[/*hernan lo tiene que rellenar */],
 				
@@ -68,7 +84,7 @@ const stage2= new Stage(vigas=[game.at(0,0),game.at(1,0),game.at(2,0),game.at(3,
 				game.at(1,10),game.at(4,10),game.at(13,10),game.at(16,10),
 				game.at(2,13),game.at(4,13),game.at(13,13),game.at(15,13)],
 				
-				image="assets/fondo/fondoNvl2-0.png",
+				image=animacionNivel2.image(),
 				vigaGanadora=null
 				)
 				

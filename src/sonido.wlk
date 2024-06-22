@@ -1,5 +1,15 @@
 import wollok.game.*
 
+class Musica{
+	const rain = game.sound("assets/sonidos/background-1.mp3")
+
+	method activarMusica(){
+		rain.shouldLoop(true)
+		game.schedule(500, { rain.play()})}
+		
+	method desactivarMusica(){
+		 rain.shouldLoop(false)}
+}
 
 	
 object musicaInicioJuego {

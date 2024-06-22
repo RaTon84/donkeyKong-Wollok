@@ -7,6 +7,8 @@ import objects.*
 import pantallas.*
 import pauline.*
 
+const musica2 = new Musica()
+const musica1 = new Musica()
 
 object mario {
 	var vidas=2
@@ -15,6 +17,7 @@ object mario {
 	const velocidad=100
 	var property position=game.at(1,1)
 	var property stageEnQueMeMuevo= stage1
+	var property palancasQueEncontrar=[palanca1,palanca2,palanca3,palanca4]
 	
 	method image()= animacionMario.image()
 	
@@ -82,13 +85,15 @@ object mario {
    			game.say(self, "¡Auch!")
    			vidas= vidas - 1
    			if(self.juegoTerminado()){
-   				juego.musicaFondo().pause()
+   				musica1.desactivarMusica()
+   				musica2.desactivarMusica()
    				gameOver.marioPierde()}}}
    	
 		
 		//MOVIMIENTO
 	method moverDerecha(){
 		self.moverDerechaSiSePuede()
+		self.verificarPalanca()
 		sonidoMario.deMovimiento()
 		animacionMario.animarDerecha()
 		if (stageEnQueMeMuevo.hayCaidaDebajo()) self.caer()
@@ -97,6 +102,7 @@ object mario {
 	method moverIzquierda(){
 		self.moverIzquierdaSiSePuede()
 		self.verificarVigaGanadora()
+		self.verificarPalanca()
 		sonidoMario.deMovimiento()
 		animacionMario.animarIzquierda()
 		if (stageEnQueMeMuevo.hayCaidaDebajo()) self.caer()
@@ -194,8 +200,21 @@ object mario {
 	
 
 	method verificarVigaGanadora(){
-		if (position==stageEnQueMeMuevo.vigaGanadora())
+		if (position==stageEnQueMeMuevo.vigaGanadora()){
 			juego.pasarNivel()
+			stageEnQueMeMuevo=stage2}}
+	
+	method verificarPalanca(){
+		if (stageEnQueMeMuevo==stage2 and palancasQueEncontrar.any{p=>p.position()==position}){
+			palancasQueEncontrar.first().consecuencias()
+			self.eliminarPalanca()}
+	}
+	
+	method eliminarPalanca(){
+		palancasQueEncontrar.remove(palancasQueEncontrar.first())
 	}
 }
+
+	
+
 
