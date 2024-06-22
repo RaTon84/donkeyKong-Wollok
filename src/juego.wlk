@@ -82,14 +82,16 @@ object juego{
 			self.aniadirVisuales(stage2)
 		mario.inicioMario() 
 		kong.animacion()
-		game.onTick(5550,"lanzamientoDeBarriles",{prograBarril.tirarBarriles()})
+		
 		self.medidas()}
 	
 	method configuracionNivel1(){
-	game.title("Donkey Kong (wollok Version)")
-	self.configuracion(1)
-	musicaInicioJuego.activarMusicaInicialDelJuego()
-	musica1.activarMusica()}
+		game.title("Donkey Kong (wollok Version)")
+		self.configuracion(1)
+		musicaInicioJuego.activarMusicaInicialDelJuego()
+		musica1.activarMusica()
+		game.onTick(5550,"lanzamientoDeBarriles",{prograBarril.tirarBarriles()})
+	}
 	        
 
 	method configuracionNivel2(){
