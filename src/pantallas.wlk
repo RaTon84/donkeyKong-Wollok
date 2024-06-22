@@ -35,6 +35,11 @@ object pantallaInicioStage2 inherits Pantalla{
 	override method image()="assets/pantallaInicio/inicioStage2.png"
 }
 
+object pantallaYouWin inherits Pantalla{
+	override method image()="assets/pantallaInicio/youWin.png"
+}
+
+
 object gameOver {
 	method marioPierde(){
 		game.clear()
@@ -44,5 +49,15 @@ object gameOver {
 		keyboard.r().onPressDo{
 			game.clear()
 			juego.inicio()}}
+}
+
+object youWin {
+	method marioGana(){
+		game.clear()
+		//game.sound("assets/sonidos/").play()        //AGREGAR SONIDO VICTORIA
+		game.addVisual(pantallaYouWin)
+		game.schedule(6000,{
+			game.stop()})
+	}
 }
 
