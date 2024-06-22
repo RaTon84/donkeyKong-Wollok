@@ -82,7 +82,7 @@ object juego{
 			self.aniadirVisuales(stage2)
 		mario.inicioMario() 
 		kong.animacion()
-		game.onTick(4575,"lanzamientoDeBarriles",{prograBarril.tirarBarriles()})
+		game.onTick(5550,"lanzamientoDeBarriles",{prograBarril.tirarBarriles()})
 		self.medidas()}
 	
 	method configuracionNivel1(){

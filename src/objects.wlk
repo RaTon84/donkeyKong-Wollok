@@ -21,8 +21,8 @@ class Barril {
 	const property gifBarril = ["assets/objects/82.png","assets/objects/83.png","assets/objects/84.png","assets/objects/85.png"]	
 	var property image = gifBarril.get(fotograma)
 	var direccion = "derecha"
-	var property velocidad = 250
-	const random = [0,1,2,3]
+	var property velocidad = 150
+	const random = [0,1,2,3,4,5]
 	var property estoyBajandoEscalera = false
 	//const property gifDerecha = ["assets/objects/82.png","assets/objects/83.png","assets/objects/84.png","assets/objects/85.png"]
 	//const property gifIzquierda = ["assets/objects/85.png","assets/objects/84.png","assets/objects/83.png","assets/objects/82.png"]
@@ -33,7 +33,7 @@ class Barril {
 		fotograma = (fotograma+1) % lista.size()
 		image = lista.get(fotograma)}
 	
-	method animacion(){game.onTick(200, "animacion-tirarBarriles", {self.siguienteFotograma(gifBarril)})}
+	method animacion(){game.onTick(200, "animacion-Barril", {self.siguienteFotograma(gifBarril)})}
 	//method animacionDerecha(){game.onTick(200, "animacion-derecha", {self.siguienteFotograma(gifDerecha)})}
 	//method animacionIzquierda(){game.onTick(200, "animacion-izquierda", {self.siguienteFotograma(gifIzquierda)})}	
 	//method animacionEscalera(){game.onTick(200, "animacion-escalera", {self.siguienteFotograma(gifEscalera)})}
@@ -75,7 +75,7 @@ class Barril {
 			else self.caerSiguienteViga()}
 
 	method dicidir(){
-		if(random.anyOne()==0)
+		if(random.anyOne()==3)
 			self.bajarEscalera()
 		else self.rodarVigas()}
 	
@@ -93,7 +93,8 @@ class Barril {
 		game.removeVisual(self)
 		position = game.at(5,14)
 		direccion = "derecha"
-		game.removeTickEvent("recorrido-barril")}
+		game.removeTickEvent("recorrido-barril")
+		game.removeTickEvent("animacion-Barril")}
 	
     method colisionadoPor(personaje){
 		if(personaje.tieneMazo()){
@@ -113,9 +114,7 @@ object prograBarril{
 		const b3 = new Barril()
 		const b4 = new Barril()
 		const b5 = new Barril()
-		const b6 = new Barril()
-		const b7 = new Barril()
-		const barriles1 = [b1,b2,b3,b4,b5,b6,b7]
+		const barriles1 = [b1,b2,b3,b4,b5]
 		var nro=0
 		var nroBarril = barriles1.first()
 		

@@ -17,7 +17,7 @@ object kong{
 		image = lista.get(fotograma)}
 	
 	method animacion(){
-		game.onTick(750, "animacion-tirarBarriles", {
+		game.onTick(900, "animacion-tirarBarriles", {
 			self.siguienteFotograma(gifKong)})}
 	
 	method esChocadoPor(otro){}
