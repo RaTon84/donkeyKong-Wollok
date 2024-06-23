@@ -545,16 +545,32 @@ object mazo {
 class Palanca{
 	const property position
 	
-	
 	method image (){
 		return "assets/objects/palanca.png"}		
 		
 	method consecuencias(){
 		game.removeVisual(self)
-		stage2.activarEscaleraNvl2()}
-	}
+		stage2.activarEscaleraNvl2()}}
 
 const palanca1= new Palanca(position=game.at(13,1))
 const palanca2= new Palanca(position=game.at(3,4))
 const palanca3= new Palanca(position=game.at(9,7))
 const palanca4= new Palanca(position=game.at(15,11))
+
+
+class CosoAmarillo inherits Palanca{
+	
+	override method image(){
+		return "assets/objects/90.png"}
+	
+	override method consecuencias(){
+		game.removeVisual(self)}}
+
+const coso1= new CosoAmarillo(position=game.at(5,4))
+const coso2= new CosoAmarillo(position=game.at(14,4))
+const coso3= new CosoAmarillo(position=game.at(1,7))
+const coso4= new CosoAmarillo(position=game.at(12,7))	
+const coso5= new CosoAmarillo(position=game.at(12,11))
+const coso6= new CosoAmarillo(position=game.at(2,11))
+const coso7= new CosoAmarillo(position=game.at(3,14))
+const coso8= new CosoAmarillo(position=game.at(14,14))	

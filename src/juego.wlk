@@ -48,7 +48,15 @@ object juego{
 		game.addVisual(palanca1)
 		game.addVisual(palanca2)
 		game.addVisual(palanca3)
-		game.addVisual(palanca4)}
+		game.addVisual(palanca4)
+		game.addVisual(coso1)
+		game.addVisual(coso2)
+		game.addVisual(coso3)
+		game.addVisual(coso4)
+		game.addVisual(coso5)
+		game.addVisual(coso6)
+		game.addVisual(coso7)
+		game.addVisual(coso8)}
 	}
 	
 	

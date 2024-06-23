@@ -20,6 +20,7 @@ object mario {
 	var property position=game.at(1,1)
 	var property stageEnQueMeMuevo= stage1
 	var property palancasQueEncontrar=[palanca1,palanca2,palanca3,palanca4]
+	var property cososAmarillosQueEncontrar=[coso1,coso2,coso3,coso4,coso5,coso6,coso7,coso8]
 	
 	method image()= animacionMario.image()
 	
@@ -92,21 +93,21 @@ object mario {
 		//MOVIMIENTO
 	method moverDerecha(){
 		self.moverDerechaSiSePuede()
-		self.verificarPalanca()
+		self.verificarObjetos()
 		self.animarDerechaSiSePuede()
 		if (stageEnQueMeMuevo.hayCaidaDebajo()) self.caer()
 	}
 
 	method moverIzquierda(){
 		self.moverIzquierdaSiSePuede()
-		self.verificarVigaGanadora()
-		self.verificarPalanca()
+		self.verificarObjetos()
 		self.animarIzquierdaSiSePuede()
 		if (stageEnQueMeMuevo.hayCaidaDebajo()) self.caer()
 	}
 	
 	method moverArriba(){
 		self.moverArribaSiSePuede()
+		self.verificarObjetos()
 		self.animarArribaSiSePuede()
 	}
 
@@ -206,15 +207,29 @@ object mario {
 			juego.pasarNivel()
 			stageEnQueMeMuevo=stage2}}
 	
+	//VERIFICAR OBJETOS
+	
+	method verificarObjetos(){
+		self.verificarVigaGanadora()
+		self.verificarPalanca()
+		self.verificarCosoAmarillo()}
+	
+	
 	method verificarPalanca(){
 		if (stageEnQueMeMuevo==stage2 and palancasQueEncontrar.any{p=>p.position()==position}){
 			palancasQueEncontrar.first().consecuencias()
-			self.eliminarPalanca()}
-	}
+			self.eliminarPalanca()}}
+	
+	method verificarCosoAmarillo(){
+		if (stageEnQueMeMuevo==stage2 and cososAmarillosQueEncontrar.any{p=>p.position()==position}){
+			cososAmarillosQueEncontrar.first().consecuencias()
+			self.eliminarCosoAmarillo()}}
 	
 	method eliminarPalanca(){
-		palancasQueEncontrar.remove(palancasQueEncontrar.first())
-	}
+		palancasQueEncontrar.remove(palancasQueEncontrar.first())}
+	
+	method eliminarCosoAmarillo(){
+		cososAmarillosQueEncontrar.remove(cososAmarillosQueEncontrar.find{p=>p.position()==position})}
 }
 
 	
