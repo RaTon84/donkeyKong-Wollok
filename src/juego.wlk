@@ -125,9 +125,7 @@ object juego{
 			self.aniadirVisuales(stage1)
 		else
 			self.aniadirVisuales(stage2)
-		mario.inicioMario() 
-		kong.animacion()
-		game.onTick(5550,"lanzamientoDeBarriles",{prograBarril.tirarBarriles()})
+		mario.inicioMario()		
 		self.medidas()}
 	
 	method configuracionNivel1(){
@@ -139,9 +137,13 @@ object juego{
 			self.musicaFondo().resume()
 			game.removeTickEvent("musica fondo juego")
 		})
-			
+		kong.animacion()
+		game.onTick(5550,"lanzamientoDeBarriles",{prograBarril.tirarBarriles()})	
+		game.addVisual(barrilAzul)
+		game.addVisual(fuegoBarril)
+		game.schedule(7000,{prograFueguito.aniadirFueguito()})
+		fuegoBarril.animacion()	
 	}
-	        
 
 	method configuracionNivel2(){
 		kong.positionSegundoNivel()
