@@ -21,6 +21,7 @@ object mario {
 	var property stageEnQueMeMuevo= stage1
 	var property palancasQueEncontrar=[palanca1,palanca2,palanca3,palanca4]
 	var property cososAmarillosQueEncontrar=[coso1,coso2,coso3,coso4,coso5,coso6,coso7,coso8]
+	var contadorCosos=0
 	
 	method image()= animacionMario.image()
 	
@@ -69,6 +70,8 @@ object mario {
 }
 	
 	method juegoTerminado()= vidas==0
+	
+	method ganaElJuego()= contadorCosos==8
     
     method sumaPuntos(cantidad){puntos+=cantidad}
  
@@ -201,19 +204,16 @@ object mario {
 			else					
 				animacionMario.animarDerecha()}}
 
-
-	method verificarVigaGanadora(){
-		if (position==stageEnQueMeMuevo.vigaGanadora()){
-			juego.pasarNivel()
-			stageEnQueMeMuevo=stage2}}
-	
 	//VERIFICAR OBJETOS
-	
 	method verificarObjetos(){
 		self.verificarVigaGanadora()
 		self.verificarPalanca()
 		self.verificarCosoAmarillo()}
 	
+	method verificarVigaGanadora(){
+		if (position==stageEnQueMeMuevo.vigaGanadora()){
+			juego.pasarNivel()
+			stageEnQueMeMuevo=stage2}}	
 	
 	method verificarPalanca(){
 		if (stageEnQueMeMuevo==stage2 and palancasQueEncontrar.any{p=>p.position()==position}){
@@ -222,14 +222,28 @@ object mario {
 	
 	method verificarCosoAmarillo(){
 		if (stageEnQueMeMuevo==stage2 and cososAmarillosQueEncontrar.any{p=>p.position()==position}){
-			cososAmarillosQueEncontrar.first().consecuencias()
-			self.eliminarCosoAmarillo()}}
+			self.encontrarCosoAmarillo().consecuencias()
+			self.eliminarCosoAmarillo()
+			contadorCosos+=1
+			self.verificarWin()}}
+			
+	method verificarWin(){
+		if (self.ganaElJuego()){
+			youWin.marioGana()
+		}
+	}
+	
+	//ELIMINAR OBJETOS
 	
 	method eliminarPalanca(){
 		palancasQueEncontrar.remove(palancasQueEncontrar.first())}
 	
 	method eliminarCosoAmarillo(){
-		cososAmarillosQueEncontrar.remove(cososAmarillosQueEncontrar.find{p=>p.position()==position})}
+		cososAmarillosQueEncontrar.remove(self.encontrarCosoAmarillo())}
+		
+	method encontrarCosoAmarillo(){
+		return cososAmarillosQueEncontrar.find{p=>p.position()==position}
+	}
 }
 
 	
