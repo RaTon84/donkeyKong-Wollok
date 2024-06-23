@@ -93,8 +93,7 @@ object mario {
 	method moverDerecha(){
 		self.moverDerechaSiSePuede()
 		self.verificarPalanca()
-		sonidoMario.deMovimiento()
-		animacionMario.animarDerecha()
+		self.animarDerechaSiSePuede()
 		if (stageEnQueMeMuevo.hayCaidaDebajo()) self.caer()
 	}
 
@@ -102,8 +101,7 @@ object mario {
 		self.moverIzquierdaSiSePuede()
 		self.verificarVigaGanadora()
 		self.verificarPalanca()
-		sonidoMario.deMovimiento()
-		animacionMario.animarIzquierda()
+		self.animarIzquierdaSiSePuede()
 		if (stageEnQueMeMuevo.hayCaidaDebajo()) self.caer()
 	}
 	
@@ -143,7 +141,7 @@ object mario {
 	//MUEVE DIRECCION SI SE PUEDE
 	
 	method saltarSiSePuede(){
-			if(self.validarSalto()){
+			if(stageEnQueMeMuevo.hayVigaDebajo()){      // antes self.validarSalto()
 			self.moverArribaSinCondicion()
 			animacionMario.animarSalto()											
 			game.schedule(velocidad*3,{self.caidaSalto()})}}
@@ -174,23 +172,6 @@ object mario {
 		if (stageEnQueMeMuevo.hayVigaDebajo())
 			position = game.at(if(position.x()-1>=0)position.x()-1 else position.x() ,position.y())
 			}
-
-	method validarSalto(){
-		const posicionParaSaltar = [game.at(0,1),game.at(1,1),game.at(2,1), game.at(3,1), game.at(4,1) ,game.at(5,1),game.at(6,1),game.at(7,1),
-		game.at(8,1), game.at(9,1) ,game.at(10,1),game.at(11,1),game.at(12,1), game.at(13,1),game.at(14,1), 
-		game.at(15,1) ,game.at(16,1),game.at(17,1), game.at(0,4) ,game.at(1,4), game.at(2,4),game.at(3,4), game.at(4,4) , game.at(5,4),game.at(6,4), game.at(7,4)
-		, game.at(8,4), game.at(9,4),game.at(10,4), game.at(11,4), game.at(12,4) ,game.at(13,4) , game.at(14,4) 
-		,game.at(15,4), game.at(16,4), game.at(1,6), game.at(2,6), game.at(3,6), game.at(4,6) , game.at(5,6), game.at(6,6) ,game.at(7,6)
-		,game.at(8,6) , game.at(9,6) , game.at(10,6), game.at(11,6), game.at(12,6), game.at(13,6), game.at(14,6) 
-		, game.at(15,6) , game.at(16,6), game.at(17,6), game.at(0,9) , game.at(1,9), game.at(2,9), game.at(3,9) ,game.at(4,9), game.at(5,9) , game.at(6,9), game.at(7,9)
-		,game.at(8,9) ,game.at(9,9) ,game.at(10,9) , game.at(11,9),game.at(12,9) , game.at(13,9),game.at(14,9) 
-		,game.at(15,9),game.at(16,9) ,game.at(1,12) ,game.at(2,12),game.at(3,12),game.at(4,12) , game.at(5,12) , game.at(6,12), game.at(7,12)
-		,game.at(8,12) ,game.at(9,12) , game.at(10,12) , game.at(11,12) ,game.at(12,12) , game.at(13,12), game.at(14,12) 
-		,game.at(15,12), game.at(16,12),game.at(17,12), game.at(0,14) , game.at(1,14) , game.at(2,14), game.at(3,14) , game.at(4,14) , game.at(5,14), game.at(6,14), game.at(7,14)
-		,game.at(8,14) , game.at(9,14) , game.at(10,14) , game.at(11,14) , game.at(12,14), game.at(13,14) ,game.at(14,14) 
-		, game.at(15,14),game.at(16,14) , game.at(10,16) , game.at(7,16) , game.at(8,16) , game.at(9,16)]
-		
-		return posicionParaSaltar.any{mensaje => mensaje == position}}
 	
 	// ANIMAR SI SE PUEDE
 	
@@ -199,9 +180,20 @@ object mario {
 		animacionMario.animarArriba()}
 	
 	method animarAbajoSiSePuede(){
-		if (not stageEnQueMeMuevo.hayVigaDebajo())
-		animacionMario.animarArriba()}
+		if (not stageEnQueMeMuevo.hayVigaDebajo()){
+		animacionMario.animarArriba()
+		sonidoMario.deMovimiento()}}
 	
+	method animarIzquierdaSiSePuede(){
+		if (stageEnQueMeMuevo.hayVigaDebajo()){
+		animacionMario.animarIzquierda()
+		sonidoMario.deMovimiento()}}
+
+
+	method animarDerechaSiSePuede(){
+		if (stageEnQueMeMuevo.hayVigaDebajo())
+		animacionMario.animarDerecha()}
+
 
 	method verificarVigaGanadora(){
 		if (position==stageEnQueMeMuevo.vigaGanadora()){
