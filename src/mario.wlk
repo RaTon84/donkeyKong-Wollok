@@ -117,7 +117,6 @@ object mario {
 	
 	method saltar(){
 			self.saltarSiSePuede()																									  
-			sonidoMario.deSalto()
 	}
 	
 	method caer(){
@@ -143,6 +142,7 @@ object mario {
 	method saltarSiSePuede(){
 			if(stageEnQueMeMuevo.hayVigaDebajo()){      // antes self.validarSalto()
 			self.moverArribaSinCondicion()
+			sonidoMario.deSalto()
 			animacionMario.animarSalto()											
 			game.schedule(velocidad*3,{self.caidaSalto()})}}
 	
@@ -180,19 +180,25 @@ object mario {
 		animacionMario.animarArriba()}
 	
 	method animarAbajoSiSePuede(){
-		if (not stageEnQueMeMuevo.hayVigaDebajo()){
-		animacionMario.animarArriba()
-		sonidoMario.deMovimiento()}}
+		if (not stageEnQueMeMuevo.hayVigaDebajo())
+		animacionMario.animarArriba()}
 	
 	method animarIzquierdaSiSePuede(){
 		if (stageEnQueMeMuevo.hayVigaDebajo()){
-		animacionMario.animarIzquierda()
-		sonidoMario.deMovimiento()}}
+		sonidoMario.deMovimiento()
+			if (self.tieneMazo())
+				animacionMario.animarIzquierdaConMazo()
+			else
+				animacionMario.animarIzquierda()}}
 
 
 	method animarDerechaSiSePuede(){
-		if (stageEnQueMeMuevo.hayVigaDebajo())
-		animacionMario.animarDerecha()}
+		if (stageEnQueMeMuevo.hayVigaDebajo()){
+			sonidoMario.deMovimiento()
+			if (self.tieneMazo())
+				animacionMario.animarDerechaConMazo()
+			else					
+				animacionMario.animarDerecha()}}
 
 
 	method verificarVigaGanadora(){

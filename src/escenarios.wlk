@@ -42,7 +42,7 @@ class Stage{
 			escaleras+=[game.at(2,7),game.at(2,5),game.at(2,6),game.at(7,7),game.at(7,5),game.at(7,6),game.at(11,7),game.at(11,5),game.at(11,6),game.at(15,7),game.at(15,5),game.at(15,6)]}
 		
 		else if (unNumero==3){
-			escaleras+=[game.at(3,11),game.at(3,8),game.at(3,9),game.at(3,10),game.at(14,11),game.at(14,8),game.at(14,9),game.at(14,10)]}
+			escaleras+=[game.at(3,11),game.at(3,8),game.at(3,9),game.at(3,10),game.at(7,11),game.at(7,8),game.at(7,9),game.at(7,10),game.at(14,11),game.at(14,8),game.at(14,9),game.at(14,10)]}
 				
 		else 
 			escaleras+=[game.at(9,14),game.at(9,12),game.at(9,13)]}

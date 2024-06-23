@@ -521,15 +521,13 @@ object mazo {
 	
 	method moverDerechaConMazo(){
 		mario.moverDerechaSiSePuede()
-		sonidoMario.deMovimiento()
-		animacionMario.animarDerechaConMazo()
+		mario.animarDerechaSiSePuede()
 		if (stageEnQueSeMueveMario.hayCaidaDebajo()) mario.caer()}
 	
 	method moverIzquierdaConMazo(){
 		mario.moverIzquierdaSiSePuede()
 		mario.verificarVigaGanadora()
-		sonidoMario.deMovimiento()
-		animacionMario.animarIzquierdaConMazo()
+		mario.animarIzquierdaSiSePuede()
 		if (stageEnQueSeMueveMario.hayCaidaDebajo()) mario.caer()}
 	
 	method activarMazo(){
