@@ -8,6 +8,7 @@ class Stage{
 	var property escaleras=[]
 	const property caidaBarril=[]
 	const property caidas=[]
+	const property caidaMenor=[]
 	var property image=null
 	const property vigaGanadora
 	var escaleraLvl2=0
@@ -15,6 +16,8 @@ class Stage{
 	method hayVigaDebajo()= vigas.any{v=>v==mario.obtenerPosicionAbajo()}
 	
 	method hayCaidaDebajo()=caidas.any{c=>c==mario.obtenerPosicionAbajo()}
+	
+	method hayCaidaMenorDebajo()=caidaMenor.any{c=>c==mario.obtenerPosicionAbajo()}
 	
 	method hayEscaleraArriba()= escaleras.any{v=>v==mario.obtenerPosicionArriba()}
 	
@@ -85,7 +88,8 @@ const stage2= new Stage(vigas=[game.at(0,0),game.at(1,0),game.at(2,0),game.at(3,
 				game.at(2,13),game.at(4,13),game.at(13,13),game.at(15,13)],
 				
 				image=animacionNivel2.image(),
-				vigaGanadora=null
+				vigaGanadora=null,
+				caidaMenor=[game.at(1,10),game.at(16,10)]
 				)
 				
 

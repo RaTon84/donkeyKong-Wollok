@@ -123,7 +123,12 @@ object mario {
 	}
 	
 	method caer(){
-		position=game.at(position.x(),position.y() - if (position.y()==4 or position.y()== 9 or position.y()==12) 3 else 2)
+		position= if (stageEnQueMeMuevo==stage1)
+					game.at(position.x(),position.y() - if (position.y()==4 or position.y()== 9 or position.y()==12) 3 else 2)
+				  else 
+				  	game.at(position.x(),position.y() - if (position.y()==4) 3 else if (position.y()==7) 6 else if (position.y()==11 and not stage2.hayCaidaMenorDebajo())10 else if(position.y()==11 and stage2.hayCaidaMenorDebajo())4  else 13)
+		
+		
 		animacionMario.animarCaida()}
 	
 	//OBTIENE POSITION VIGA Y ESCALERA

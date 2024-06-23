@@ -549,7 +549,7 @@ class Palanca{
 	
 	
 	method image (){
-		return "assets/objects/90.png"}		
+		return "assets/objects/palanca.png"}		
 		
 	method consecuencias(){
 		game.removeVisual(self)
