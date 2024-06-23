@@ -10,7 +10,7 @@ import score.*
 
 
 object mario {
-	var vidas=2
+	var vidas=0
 	var puntos = 0
 	
  	//method puntaje()
@@ -25,7 +25,7 @@ object mario {
 	
 	method configuracionInicioMario(){		
 		position=game.at(1,1)
-		vidas=20
+		vidas=2
 	    puntos = 0
 	    tieneMazo=false
 		animacionMario.animarDerecha()}

@@ -1,3 +1,4 @@
+
 import wollok.game.*
 import mario.*
 import kong.*
@@ -10,10 +11,16 @@ import score.*
 
 
 object juego{
+	 var validacionMusicaInicio = 0
+	  var validacionMusicaJuego = 0
 	var property musicaFondo = game.sound("assets/sonidos/background-1.mp3")
+	var property musicaInicio = game.sound("assets/sonidos/sonidoInicial.mp3")
 	method iniciarJuego(){
+		
 		self.inicio()
-		game.start()}												
+		
+		game.start()
+		}											
 	
 	method medidas(){
 		game.width(18)
@@ -46,16 +53,28 @@ object juego{
 	
 	
 	method inicio(){
+		game.onTick(100,"musica inicial",{
+			if(validacionMusicaInicio == 0){
+				self.musicaInicio().play()
+				musicaInicio.shouldLoop(true)
+				validacionMusicaInicio = validacionMusicaInicio + 1
+				game.removeTickEvent("musica inicial")
+			}
+			else{
+				self.musicaInicio().resume()
+				game.removeTickEvent("musica inicial")
+			}})
 		game.addVisual(pantallaInicio)
 		self.cambioImage(pantallaInicio)
 		self.medidas()
-		musicaInicial.activarMusicaInicial()
 		keyboard.enter().onPressDo{
-			self.controles()}}
+			self.controles()
+			}
+			}
 	
 	method controles(){
 		var contador = 0
-		var validacion = true
+		
 		game.onTick(100,"validacion",{contador = contador + 1})
 		game.removeVisual(pantallaInicio)
 		game.addVisual(pantallaControles)
@@ -63,17 +82,20 @@ object juego{
 		self.medidas()
 		game.schedule(1,{
 			keyboard.enter().onPressDo{
-			musicaInicial.desactivarMusicaInicial()
+			self.musicaInicio().pause()
+		
 			self.inicioStage1()
-			if(validacion){
-			self.musicaFondo().play()
-			musicaFondo.shouldLoop(true)
-			self.musicaFondo().pause()
-			validacion = false
-		}
-
-		}
-			})}
+			game.onTick(100,"musica juego",{
+			if(validacionMusicaJuego == 0){
+				self.musicaFondo().play()
+				musicaFondo.shouldLoop(true)
+				self.musicaFondo().pause()
+				musicaPlayJuego.musicaPlay().play()
+				musicaPlayJuego.musicaPlay().shouldLoop(true)
+				musicaPlayJuego.musicaPlay().pause()
+				validacionMusicaJuego = validacionMusicaJuego + 1
+				game.removeTickEvent("musica juego")
+			}})}})}
 			
 	method inicioStage1(){
 			game.removeVisual(pantallaControles)
@@ -103,21 +125,21 @@ object juego{
 			self.aniadirVisuales(stage1)
 		else
 			self.aniadirVisuales(stage2)
-		mario.inicioMario() 		
-		self.medidas()
-	}
+		mario.inicioMario() 
+		kong.animacion()
+		game.onTick(5550,"lanzamientoDeBarriles",{prograBarril.tirarBarriles()})
+		self.medidas()}
 	
 	method configuracionNivel1(){
 		game.title("Donkey Kong (wollok Version)")
 		self.configuracion(1)
-		//musicaInicioJuego.activarMusicaInicialDelJuego()
-		self.musicaFondo().resume()
-		kong.animacion()
-		game.onTick(5550,"lanzamientoDeBarriles",{prograBarril.tirarBarriles()})		
-		game.addVisual(barrilAzul)
-		game.addVisual(fuegoBarril)
-		game.schedule(7000,{prograFueguito.aniadirFueguito()})
-		fuegoBarril.animacion()
+		musicaPlayJuego.musicaPlay().resume()
+		game.onTick(3000,"musica fondo juego",{
+			musicaPlayJuego.musicaPlay().pause()
+			self.musicaFondo().resume()
+			game.removeTickEvent("musica fondo juego")
+		})
+			
 	}
 	        
 
