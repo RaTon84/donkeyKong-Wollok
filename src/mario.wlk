@@ -6,12 +6,15 @@ import sonido.*
 import objects.*
 import pantallas.*
 import pauline.*
-
+import score.*
 
 
 object mario {
 	var vidas=2
 	var puntos = 0
+	
+ 	//method puntaje()
+	//method sumaPuntos()
 	var property tieneMazo=false
 	const velocidad=100
 	var property position=game.at(1,1)
@@ -66,11 +69,9 @@ object mario {
 	
 	method juegoTerminado()= vidas==0
     
-	method puntaje()=puntos
-
     method sumaPuntos(cantidad){puntos+=cantidad}
  
-   	method eliminarBarril(){self.sumaPuntos(100)} 
+   	method eliminarBarril(){puntaje.sumaPuntos(100)} 
 	
  	method esColisionadoPor(){}
    		

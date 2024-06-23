@@ -185,7 +185,7 @@ object mazo {
 	 	game.onTick(8000, "movimiento",{ 
 	 	mario.tieneMazo(false)
 		rain.shouldLoop(false)
-		juego.musicaFondo().play()})}
+		juego.musicaFondo().resume()})}
 }
 
 class Palanca{

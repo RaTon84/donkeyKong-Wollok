@@ -6,6 +6,8 @@ import escenarios.*
 import sonido.*
 import objects.*
 import pantallas.*
+import score.*
+
 
 object juego{
 	var property musicaFondo = game.sound("assets/sonidos/background-1.mp3")
@@ -29,6 +31,10 @@ object juego{
 	game.addVisual(mario)
 	game.addVisual(kong)
 	game.addVisual(barriles)
+	game.addVisual(unidadTablero)
+	game.addVisual(decenaTablero)
+	game.addVisual(centenaTablero)
+	game.addVisual(milTablero)
 	if (unStage==stage1)
 		game.addVisual(pauline)
 	if (unStage==stage2){

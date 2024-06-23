@@ -27,7 +27,7 @@ object sonidoMario{
 		const rain = game.sound("assets/sonidos/spring.wav")
 		rain.volume(0.5)
 		game.schedule(10, { rain.play()})
-		game.schedule(150, { rain.stop()})}
+		}
 	
 	method deSalto(){
 		const rain = game.sound("assets/sonidos/jump.wav")
