@@ -17,22 +17,21 @@ class Barril {
 	var property position = game.at(5,14)
 	var fotograma = 0
 	var direccion = "derecha"
-	var property velocidad = 150
-	const random = [0,1,2,3,4,5]
+	var property velocidad = 175
+	const random = [0,1,2,3,4]
 	var property estoyBajandoEscalera = false
 	const property gifDerecha = ["assets/objects/82.png","assets/objects/83.png","assets/objects/84.png","assets/objects/85.png"]
 	const property gifIzquierda = ["assets/objects/85.png","assets/objects/84.png","assets/objects/83.png","assets/objects/82.png"]
+	const property gifEscalera = ["assets/objects/86.png","assets/objects/87.png"]
 	var gifActual = gifDerecha
-	var property image = gifDerecha.get(fotograma)
-	//const property gifEscalera = ["assets/objects/86.png","assets/objects/87.png"]
-	//var property image = gifDerecha.get(fotograma)
+	var property image = gifDerecha.get(fotograma)	
 	
 	method siguienteFotograma(lista) {
 		fotograma = (fotograma + 1) % lista.size()
 		image = lista.get(fotograma)
 	}
 	
-	method animacion() {game.onTick(velocidad, "animacion-Barril", { self.siguienteFotograma(gifActual)})}
+	method animacion() {game.onTick(velocidad*0.8, "animacion-Barril", { self.siguienteFotograma(gifActual)})}
 
 	method rodarDerecha() {position = game.at(position.x() + 1, position.y())}
 
@@ -42,14 +41,14 @@ class Barril {
 		
 	method cambiarDireccion() {
 		if (direccion == "derecha") {
-			direccion = "izquierda"
-			gifActual = gifIzquierda
 			game.removeTickEvent("animacion-Barril")
+			direccion = "izquierda"
+			gifActual = gifIzquierda			
 			self.animacion()
 		} else {
-			direccion = "derecha"
-			gifActual = gifDerecha
 			game.removeTickEvent("animacion-Barril")
+			direccion = "derecha"
+			gifActual = gifDerecha			
 			self.animacion()
 		}
 	}
@@ -60,20 +59,27 @@ class Barril {
 	method caerSiguienteViga() {
 		if(self.hayVigaAbajo())	self.cambiarDireccion() 
 		else self.caer()
-	} //cambia animacion a normal
+	}
 	
 	method bajarEscalera(){
-		if(self.hayVigaAbajo() && estoyBajandoEscalera){ //cambia animacion a escalera
+		if(self.hayVigaAbajo() && estoyBajandoEscalera){
 			self.cambiarDireccion() 
-			estoyBajandoEscalera=false} 
+			estoyBajandoEscalera=false
+		}
 		else{
+			game.removeTickEvent("animacion-Barril")
+			gifActual = gifEscalera	
+			self.animacion()
 			self.caer()
-			estoyBajandoEscalera=true}}
+			estoyBajandoEscalera=true
+		}
+	}
 			
 	method rodarVigas(){
 		if(direccion=="izquierda" && position.x()!=0)self.rodarIzquierda()
 			else if(direccion=="derecha" && position.x()!=17)self.rodarDerecha()
-			else self.caerSiguienteViga()}
+			else self.caerSiguienteViga()
+	}
 
 	method dicidir(){
 		if(random.anyOne()==3) self.bajarEscalera()

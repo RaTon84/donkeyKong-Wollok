@@ -148,7 +148,7 @@ object juego{
 		})
 		kong.animacionStage1()
 		game.addVisual(barriles)
-		//game.onTick(5550,"lanzamientoDeBarriles",{prograBarril.tirarBarriles()})	
+		game.onTick(5550,"lanzamientoDeBarriles",{prograBarril.tirarBarriles()})	
 		game.addVisual(barrilAzul)
 		game.addVisual(fuegoBarril)
 		game.schedule(7000,{prograFueguito.aniadirFueguito()})
