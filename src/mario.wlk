@@ -69,7 +69,7 @@ object mario {
 			self.saltar()}	
 }
 	
-	method juegoTerminado()= vidas==0
+	//method juegoTerminado()= vidas.cantidadDeVida()==0
 	
 	method ganaElJuego()= contadorCosos==8
     
@@ -246,12 +246,12 @@ object mario {
 
 object vidas{
 	var property image= "assets/objects/2-Vidas.png"
-	var property cantidadDeVida=2
+	var cantidadDeVida=2
 	
 	method position()=game.at(16,17)
 	
 	method iniciarConDosVidas(){
-		cantidadDeVida=200
+		cantidadDeVida=2
 		image= "assets/objects/2-Vidas.png"
 	}
 	
@@ -260,11 +260,13 @@ object vidas{
 	method pierdeVida(){
 		cantidadDeVida= cantidadDeVida-1
 		image = "assets/objects/1-Vidas.png"
-		if(self.juegoTerminado()){
-   				juego.musicaFondo().pause()
+		if(cantidadDeVida==0){
+   				if (mario.stageEnQueMeMuevo()==stage1)
+   					juego.musicaFondo().pause()
+   				else 
+   					juego.musicaFondoStage2().pause()
    				gameOver.marioPierde()}
-	}
-	
+	}		
 }
 
 

@@ -158,7 +158,7 @@ object juego{
 		game.addVisual(barrilAzul)
 		game.addVisual(fuegoBarril)
 		game.schedule(7000,{prograFueguito.aniadirFueguito()})
-		fuegoBarril.animacion()	
+		fuegoBarril.animacion()
 	}
 
 	method configuracionNivel2(){
