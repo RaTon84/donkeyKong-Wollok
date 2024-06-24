@@ -113,8 +113,8 @@ class Barril {
     method colisionadoPor(personaje){
 		if(personaje.tieneMazo()){
 			game.sound("assets/sonidos/get-item.wav").play()	
-			game.say(mario, "¡100 Puntos!")
-			personaje.eliminarBarril()
+			//game.say(mario, "¡100 Puntos!")
+			//personaje.eliminarBarril()
 		}
 		else 
 			personaje.esChocadoPor(self)		
@@ -261,9 +261,9 @@ class Fueguito{
 	
 	 method colisionadoPor(personaje){
 		if(personaje.tieneMazo()){
-			game.sound("assets/sonidos/get-item.wav").play()	
-			game.say(mario, "¡100 Puntos!")
-			personaje.eliminarBarril()}
+			game.sound("assets/sonidos/get-item.wav").play()}
+			//game.say(mario, "¡100 Puntos!")
+			//personaje.eliminarBarril()}
 		else 
 			//personaje.esChocadoPor(self) ////añadir a mario
 		self.removerFueguito()

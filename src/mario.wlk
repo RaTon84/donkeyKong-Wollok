@@ -10,8 +10,8 @@ import score.*
 
 
 object mario {
-	var vidas=0
-	var puntos = 0
+	//var vidas=0
+	//var puntos = 0
 	
  	//method puntaje()
 	//method sumaPuntos()
@@ -27,8 +27,8 @@ object mario {
 	
 	method configuracionInicioMario(){		
 		position=game.at(1,1)
-		vidas=2
-	    puntos = 0
+		//vidas=2
+	    //puntos = 0
 	    tieneMazo=false
 		animacionMario.animarDerecha()}
 		
@@ -73,9 +73,9 @@ object mario {
 	
 	method ganaElJuego()= contadorCosos==8
     
-    method sumaPuntos(cantidad){puntos+=cantidad}
+   // method sumaPuntos(cantidad){puntos+=cantidad}
  
-   	method eliminarBarril(){puntaje.sumaPuntos(100)} 
+   	//method eliminarBarril(){puntaje.sumaPuntos(100)} 
 	
  	method esColisionadoPor(){}
    		
@@ -87,10 +87,8 @@ object mario {
    			animacionMario.pierdeVida()
    			sonidoMario.pierdeVida()
    			game.say(self, "¡Auch!")
-   			vidas= vidas - 1
-   			if(self.juegoTerminado()){
-   				juego.musicaFondo().pause()
-   				gameOver.marioPierde()}}}
+   			//vidas= vidas - 1
+   			vidas.pierdeVida()}}
    	
 		
 		//MOVIMIENTO
@@ -246,6 +244,22 @@ object mario {
 	}
 }
 
+object vidas{
+	var property image= "assets/objects/2-Vidas.png"
+	var property cantidadDeVida=2
 	
+	method position()=game.at(8,17)
+	
+	method juegoTerminado()= cantidadDeVida==0
+	
+	method pierdeVida(){
+		cantidadDeVida= cantidadDeVida-1
+		image = cantidadDeVida.toString()+"-Vidas.png"
+		if(self.juegoTerminado()){
+   				juego.musicaFondo().pause()
+   				gameOver.marioPierde()}
+	}
+	
+}
 
 

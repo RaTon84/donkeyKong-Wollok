@@ -1,5 +1,5 @@
 import wollok.game.*
-
+/* 
 object puntaje {
 	
 	var puntos=0
@@ -107,4 +107,4 @@ object milTablero{
 	}
 	
 	method image() = imagen
-}
+}*/
