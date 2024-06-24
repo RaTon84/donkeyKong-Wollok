@@ -27,7 +27,7 @@ object mario {
 	
 	method configuracionInicioMario(){		
 		position=game.at(3,1)
-		//vidas=2
+		vidas.iniciarConDosVidas()
 	    //puntos = 0
 	    tieneMazo=false
 		animacionMario.animarDerecha()}
@@ -249,6 +249,10 @@ object vidas{
 	var property cantidadDeVida=2
 	
 	method position()=game.at(8,17)
+	
+	method iniciarConDosVidas(){
+		cantidadDeVida=2
+	}
 	
 	method juegoTerminado()= cantidadDeVida==0
 	
