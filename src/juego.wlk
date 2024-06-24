@@ -37,7 +37,7 @@ object juego{
 	game.addVisual(mazo)
 	game.addVisual(mario)
 	game.addVisual(kong)
-	game.addVisual(barriles)
+	//game.addVisual(barriles)
 	//game.addVisual(unidadTablero)
 	//game.addVisual(decenaTablero)
 	//game.addVisual(centenaTablero)
@@ -146,8 +146,9 @@ object juego{
 			self.musicaFondo().resume()
 			game.removeTickEvent("musica fondo juego")
 		})
-		kong.animacion()
-		game.onTick(5550,"lanzamientoDeBarriles",{prograBarril.tirarBarriles()})	
+		kong.animacionStage1()
+		game.addVisual(barriles)
+		//game.onTick(5550,"lanzamientoDeBarriles",{prograBarril.tirarBarriles()})	
 		game.addVisual(barrilAzul)
 		game.addVisual(fuegoBarril)
 		game.schedule(7000,{prograFueguito.aniadirFueguito()})
@@ -156,6 +157,13 @@ object juego{
 
 	method configuracionNivel2(){
 		kong.positionSegundoNivel()
+		kong.animacionStage2()
 		barriles.positionSegundoNivel()
-		self.configuracion(2)}
+		game.schedule(7000,{prograFantasma.aniadirFantasmas()})
+		game.schedule(20000,{prograFantasma.aniadirFantasmas()})
+		game.schedule(30000,{prograFantasma.aniadirFantasmas()})
+		game.schedule(40000,{prograFantasma.aniadirFantasmas()})
+		game.schedule(50000,{prograFantasma.aniadirFantasmas()})
+		self.configuracion(2)
+		}
 }

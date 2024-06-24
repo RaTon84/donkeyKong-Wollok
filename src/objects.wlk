@@ -250,7 +250,7 @@ class Fueguito{
 			game.say(mario, "¡100 Puntos!")
 			personaje.eliminarBarril()
 		} else 
-			//personaje.esChocadoPor(self) ////añadir a mario
+			personaje.esChocadoPor(self) ////añadir a mario
 		self.removerFueguito()
 	}
 }
@@ -298,7 +298,7 @@ class Fantasma {
 	var gifActual = gifFantasmaDerecha
 	var property image = gifFantasmaDerecha.get(fotograma)
 	var direccion = "derecha"
-	var property velocidad = 700
+	var property velocidad = 400
 	const random = [0,1,2,3,4,5]
 	const randomEscalera = [0,1,2,3]
 	var estoyBajandoEscalera = false
@@ -333,15 +333,15 @@ class Fantasma {
 		}
 	}
 	
-	method hayVigaAbajo() {return stage1.vigas().any({ v => v == game.at(position.x(), position.y() - 1) })}
+	method hayVigaAbajo() {return stage2.vigas().any({ v => v == game.at(position.x(), position.y() - 1) })}
 	
-	method hayVigaIzquierda() {return stage1.vigas().any({ v => v == game.at(position.x() - 1, position.y() - 1)})}
+	method hayVigaIzquierda() {return stage2.vigas().any({ v => v == game.at(position.x() - 1, position.y() - 1)})}
 	
-	method hayVigaDerecha() {return stage1.vigas().any({ v => v == game.at(position.x() + 1, position.y() - 1) })}
+	method hayVigaDerecha() {return stage2.vigas().any({ v => v == game.at(position.x() + 1, position.y() - 1) })}
 	
-	method hayEscalera() {return stage1.escaleras().any({ v => v == game.at(position.x(), position.y()+1) })}// el +1 porque uso las escaleras de mario
+	method hayEscalera() {return stage2.escaleras().any({ v => v == game.at(position.x(), position.y()+1) })}// el +1 porque uso las escaleras de mario
 	
-	method hayEscaleraAbajo() {return stage1.escaleras().any({ v => v == game.at(position.x(), position.y()-1) })}
+	method hayEscaleraAbajo() {return stage2.escaleras().any({ v => v == game.at(position.x(), position.y()-1) })}
 	
 	method bajarEscalera() {
 		if (self.hayVigaAbajo() && estoyBajandoEscalera){
@@ -396,18 +396,19 @@ class Fantasma {
 			game.sound("assets/sonidos/get-item.wav").play()	
 			game.say(mario, "¡100 Puntos!")
 			personaje.eliminarBarril()
-		} else  //personaje.esChocadoPor(self) ////añadir a mario
+		} else  
+			personaje.esChocadoPor(self) ////añadir a mario
 		self.removerFantasma()
 	}
 }
 
 object prograFantasma {
-	const f1 = new Fantasma()
-	const f2 = new Fantasma()
-	const f3 = new Fantasma()
-	const f4 = new Fantasma()
-	const f5 = new Fantasma()
-	const fantasmas = [ f1, f2, f3, f4, f5 ]
+	const f1 = new Fantasma(position=game.at(5,4))
+	const f2 = new Fantasma(position=game.at(16,7))
+	const f3 = new Fantasma(position=game.at(1,7))
+	const f4 = new Fantasma(position=game.at(5,11))
+	const f5 = new Fantasma(position=game.at(5,7))
+	const fantasmas = [f1,f2,f3,f4,f5]
 	var posicion = 0
 	var nroFantasma = fantasmas.first()
 
@@ -422,10 +423,10 @@ object prograFantasma {
 			game.addVisual(nroFantasma)
 			nroFantasma.animacion()
 			nroFantasma.recorrerEscenario()
-			//game.onCollideDo(mario, { elemento => elemento.colisionadoPor(mario)})
+			game.onCollideDo(mario, { elemento => elemento.colisionadoPor(mario)})
 			//game.onCollideDo(nroBarril, { personaje => personaje.esChocadoPor(nroFantasma)})
 		} catch e : Exception {
-			//nroFantasma.removerBarril()
+			//nroFantasma.removerFantasma()
 			game.addVisual(nroFantasma)
 			nroFantasma.animacion()
 			nroFantasma.recorrerEscenario()
@@ -434,10 +435,10 @@ object prograFantasma {
 		//game.onCollideDo(nroFantasma, { personaje => personaje.esChocadoPor(nroFantasma)})
 	}
 
-	/*method aniadirFantasmas() {
+	method aniadirFantasmas() {
 		self.aniadirFantasma()
 		self.siguienteFantasma()
-	}*/
+	}
 }
 
 //MAZO

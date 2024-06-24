@@ -26,7 +26,7 @@ object mario {
 	method image()= animacionMario.image()
 	
 	method configuracionInicioMario(){		
-		position=game.at(1,1)
+		position=game.at(3,1)
 		//vidas=2
 	    //puntos = 0
 	    tieneMazo=false
