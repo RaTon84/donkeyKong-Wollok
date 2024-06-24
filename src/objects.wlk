@@ -159,12 +159,16 @@ class Fueguito{
 	const property randomEscalera = [0,1,2]
 	var property estoyBajandoEscalera = false
 	var property estoySubiendoEscalera = false
-	const property gifFantasmaDerecha = ["assets/objects/50.png","assets/objects/51.png"]
-	const property gifFantasmaIzquierda = ["assets/objects/48.png","assets/objects/49.png"]
-	var gifActual = gifFantasmaDerecha
-	var property image = gifFantasmaDerecha.get(fotograma)
+	const property gifFueguitoNormalDerecha = ["assets/objects/50.png","assets/objects/51.png"]
+	const property gifFueguitoNormalIzquierda = ["assets/objects/48.png","assets/objects/49.png"]
+	const property gifFueguitoAzulDerecha = ["assets/objects/26.png","assets/objects/27.png"]
+	const property gifFueguitoAzulIzquierda = ["assets/objects/24.png","assets/objects/25.png"]
+	var gifFueguitoDerecha = gifFueguitoNormalDerecha
+	var gifFueguitoIzquierda = gifFueguitoNormalIzquierda
+	var gifActual = gifFueguitoDerecha
+	var property image = gifFueguitoDerecha.get(fotograma)
 	
-	method siguienteFotograma(){
+	method siguienteFotograma() {
 		fotograma = (fotograma+1) % gifActual.size()
 		image = gifActual.get(fotograma)
 	}
@@ -181,14 +185,14 @@ class Fueguito{
 		
 	method cambiarDireccion() {
 		if (direccion == "derecha"){
-			direccion = "izquierda"
-			gifActual = gifFantasmaIzquierda
 			game.removeTickEvent("animacion-fueguito")
+			direccion = "izquierda"
+			gifActual = gifFueguitoIzquierda			
 			self.animacion()
 		} else{
-			direccion = "derecha"
-			gifActual = gifFantasmaDerecha
 			game.removeTickEvent("animacion-fueguito")
+			direccion = "derecha"
+			gifActual = gifFueguitoDerecha
 			self.animacion()
 		}
 	}
@@ -203,8 +207,8 @@ class Fueguito{
 	
 	method hayEscaleraAbajo() {return stage1.escaleras().any({ v => v == game.at(position.x(), position.y()-1) })}
 	
-	method bajarEscalera(){
-		if (self.hayVigaAbajo() && estoyBajandoEscalera)	estoyBajandoEscalera=false
+	method bajarEscalera() {
+		if (self.hayVigaAbajo() && estoyBajandoEscalera) estoyBajandoEscalera=false
 		else {
 			self.moverAbajo()
 			estoyBajandoEscalera=true
@@ -259,6 +263,18 @@ class Fueguito{
 			personaje.esChocadoPor(self) ////añadir a mario
 		self.removerFueguito()
 	}
+	
+	method transformacionAzul(){
+		gifFueguitoDerecha = gifFueguitoAzulDerecha
+		gifFueguitoIzquierda = gifFueguitoAzulIzquierda
+		self.cambiarDireccion()
+	}
+	
+	method transformacionNormal(){
+		gifFueguitoDerecha = gifFueguitoNormalDerecha
+		gifFueguitoIzquierda = gifFueguitoNormalIzquierda
+		self.cambiarDireccion()
+	}
 }
 
 object prograFueguito {
@@ -271,6 +287,10 @@ object prograFueguito {
 		fueguito.recorrerEscenario()
 		game.onCollideDo(mario, { elemento => elemento.colisionadoPor(mario)})
 		//game.onCollideDo(fueguito, { personaje => personaje.esChocadoPor(fueguito)})
+	}
+	
+	method fueguito(){
+		return fueguito
 	}
 }
 
@@ -299,8 +319,12 @@ object fuegoBarril {
 class Fantasma {
 	var property position = game.at(3,1)
 	var fotograma = 0
-	const property gifFantasmaDerecha = ["assets/objects/72.png","assets/objects/73.png"]
-	const property gifFantasmaIzquierda = ["assets/objects/70.png","assets/objects/71.png"]
+	const property gifFantasmaNormalDerecha = ["assets/objects/72.png","assets/objects/73.png"]
+	const property gifFantasmaNormalIzquierda = ["assets/objects/70.png","assets/objects/71.png"]
+	const property gifFantasmaAzulDerecha = ["assets/objects/55.png","assets/objects/56.png"]
+	const property gifFantasmaAzulIzquierda = ["assets/objects/53.png","assets/objects/54.png"]
+	var gifFantasmaDerecha = gifFantasmaNormalDerecha
+	var gifFantasmaIzquierda = gifFantasmaNormalIzquierda
 	var gifActual = gifFantasmaDerecha
 	var property image = gifFantasmaDerecha.get(fotograma)
 	var direccion = "derecha"
@@ -327,14 +351,14 @@ class Fantasma {
 		
 	method cambiarDireccion() {
 		if (direccion == "derecha") {
-			direccion = "izquierda"
-			gifActual = gifFantasmaIzquierda
 			game.removeTickEvent("animacion-fantasma")
+			direccion = "izquierda"
+			gifActual = gifFantasmaIzquierda			
 			self.animacion()
 		} else {
-			direccion = "derecha"
-			gifActual = gifFantasmaDerecha
 			game.removeTickEvent("animacion-fantasma")
+			direccion = "derecha"
+			gifActual = gifFantasmaDerecha			
 			self.animacion()
 		}
 	}
@@ -406,6 +430,18 @@ class Fantasma {
 			personaje.esChocadoPor(self) ////añadir a mario
 		self.removerFantasma()
 	}
+	
+	method transformacionAzul(){
+		gifFantasmaDerecha = gifFantasmaAzulDerecha
+		gifFantasmaIzquierda = gifFantasmaAzulIzquierda
+		self.cambiarDireccion()
+	}
+	
+	method transformacionNormal(){
+		gifFantasmaDerecha = gifFantasmaNormalDerecha
+		gifFantasmaIzquierda = gifFantasmaNormalIzquierda
+		self.cambiarDireccion()
+	}
 }
 
 object prograFantasma {
@@ -414,7 +450,7 @@ object prograFantasma {
 	const f3 = new Fantasma(position=game.at(1,7))
 	const f4 = new Fantasma(position=game.at(5,11))
 	const f5 = new Fantasma(position=game.at(5,7))
-	const fantasmas = [f1,f2,f3,f4,f5]
+	const property fantasmas = [f1,f2,f3,f4,f5]
 	var posicion = 0
 	var nroFantasma = fantasmas.first()
 
@@ -457,6 +493,8 @@ object mazo {
 		return  "assets/objects/59.png"}
 	
 	method colisionadoPor(personaje){
+		try {prograFueguito.fueguito().transformacionAzul()} catch e : Exception{}
+		try {prograFantasma.fantasmas().forEach({f=>f.transformacionAzul()})} catch e : Exception{}
 		personaje.tieneMazo(true)
 		game.removeVisual(self)
 		self.activarMazo()}
@@ -482,13 +520,18 @@ object mazo {
 		sonidoMario.deObjeto()
 		rain.play()
 		rain.shouldLoop(true)
-	 	game.onTick(8000, "movimiento",{ 
-	 	mario.tieneMazo(false)
-		rain.shouldLoop(false)
-		if (stageEnQueSeMueveMario==stage1)
-			{juego.musicaFondo().resume()}
-		else 
-			{juego.musicaFondoStage2().resume()}})}
+	 	game.schedule(8000,{ 
+	 		mario.tieneMazo(false)
+			rain.shouldLoop(false)
+			if (stageEnQueSeMueveMario==stage1){
+				juego.musicaFondo().resume()			
+			} else {
+				juego.musicaFondoStage2().resume()
+			}
+			try {prograFueguito.fueguito().transformacionNormal()} catch e : Exception{}
+			try {prograFantasma.fantasmas().forEach({f=>f.transformacionNormal()})} catch e : Exception{}
+			})
+		}
 }
 
 class Palanca{
