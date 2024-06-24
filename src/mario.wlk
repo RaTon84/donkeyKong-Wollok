@@ -246,12 +246,12 @@ object mario {
 
 object vidas{
 	var property image= "assets/objects/2-Vidas.png"
-	var property cantidadDeVida=2
+	var property cantidadDeVida=200
 	
 	method position()=game.at(16,17)
 	
 	method iniciarConDosVidas(){
-		cantidadDeVida=2
+		cantidadDeVida=200
 		image= "assets/objects/2-Vidas.png"
 	}
 	

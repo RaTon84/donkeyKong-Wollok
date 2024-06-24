@@ -11,9 +11,10 @@ import score.*
 
 
 object juego{
-	 var validacionMusicaInicio = 0
-	  var validacionMusicaJuego = 0
+	var validacionMusicaInicio = 0
+	var validacionMusicaJuego = 0
 	var property musicaFondo = game.sound("assets/sonidos/background-1.mp3")
+	var property musicaFondoStage2 = game.sound("assets/sonidos/musicaFondoStage2.mp3")
 	var property musicaInicio = game.sound("assets/sonidos/sonidoInicial.mp3")
 	method iniciarJuego(){
 		
@@ -97,11 +98,15 @@ object juego{
 			game.onTick(100,"musica juego",{
 			if(validacionMusicaJuego == 0){
 				self.musicaFondo().play()
-				musicaFondo.shouldLoop(true)
 				self.musicaFondo().pause()
+				self.musicaFondoStage2().play()	
+				self.musicaFondoStage2().pause()			
+				musicaFondo.shouldLoop(true)
+				musicaFondoStage2.shouldLoop(true)
 				musicaPlayJuego.musicaPlay().play()
 				musicaPlayJuego.musicaPlay().shouldLoop(true)
 				musicaPlayJuego.musicaPlay().pause()
+				musicaFondoStage2.volume(0.5)
 				validacionMusicaJuego = validacionMusicaJuego + 1
 				game.removeTickEvent("musica juego")
 			}})}})}
@@ -141,7 +146,7 @@ object juego{
 		game.title("Donkey Kong (wollok Version)")
 		self.configuracion(1)
 		musicaPlayJuego.musicaPlay().resume()
-		game.onTick(3000,"musica fondo juego",{
+		game.onTick(2500,"musica fondo juego",{
 			musicaPlayJuego.musicaPlay().pause()
 			self.musicaFondo().resume()
 			game.removeTickEvent("musica fondo juego")
@@ -165,5 +170,6 @@ object juego{
 		game.schedule(40000,{prograFantasma.aniadirFantasmas()})
 		game.schedule(50000,{prograFantasma.aniadirFantasmas()})
 		self.configuracion(2)
+		game.schedule(2000,{self.musicaFondoStage2().resume()})
 		}
 }

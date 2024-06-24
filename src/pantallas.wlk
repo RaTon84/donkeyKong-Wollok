@@ -67,7 +67,8 @@ object gameOver {
 object youWin {
 	method marioGana(){
 		game.clear()
-		//game.sound("assets/sonidos/").play()        //AGREGAR SONIDO VICTORIA
+		juego.musicaFondoStage2().stop()
+		game.sound("assets/sonidos/win.wav").play()      
 		game.addVisual(pantallaYouWin)
 		game.schedule(6000,{
 			game.stop()})
