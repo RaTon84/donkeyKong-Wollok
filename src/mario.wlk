@@ -246,7 +246,7 @@ object mario {
 
 object vidas{
 	var property image= "assets/objects/2-Vidas.png"
-	var property cantidadDeVida=200
+	var property cantidadDeVida=2
 	
 	method position()=game.at(16,17)
 	

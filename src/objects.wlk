@@ -253,8 +253,8 @@ class Fueguito{
 	method colisionadoPor(personaje) {
 		if (personaje.tieneMazo()) {
 			game.sound("assets/sonidos/get-item.wav").play()	
-			game.say(mario, "¡100 Puntos!")
-			personaje.eliminarBarril()
+			//game.say(mario, "¡100 Puntos!")
+			//personaje.eliminarBarril()
 		} else 
 			personaje.esChocadoPor(self) ////añadir a mario
 		self.removerFueguito()
@@ -451,7 +451,7 @@ object prograFantasma {
 
 object mazo {
 	var property position= game.at(2,7)
-	const stageEnQueSeMueveMario= mario.stageEnQueMeMuevo()
+	var property stageEnQueSeMueveMario= stage1
 
 	method image(){
 		return  "assets/objects/59.png"}
@@ -492,7 +492,10 @@ class Palanca{
 		
 	method consecuencias(){
 		game.removeVisual(self)
-		stage2.activarEscaleraNvl2()}}
+		stage2.activarEscaleraNvl2()}
+	
+	method colisionadoPor(personaje){
+		personaje.verificarObjetos()}}
 
 const palanca1= new Palanca(position=game.at(13,1))
 const palanca2= new Palanca(position=game.at(3,4))

@@ -138,7 +138,8 @@ object juego{
 		if (unNivel==1)
 			self.aniadirVisuales(stage1)
 		else
-			self.aniadirVisuales(stage2)
+			{self.aniadirVisuales(stage2)
+			mazo.stageEnQueSeMueveMario(stage2)}
 		mario.inicioMario()		
 		self.medidas()}
 	
