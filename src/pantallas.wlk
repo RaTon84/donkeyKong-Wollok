@@ -41,14 +41,27 @@ object pantallaYouWin inherits Pantalla{
 
 
 object gameOver {
+	var property musicaGameOver =  game.sound("assets/sonidos/muerte.wav")
+	var validacion = 0
 	method marioPierde(){
 		game.clear()
-		game.sound("assets/sonidos/muerte.wav").play()
+		if (validacion > 0){
+			self.musicaGameOver().resume()
+		}else{
+			self.musicaGameOver().play()
+			musicaGameOver.shouldLoop(true)
+			validacion = validacion + 1
+		}
+		
 		game.addVisual(pantallaGameOver)
 		game.onTick(1000,"cambio imagen muerte",{pantallaGameOver.siguienteFotograma()})
 		keyboard.r().onPressDo{
 			game.clear()
-			juego.inicio()}}
+			juego.inicio()
+			self.musicaGameOver().pause()
+			}
+		}
+			
 }
 
 object youWin {
