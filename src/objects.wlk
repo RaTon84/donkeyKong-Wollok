@@ -474,14 +474,21 @@ object mazo {
 	
 	method activarMazo(){
 		const rain = game.sound("assets/sonidos/background-3.mp3")	
-		juego.musicaFondo().pause()
+		
+		if (stageEnQueSeMueveMario==stage1)
+			{juego.musicaFondo().pause()}
+		else 
+			{juego.musicaFondoStage2().pause()}
 		sonidoMario.deObjeto()
 		rain.play()
 		rain.shouldLoop(true)
 	 	game.onTick(8000, "movimiento",{ 
 	 	mario.tieneMazo(false)
 		rain.shouldLoop(false)
-		juego.musicaFondo().resume()})}
+		if (stageEnQueSeMueveMario==stage1)
+			{juego.musicaFondo().resume()}
+		else 
+			{juego.musicaFondoStage2().resume()}})}
 }
 
 class Palanca{
