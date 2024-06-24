@@ -248,17 +248,18 @@ object vidas{
 	var property image= "assets/objects/2-Vidas.png"
 	var property cantidadDeVida=2
 	
-	method position()=game.at(8,17)
+	method position()=game.at(16,17)
 	
 	method iniciarConDosVidas(){
 		cantidadDeVida=2
+		image= "assets/objects/2-Vidas.png"
 	}
 	
 	method juegoTerminado()= cantidadDeVida==0
 	
 	method pierdeVida(){
 		cantidadDeVida= cantidadDeVida-1
-		image = cantidadDeVida.toString()+"-Vidas.png"
+		image = "assets/objects/1-Vidas.png"
 		if(self.juegoTerminado()){
    				juego.musicaFondo().pause()
    				gameOver.marioPierde()}
