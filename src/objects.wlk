@@ -10,9 +10,7 @@ import juego.*
 object barriles {
 	var property position=game.at(0,14)	
 	method image() = "assets/objects/2.png"
-	method positionSegundoNivel(){
-		self.position(game.at(6,14))
-	}
+	method positionSegundoNivel(){self.position(game.at(6,14))}
 }
 
 class Barril {
@@ -34,21 +32,13 @@ class Barril {
 		image = lista.get(fotograma)
 	}
 	
-	method animacion() {
-		game.onTick(velocidad, "animacion-Barril", { self.siguienteFotograma(gifActual)})
-	}
+	method animacion() {game.onTick(velocidad, "animacion-Barril", { self.siguienteFotograma(gifActual)})}
 
-	method rodarDerecha() {
-		position = game.at(position.x() + 1, position.y())
-	}
+	method rodarDerecha() {position = game.at(position.x() + 1, position.y())}
 
-	method rodarIzquierda() {
-		position = game.at(position.x() - 1, position.y())
-	}
+	method rodarIzquierda() {position = game.at(position.x() - 1, position.y())}
 
-	method caer() {
-		position = game.at(position.x(), position.y() - 1)
-	}
+	method caer() {position = game.at(position.x(), position.y() - 1)}
 		
 	method cambiarDireccion() {
 		if (direccion == "derecha") {
@@ -67,11 +57,9 @@ class Barril {
 	
 	method puedoCaer(){return stage1.caidaBarril().any({v=>v==game.at(position.x(),position.y())})}
 	
-	method caerSiguienteViga(){
-		if(self.hayVigaAbajo())
-			self.cambiarDireccion() 
-		else 
-			self.caer()
+	method caerSiguienteViga() {
+		if(self.hayVigaAbajo())	self.cambiarDireccion() 
+		else self.caer()
 	} //cambia animacion a normal
 	
 	method bajarEscalera(){
@@ -96,11 +84,10 @@ class Barril {
 		if(position==game.at(0,1)){self.removerBarril()}				
 		else if(estoyBajandoEscalera)self.bajarEscalera()
 		else if(self.puedoCaer())self.dicidir()
-		else self.rodarVigas()}
-	
-	method recorrerEscenario(){
-		game.onTick(velocidad, "recorrido-barril", {self.rodar()})
+		else self.rodarVigas()
 	}
+	
+	method recorrerEscenario(){game.onTick(velocidad, "recorrido-barril", {self.rodar()})}
 		
 	method removerBarril(){
 		game.removeVisual(self)
@@ -113,8 +100,8 @@ class Barril {
     method colisionadoPor(personaje){
 		if(personaje.tieneMazo()){
 			game.sound("assets/sonidos/get-item.wav").play()	
-			//game.say(mario, "¡100 Puntos!")
-			//personaje.eliminarBarril()
+			game.say(mario, "¡100 Puntos!")
+			personaje.eliminarBarril()
 		}
 		else 
 			personaje.esChocadoPor(self)		
@@ -159,43 +146,32 @@ object prograBarril {
 
 class Fueguito{
 	var property position = game.at(2,1)
-	var fotograma = 0
+	var property fotograma = 0
+	var property direccion = "derecha"
+	var property velocidad = 300
+	const property random = [0,1,2,3,4,5,6,7,8,9]
+	const property randomEscalera = [0,1,2]
+	var property estoyBajandoEscalera = false
+	var property estoySubiendoEscalera = false
 	const property gifFantasmaDerecha = ["assets/objects/50.png","assets/objects/51.png"]
 	const property gifFantasmaIzquierda = ["assets/objects/48.png","assets/objects/49.png"]
 	var gifActual = gifFantasmaDerecha
 	var property image = gifFantasmaDerecha.get(fotograma)
-	var direccion = "derecha"
-	var property velocidad = 700
-	const random = [0,1,2,3,4,5,6,7,8,9]
 	
 	method siguienteFotograma(){
 		fotograma = (fotograma+1) % gifActual.size()
 		image = gifActual.get(fotograma)
 	}
 	
-	method animacion(){
-		game.onTick(250, "animacion-fueguito", {self.siguienteFotograma()})
-	}
+	method animacion() {game.onTick(250, "animacion-fueguito", {self.siguienteFotograma()})}
 	
-	method moverDerecha() {
-		position = game.at(position.x() + 1, position.y())
-	}
+	method moverDerecha() {position = game.at(position.x() + 1, position.y())}
 	
-	method moverIzquierda() {
-		position = game.at(position.x() - 1, position.y())
-	}
+	method moverIzquierda() {position = game.at(position.x() - 1, position.y())}
 	
-	method moverAriiba() {
-		position = game.at(position.x(), position.y() + 1)
-	}
+	method moverArriba() {position = game.at(position.x(), position.y() + 1)}
 	
-	method moverAbajo() {
-		position = game.at(position.x(), position.y() - 1)
-	}
-	
-	method caer() {
-		position = game.at(position.x(), position.y() - 1)
-	}
+	method moverAbajo() {position = game.at(position.x(), position.y() - 1)}
 		
 	method cambiarDireccion() {
 		if (direccion == "derecha"){
@@ -211,60 +187,69 @@ class Fueguito{
 		}
 	}
 	
-	method hayVigaAbajo() {
-		return stage1.vigas().any({ v => v == game.at(position.x(), position.y() - 1) })
+	method hayVigaAbajo() {return stage1.vigas().any({ v => v == game.at(position.x(), position.y() - 1) })}
+	
+	method hayVigaIzquierda() {return stage1.vigas().any({ v => v == game.at(position.x() - 1, position.y() - 1) })}
+	
+	method hayVigaDerecha() {return stage1.vigas().any({ v => v == game.at(position.x() + 1, position.y() - 1) })}
+	
+	method hayEscalera() {return stage1.escaleras().any({ v => v == game.at(position.x(), position.y()+1) })}// el +1 porque uso las escaleras de mario
+	
+	method hayEscaleraAbajo() {return stage1.escaleras().any({ v => v == game.at(position.x(), position.y()-1) })}
+	
+	method bajarEscalera(){
+		if (self.hayVigaAbajo() && estoyBajandoEscalera)	estoyBajandoEscalera=false
+		else {
+			self.moverAbajo()
+			estoyBajandoEscalera=true
+		}
 	}
 	
-	method hayVigaIzquierda() {
-		return stage1.vigas().any({ v => v == game.at(position.x() - 1, position.y() - 1) })
+	method subirEscalera() {
+		if (self.hayVigaAbajo() && estoySubiendoEscalera) estoySubiendoEscalera=false
+		else {
+			self.moverArriba()
+			estoySubiendoEscalera=true
+		}
 	}
-	
-	method hayVigaDerecha() {
-		return stage1.vigas().any({ v => v == game.at(position.x() + 1, position.y() - 1) })
-	}
-	
-	method hayEscalera() {
-		return stage1.caidaBarril().any({ v => v == game.at(position.x(), position.y()) })
-	}
-	
 
 	method recorrerVigas() {
-		if (random.anyOne() == 3){
-			self.cambiarDireccion()	
-		}
-		else if (direccion == "derecha" && self.hayVigaDerecha()) {
-			self.moverDerecha()
-		} else if (direccion == "izquierda" && self.hayVigaIzquierda()) {
-			self.moverIzquierda()
-			
-		} else if (!self.hayVigaDerecha()) {
-			self.cambiarDireccion()	
-		} else {
-			self.cambiarDireccion()	
-		}
+		if (random.anyOne() == 3) self.cambiarDireccion()
+		else if (direccion == "derecha" && self.hayVigaDerecha()) self.moverDerecha()
+		else if (direccion == "izquierda" && self.hayVigaIzquierda()) self.moverIzquierda()			
+		else if (!self.hayVigaDerecha()) self.cambiarDireccion()	
+		else self.cambiarDireccion()
 	}
 	
-	method moverse(){
-		self.recorrerVigas()
+	method dicidir() {
+		const decision = randomEscalera.anyOne()
+		if (decision==2 && self.hayEscalera()) self.subirEscalera()
+		else if (decision==2 && self.hayEscaleraAbajo()) self.bajarEscalera() 
+		else self.recorrerVigas()
 	}
 	
-	method recorrerEscenario(){
-		game.onTick(velocidad, "recorrido-fueguito", {self.moverse()})
+	method moverse() {
+		if (estoyBajandoEscalera) self.bajarEscalera()
+		else if (estoySubiendoEscalera) self.subirEscalera()
+		else if (self.hayEscalera() || self.hayEscaleraAbajo()) self.dicidir()
+		else self.recorrerVigas()
 	}
 	
-	method removerFueguito(){
+	method recorrerEscenario() {game.onTick(velocidad, "recorrido-fueguito", {self.moverse()})}
+	
+	method removerFueguito() {
 		game.removeVisual(self)
 		direccion = "derecha"
 		game.removeTickEvent("recorrido-fueguito")
 		game.removeTickEvent("animacion-fueguito")
 	}
 	
-	 method colisionadoPor(personaje){
-		if(personaje.tieneMazo()){
-			game.sound("assets/sonidos/get-item.wav").play()}
-			//game.say(mario, "¡100 Puntos!")
-			//personaje.eliminarBarril()}
-		else 
+	method colisionadoPor(personaje) {
+		if (personaje.tieneMazo()) {
+			game.sound("assets/sonidos/get-item.wav").play()	
+			game.say(mario, "¡100 Puntos!")
+			personaje.eliminarBarril()
+		} else 
 			//personaje.esChocadoPor(self) ////añadir a mario
 		self.removerFueguito()
 	}
@@ -281,11 +266,6 @@ object prograFueguito {
 		game.onCollideDo(mario, { elemento => elemento.colisionadoPor(mario)})
 		//game.onCollideDo(fueguito, { personaje => personaje.esChocadoPor(fueguito)})
 	}
-
-/*method aniadirFantasmas() {
- * 	self.aniadirFantasma()
- * 	self.siguienteFantasma()
- }*/
 }
 
 object barrilAzul{
@@ -295,21 +275,19 @@ object barrilAzul{
 	method colisionadoPor(personaje){}
 }
 
-object fuegoBarril{
+object fuegoBarril {
 	var property position = game.at(1,2)
 	var fotograma = 0
 	const property gifFuegoBarril = ["assets/objects/57.png","assets/objects/58.png"]
 	var property image = gifFuegoBarril.get(fotograma)
 	
-	method siguienteFotograma(){
+	method siguienteFotograma() {
 		fotograma = (fotograma+1) % gifFuegoBarril.size()
 		image = gifFuegoBarril.get(fotograma)
 	}
 		
-	method animacion(){
-		game.onTick(200, "animacion-fuegoBarril", {self.siguienteFotograma()})
-	}
-	method colisionadoPor(personaje){}
+	method animacion() {game.onTick(200, "animacion-fuegoBarril", {self.siguienteFotograma()})}
+	//method colisionadoPor(personaje){}
 }
 
 class Fantasma {
@@ -322,44 +300,32 @@ class Fantasma {
 	var direccion = "derecha"
 	var property velocidad = 700
 	const random = [0,1,2,3,4,5]
-	//const dicidirDireccion = ["izquierda","derecha"]
+	const randomEscalera = [0,1,2,3]
+	var estoyBajandoEscalera = false
+	var estoySubiendoEscalera = false
 	
-	method siguienteFotograma(){
+	method siguienteFotograma() {
 		fotograma = (fotograma+1) % gifActual.size()
 		image = gifActual.get(fotograma)
 	}
 	
-	method animacion(){
-		game.onTick(250, "animacion-fantasma", {self.siguienteFotograma()})
-	}
+	method animacion() {game.onTick(250, "animacion-fantasma", {self.siguienteFotograma()})}
 	
-	method moverDerecha() {
-		position = game.at(position.x() + 1, position.y())
-	}
+	method moverDerecha() {position = game.at(position.x() + 1, position.y())}
 	
-	method moverIzquierda() {
-		position = game.at(position.x() - 1, position.y())
-	}
+	method moverIzquierda() {position = game.at(position.x() - 1, position.y())}
 	
-	method moverAriiba() {
-		position = game.at(position.x(), position.y() + 1)
-	}
+	method moverArriba() {position = game.at(position.x(), position.y() + 1)}
 	
-	method moverAbajo() {
-		position = game.at(position.x(), position.y() - 1)
-	}
-	
-	method caer() {
-		position = game.at(position.x(), position.y() - 1)
-	}
+	method moverAbajo() {position = game.at(position.x(), position.y() - 1)}
 		
 	method cambiarDireccion() {
-		if (direccion == "derecha"){
+		if (direccion == "derecha") {
 			direccion = "izquierda"
 			gifActual = gifFantasmaIzquierda
 			game.removeTickEvent("animacion-fantasma")
 			self.animacion()
-		} else{
+		} else {
 			direccion = "derecha"
 			gifActual = gifFantasmaDerecha
 			game.removeTickEvent("animacion-fantasma")
@@ -367,103 +333,72 @@ class Fantasma {
 		}
 	}
 	
-	method hayVigaAbajo() {
-		return stage1.vigas().any({ v => v == game.at(position.x(), position.y() - 1) })
-	}
+	method hayVigaAbajo() {return stage1.vigas().any({ v => v == game.at(position.x(), position.y() - 1) })}
 	
-	method hayVigaIzquierda() {
-		return stage1.vigas().any({ v => v == game.at(position.x() - 1, position.y() - 1) })
-	}
+	method hayVigaIzquierda() {return stage1.vigas().any({ v => v == game.at(position.x() - 1, position.y() - 1)})}
 	
-	method hayVigaDerecha() {
-		return stage1.vigas().any({ v => v == game.at(position.x() + 1, position.y() - 1) })
-	}
+	method hayVigaDerecha() {return stage1.vigas().any({ v => v == game.at(position.x() + 1, position.y() - 1) })}
 	
-	method hayEscalera() {
-		return stage1.caidaBarril().any({ v => v == game.at(position.x(), position.y()) })
-	}
+	method hayEscalera() {return stage1.escaleras().any({ v => v == game.at(position.x(), position.y()+1) })}// el +1 porque uso las escaleras de mario
 	
-
-	method recorrerVigas() {
-		if (random.anyOne() == 3){
-			self.cambiarDireccion()	
-		}
-		else if (direccion == "derecha" && self.hayVigaDerecha()) {
-			gifActual = gifFantasmaDerecha
-			game.removeTickEvent("animacion-fantasma")
-			self.animacion()
-			self.moverDerecha()
-		} else if (direccion == "izquierda" && self.hayVigaIzquierda()) {
-			gifActual = gifFantasmaIzquierda
-			game.removeTickEvent("animacion-fantasma")
-			self.animacion()
-			self.moverIzquierda()///a cada rato cambia la animacion
-			
-		} else if (!self.hayVigaDerecha()) {
-			self.cambiarDireccion()	
+	method hayEscaleraAbajo() {return stage1.escaleras().any({ v => v == game.at(position.x(), position.y()-1) })}
+	
+	method bajarEscalera() {
+		if (self.hayVigaAbajo() && estoyBajandoEscalera){
+			estoyBajandoEscalera=false
 		} else {
-			self.cambiarDireccion()	
+			self.moverAbajo()
+			estoyBajandoEscalera=true
 		}
-	// else if(direccion=="derecha" && self.hayVigaDerecha())self.moverDerecha()
-	// else if(direccion=="izquierda" && self.hayVigaIzquierda())self.moverIzquierda()
-	// else self.moverDerecha()
 	}
-
-	/*method dicidir(){
-		if(random.anyOne()==3) self.bajarEscalera()
+	
+	method subirEscalera() {
+		if (self.hayVigaAbajo() && estoySubiendoEscalera) estoySubiendoEscalera=false
+		else {
+			self.moverArriba()
+			estoySubiendoEscalera=true
+		}
+	}
+	
+	method recorrerVigas() {
+		if (random.anyOne() == 3) self.cambiarDireccion()
+		else if (direccion == "derecha" && self.hayVigaDerecha()) self.moverDerecha()
+		else if (direccion == "izquierda" && self.hayVigaIzquierda()) self.moverIzquierda()			
+		else if (!self.hayVigaDerecha()) self.cambiarDireccion()	
+		else self.cambiarDireccion()
+	}
+	
+	method dicidir() {
+		const decision = randomEscalera.anyOne()
+		if (decision==3 && self.hayEscalera()) self.subirEscalera()
+		else if (decision==3 && self.hayEscaleraAbajo()) self.bajarEscalera() 
 		else self.recorrerVigas()
-	}*/	
-	method moverse(){
-		//if(estoyBajandoEscalera)self.bajarEscalera()
-		//else if(self.hayEscalera())self.dicidir()
-		//else 
-		self.recorrerVigas()
 	}
 	
-	method recorrerEscenario(){
-		game.onTick(velocidad, "recorrido-fantasma", {self.moverse()})
+	method moverse() {
+		if (estoyBajandoEscalera) self.bajarEscalera()
+		else if (estoySubiendoEscalera) self.subirEscalera()
+		else if (self.hayEscalera() || self.hayEscaleraAbajo()) self.dicidir()
+		else self.recorrerVigas()
 	}
-		/*method caerSiguienteViga(){
-		if(self.hayVigaAbajo())
-			self.cambiarDireccion() 
-		else 
-			self.caer()
-	} //cambia animacion a normal*/
 	
-	/*method bajarEscalera(){
-		if(self.hayVigaAbajo() && estoyBajandoEscalera){ //cambia animacion a escalera
-			self.cambiarDireccion() //self.animacionIzquierda() game.removeTickEvent("animacion-derecha")
-			estoyBajandoEscalera=false} 
-		else{
-			self.caer()
-			estoyBajandoEscalera=true}}*/
-			
-	/*method subirEscalera(){
-		if(self.hayVigaAbajo() && estoyBajandoEscalera){ //cambia animacion a escalera
-			self.cambiarDireccion() //self.animacionIzquierda() game.removeTickEvent("animacion-derecha")
-			estoyBajandoEscalera=false} 
-		else{
-			self.caer()
-			estoyBajandoEscalera=true}}*/
-			
-	
-	/*method esChocadoPor(otro){}
-	
-	method removerBarril(){
+	method recorrerEscenario(){game.onTick(velocidad, "recorrido-fantasma", {self.moverse()})}
+		
+	method removerFantasma() {
 		game.removeVisual(self)
-		position = game.at(5,14)
 		direccion = "derecha"
-		game.removeTickEvent("recorrido-barril")
-		game.removeTickEvent("animacion-Barril")}
+		game.removeTickEvent("recorrido-fantasma")
+		game.removeTickEvent("animacion-fantasma")
+	}
 	
-    method colisionadoPor(personaje){
-		if(personaje.tieneMazo()){
+	method colisionadoPor(personaje) {
+		if (personaje.tieneMazo()) {
 			game.sound("assets/sonidos/get-item.wav").play()	
 			game.say(mario, "¡100 Puntos!")
-			personaje.eliminarBarril()}
-		else 
-			personaje.esChocadoPor(self)		
-		self.removerBarril()}	*/
+			personaje.eliminarBarril()
+		} else  //personaje.esChocadoPor(self) ////añadir a mario
+		self.removerFantasma()
+	}
 }
 
 object prograFantasma {
