@@ -27,7 +27,7 @@ En Donkey Kong Wollok Edition tenemos dos objetivos:
 ![inicio](screenshots/pantallaInicio-0.png)
 ## Primer Escenario
 ![stage1](screenshots/inicioStage1.png)
-![stage1](screenshots/stage11.png)
+![stage1](screenshots/stage1.png)
 ![stage1](screenshots/stage12.png)
 ## Segundo Escenario
 ![stage2](screenshots/inicioStage2.png)
