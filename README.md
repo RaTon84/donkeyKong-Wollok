@@ -10,6 +10,7 @@
 
 -Viltez Hernán
 
+## Reglas de juego/instrucciones
 
 En Donkey Kong Wollok Edition tenemos dos objetivos:
 
@@ -20,7 +21,7 @@ En Donkey Kong Wollok Edition tenemos dos objetivos:
 ## Controles
 ![controles](screenshots/controles-0.png)
 
-## Capturas
+# Capturas
 
 ## Pantalla de Inicio
 ![inicio](screenshots/pantallaInicio-0.png)
@@ -36,7 +37,7 @@ En Donkey Kong Wollok Edition tenemos dos objetivos:
 ![perdida](screenshots/gameOver-0.png)
 ## Partida Ganada
 ![ganada](screenshots/youWin.png)
-## Reglas de juego/instrucciones
+
 
 
 
