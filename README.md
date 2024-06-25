@@ -15,12 +15,12 @@
 
 ##Primer Escenario
 ![stage1](screenshots/inicioStage1.png)
-![stage1](screenshots/stage11.png.png)
+![stage1](screenshots/stage11.png)
 ![stage1](screenshots/stage12.png)
 
 ##Segundo Escenario
 ![stage2](screenshots/inicioStage2.png)
-![stage2](screenshots/stage21.png.png)
+![stage2](screenshots/stage21.png)
 ![stage2](screenshots/stage22.png)
 
 ##Partida Perdida
