@@ -11,15 +11,19 @@
 ##Capturas
 
 ##Pantalla de Inicio
-
+![inicio](screenshots/pantallaInicio-0.png)
 ##Primer Escenario
-
+![stage1](screenshots/inicioStage1.png)
+![stage1](screenshots/stage 1 1.png.png)
+![stage1](screenshots/stage 1 2.png)
 ##Segundo Escenario
-
+![stage2](screenshots/inicioStage2.png)
+![stage2](screenshots/stage 2 1.png.png)
+![stage2](screenshots/stage 2 2.png)
 ##Partida Perdida
-
+![perdida](screenshots/gameOver-0.png)
 ##Partida Ganada
-
+![ganada](screenshots/youWin.png)
 ## Reglas de juego/instrucciones
 
 En Donkey Kong Wollok Edition tenemos dos objetivos:
@@ -28,4 +32,4 @@ tanto a los barriles que nos tira Kong, como a su pequeño esbirro de fuego que 
 -En el segundo escenario tendremos que enfrentarnos a Donkey Kong cara a cara. Para ello, tendremos que evitar o enfrentar a una legion de esbirros de fuego y a la condición que nos impone este segundo escenario: encontrar las palancas para ir liberando las escaleras. El nivel acaba una vez recogidos los 8 gatos mecánicos repartidos en este segundo escenario.
 
 ##Controles
-
+![controles](screenshots/controles-0.png)
