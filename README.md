@@ -12,18 +12,23 @@
 
 ##Pantalla de Inicio
 ![inicio](screenshots/pantallaInicio-0.png)
+
 ##Primer Escenario
 ![stage1](screenshots/inicioStage1.png)
-![stage1](screenshots/stage 1 1.png.png)
-![stage1](screenshots/stage 1 2.png)
+![stage1](screenshots/stage11.png.png)
+![stage1](screenshots/stage12.png)
+
 ##Segundo Escenario
 ![stage2](screenshots/inicioStage2.png)
-![stage2](screenshots/stage 2 1.png.png)
-![stage2](screenshots/stage 2 2.png)
+![stage2](screenshots/stage21.png.png)
+![stage2](screenshots/stage22.png)
+
 ##Partida Perdida
 ![perdida](screenshots/gameOver-0.png)
+
 ##Partida Ganada
 ![ganada](screenshots/youWin.png)
+
 ## Reglas de juego/instrucciones
 
 En Donkey Kong Wollok Edition tenemos dos objetivos:
