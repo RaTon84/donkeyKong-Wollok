@@ -1,6 +1,5 @@
 # Donkey Kong Wollok Edition
 
-## Pantalla de Inicio
 ![inicio](screenshots/pantallaInicio-0.png)
 
 ## Equipo de desarrollo
