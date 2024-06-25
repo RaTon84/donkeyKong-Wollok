@@ -167,6 +167,8 @@ object juego{
 	}
 
 	method configuracionNivel2(){
+		stage2.reiniciarEscaleras()
+		mario.reiniciarMarioLvl2()
 		kong.positionSegundoNivel()
 		kong.animacionStage2()
 		barriles.positionSegundoNivel()  

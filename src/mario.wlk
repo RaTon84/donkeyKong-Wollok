@@ -242,6 +242,11 @@ object mario {
 	method encontrarCosoAmarillo(){
 		return cososAmarillosQueEncontrar.find{p=>p.position()==position}
 	}
+	method reiniciarMarioLvl2(){
+		palancasQueEncontrar=[palanca1,palanca2,palanca3,palanca4]
+		cososAmarillosQueEncontrar=[coso1,coso2,coso3,coso4,coso5,coso6,coso7,coso8]
+		contadorCosos=0
+	}
 }
 
 object vidas{
@@ -266,7 +271,9 @@ object vidas{
    				else 
    					juego.musicaFondoStage2().pause()
    				gameOver.marioPierde()}
-	}		
+	}
+	
+			
 }
 
 

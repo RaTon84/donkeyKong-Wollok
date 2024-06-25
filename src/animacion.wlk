@@ -71,6 +71,14 @@ object animacionNivel2{
 	
 	method image()=fotogramas.first()
 	
+	method reinicio(){
+		fotogramas=["assets/fondo/fondoNvl2-0.png",
+					"assets/fondo/fondoNvl2-1.png",
+					"assets/fondo/fondoNvl2-2.png",
+					"assets/fondo/fondoNvl2-3.png",
+					"assets/fondo/fondoNvl2-4.png"]
+					stage2.image(self.image())
+	}
 	
 	method bajarEscaleras(){
 		fotogramas.remove(fotogramas.first())

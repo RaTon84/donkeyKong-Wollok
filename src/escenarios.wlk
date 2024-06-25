@@ -28,6 +28,12 @@ class Stage{
 	method position(){
 		return game.at(0,0)}
 		
+	method reiniciarEscaleras(){
+		animacionNivel2.reinicio()
+		escaleraLvl2=0
+		escaleras=[]}
+	
+		
 	method activarEscaleraNvl2(){
 		animacionNivel2.bajarEscaleras()
 		escaleraLvl2+=1
