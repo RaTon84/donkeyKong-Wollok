@@ -136,7 +136,12 @@ object juego{
 		else
 			game.removeVisual(pantallaInicioStage2)	
 		if (unNivel==1)
-			self.aniadirVisuales(stage1)
+			{self.aniadirVisuales(stage1)
+			mario.stageEnQueMeMuevo(stage1)
+			mazo.stageEnQueSeMueveMario(stage1)
+			barriles.positionPrimerNivel()
+			kong.positionPrimerNivel()}
+			
 		else
 			{self.aniadirVisuales(stage2)
 			mazo.stageEnQueSeMueveMario(stage2)}
@@ -164,12 +169,12 @@ object juego{
 	method configuracionNivel2(){
 		kong.positionSegundoNivel()
 		kong.animacionStage2()
-		barriles.positionSegundoNivel()
+		barriles.positionSegundoNivel()  
 		game.schedule(7000,{prograFantasma.aniadirFantasmas()})
-		game.schedule(20000,{prograFantasma.aniadirFantasmas()})
-		game.schedule(30000,{prograFantasma.aniadirFantasmas()})
-		game.schedule(40000,{prograFantasma.aniadirFantasmas()})
-		game.schedule(50000,{prograFantasma.aniadirFantasmas()})
+		game.schedule(15000,{prograFantasma.aniadirFantasmas()})
+		game.schedule(24000,{prograFantasma.aniadirFantasmas()})
+		game.schedule(35000,{prograFantasma.aniadirFantasmas()})
+		game.schedule(450000,{prograFantasma.aniadirFantasmas()})
 		self.configuracion(2)
 		game.schedule(2000,{self.musicaFondoStage2().resume()})
 		}

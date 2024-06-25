@@ -37,6 +37,11 @@ object kong{
 	
 	method esChocadoPor(otro){}
 	
+	method positionPrimerNivel(){
+		self.position(game.at(2,14))
+		image=gifKongStage1.get(fotograma)
+	}
+	
 	method positionSegundoNivel(){
 		self.position(game.at(8,14))
 		image = gifKongStage2.get(fotograma)

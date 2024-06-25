@@ -11,6 +11,7 @@ object barriles {
 	var property position=game.at(0,14)	
 	method image() = "assets/objects/2.png"
 	method positionSegundoNivel(){self.position(game.at(6,14))}
+	method positionPrimerNivel(){self.position(game.at(0,14))}
 }
 
 class Barril {
