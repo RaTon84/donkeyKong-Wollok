@@ -1,5 +1,8 @@
 # Donkey Kong Wollok Edition
 
+## Pantalla de Inicio
+![inicio](screenshots/pantallaInicio-0.png)
+
 ## Equipo de desarrollo
 
 -Negreti Carballo Nahuel
@@ -22,9 +25,6 @@ En Donkey Kong Wollok Edition tendremos dos objetivos:
 ![controles](screenshots/controles-0.png)
 
 # Capturas
-
-## Pantalla de Inicio
-![inicio](screenshots/pantallaInicio-0.png)
 
 ## Primer Escenario
 ![stage1](screenshots/inicioStage1.png)
