@@ -494,8 +494,11 @@ object mazo {
 		return  "assets/objects/59.png"}
 	
 	method colisionadoPor(personaje){
-		try {prograFueguito.fueguito().transformacionAzul()} catch e : Exception{}
 		try {prograFantasma.fantasmas().forEach({f=>f.transformacionAzul()})} catch e : Exception{}
+		try {
+			prograFueguito.fueguito().transformacionAzul()
+			prograFueguito.fueguito().cambiarDireccion()
+		} catch e : Exception{}
 		personaje.tieneMazo(true)
 		game.removeVisual(self)
 		self.activarMazo()}
@@ -521,7 +524,9 @@ object mazo {
 		sonidoMario.deObjeto()
 		rain.play()
 		rain.shouldLoop(true)
-	 	game.schedule(8000,{ 
+	 	game.schedule(8000,{
+	 		try {prograFantasma.fantasmas().forEach({f=>f.transformacionNormal()})} catch e : Exception{}
+	 		try {prograFueguito.fueguito().transformacionNormal()} catch e : Exception{}			
 	 		mario.tieneMazo(false)
 			rain.shouldLoop(false)
 			if (stageEnQueSeMueveMario==stage1){
@@ -529,8 +534,6 @@ object mazo {
 			} else {
 				juego.musicaFondoStage2().resume()
 			}
-			try {prograFueguito.fueguito().transformacionNormal()} catch e : Exception{}
-			try {prograFantasma.fantasmas().forEach({f=>f.transformacionNormal()})} catch e : Exception{}
 			})
 		}
 }
