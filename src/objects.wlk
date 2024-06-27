@@ -151,30 +151,13 @@ object prograBarril {
 	}
 }
 
-class Fueguito{
+class ObejtoTipoFuego{	
 	var property position = game.at(2,1)
 	var property fotograma = 0
 	var property direccion = "derecha"
-	var property velocidad = 300
-	const property random = [0,1,2,3,4,5,6,7,8,9]
-	const property randomEscalera = [0,1,2]
+	var property velocidad = 350
 	var property estoyBajandoEscalera = false
 	var property estoySubiendoEscalera = false
-	const property gifFueguitoNormalDerecha = ["assets/objects/50.png","assets/objects/51.png"]
-	const property gifFueguitoNormalIzquierda = ["assets/objects/48.png","assets/objects/49.png"]
-	const property gifFueguitoAzulDerecha = ["assets/objects/26.png","assets/objects/27.png"]
-	const property gifFueguitoAzulIzquierda = ["assets/objects/24.png","assets/objects/25.png"]
-	var gifFueguitoDerecha = gifFueguitoNormalDerecha
-	var gifFueguitoIzquierda = gifFueguitoNormalIzquierda
-	var gifActual = gifFueguitoDerecha
-	var property image = gifFueguitoDerecha.get(fotograma)
-	
-	method siguienteFotograma() {
-		fotograma = (fotograma+1) % gifActual.size()
-		image = gifActual.get(fotograma)
-	}
-	
-	method animacion() {game.onTick(250, "animacion-fueguito", {self.siguienteFotograma()})}
 	
 	method moverDerecha() {position = game.at(position.x() + 1, position.y())}
 	
@@ -183,7 +166,29 @@ class Fueguito{
 	method moverArriba() {position = game.at(position.x(), position.y() + 1)}
 	
 	method moverAbajo() {position = game.at(position.x(), position.y() - 1)}
-		
+	
+	method colisionadoPor(personaje)
+}
+
+class Fueguito inherits ObejtoTipoFuego {
+	const property gifFueguitoNormalDerecha = ["assets/objects/50.png","assets/objects/51.png"]
+	const property gifFueguitoNormalIzquierda = ["assets/objects/48.png","assets/objects/49.png"]
+	const property gifFueguitoAzulDerecha = ["assets/objects/26.png","assets/objects/27.png"]
+	const property gifFueguitoAzulIzquierda = ["assets/objects/24.png","assets/objects/25.png"]
+	var gifFueguitoDerecha = gifFueguitoNormalDerecha
+	var gifFueguitoIzquierda = gifFueguitoNormalIzquierda
+	var gifActual = gifFueguitoDerecha
+	var property image = gifFueguitoDerecha.first()
+	const property random = [0,1,2,3,4,5,6,7,8,9]
+	const property randomEscalera = [0,1,2]	
+	
+	method siguienteFotograma() {
+		fotograma = (fotograma+1) % gifActual.size()
+		image = gifActual.get(fotograma)
+	}
+	
+	method animacion() {game.onTick(250, "animacion-fueguito", {self.siguienteFotograma()})}
+				
 	method cambiarDireccion() {
 		if (direccion == "derecha"){
 			game.removeTickEvent("animacion-fueguito")
@@ -255,7 +260,7 @@ class Fueguito{
 		game.removeTickEvent("animacion-fueguito")
 	}
 	
-	method colisionadoPor(personaje) {
+	override method colisionadoPor(personaje) {
 		if (personaje.tieneMazo()) {
 			game.sound("assets/sonidos/get-item.wav").play()	
 			//game.say(mario, "¡100 Puntos!")
@@ -317,9 +322,7 @@ object fuegoBarril {
 	//method colisionadoPor(personaje){}
 }
 
-class Fantasma {
-	var property position = game.at(3,1)
-	var fotograma = 0
+class Fantasma inherits ObejtoTipoFuego {
 	const property gifFantasmaNormalDerecha = ["assets/objects/72.png","assets/objects/73.png"]
 	const property gifFantasmaNormalIzquierda = ["assets/objects/70.png","assets/objects/71.png"]
 	const property gifFantasmaAzulDerecha = ["assets/objects/55.png","assets/objects/56.png"]
@@ -327,13 +330,9 @@ class Fantasma {
 	var gifFantasmaDerecha = gifFantasmaNormalDerecha
 	var gifFantasmaIzquierda = gifFantasmaNormalIzquierda
 	var gifActual = gifFantasmaDerecha
-	var property image = gifFantasmaDerecha.get(fotograma)
-	var direccion = "derecha"
-	var property velocidad = 400
+	var property image = gifFantasmaDerecha.first()
 	const random = [0,1,2,3,4,5]
 	const randomEscalera = [0,1,2,3]
-	var estoyBajandoEscalera = false
-	var estoySubiendoEscalera = false
 	
 	method siguienteFotograma() {
 		fotograma = (fotograma+1) % gifActual.size()
@@ -341,15 +340,7 @@ class Fantasma {
 	}
 	
 	method animacion() {game.onTick(250, "animacion-fantasma", {self.siguienteFotograma()})}
-	
-	method moverDerecha() {position = game.at(position.x() + 1, position.y())}
-	
-	method moverIzquierda() {position = game.at(position.x() - 1, position.y())}
-	
-	method moverArriba() {position = game.at(position.x(), position.y() + 1)}
-	
-	method moverAbajo() {position = game.at(position.x(), position.y() - 1)}
-		
+				
 	method cambiarDireccion() {
 		if (direccion == "derecha") {
 			game.removeTickEvent("animacion-fantasma")
@@ -422,7 +413,7 @@ class Fantasma {
 		game.removeTickEvent("animacion-fantasma")
 	}
 	
-	method colisionadoPor(personaje) {
+	override method colisionadoPor(personaje) {
 		if (personaje.tieneMazo()) {
 			game.sound("assets/sonidos/get-item.wav").play()	
 			//game.say(mario, "¡100 Puntos!")
