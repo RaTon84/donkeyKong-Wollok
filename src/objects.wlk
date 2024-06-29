@@ -158,6 +158,7 @@ class ObejtoTipoFuego{
 	var property velocidad = 350
 	var property estoyBajandoEscalera = false
 	var property estoySubiendoEscalera = false
+	const property randomEscalera = [0,1,2,3]
 	
 	method moverDerecha() {position = game.at(position.x() + 1, position.y())}
 	
@@ -179,8 +180,7 @@ class Fueguito inherits ObejtoTipoFuego {
 	var gifFueguitoIzquierda = gifFueguitoNormalIzquierda
 	var gifActual = gifFueguitoDerecha
 	var property image = gifFueguitoDerecha.first()
-	const property random = [0,1,2,3,4,5,6,7,8,9]
-	const property randomEscalera = [0,1,2]	
+	const property random = [0,1,2,3,4,5,6,7,8,9]	
 	
 	method siguienteFotograma() {
 		fotograma = (fotograma+1) % gifActual.size()
@@ -332,7 +332,6 @@ class Fantasma inherits ObejtoTipoFuego {
 	var gifActual = gifFantasmaDerecha
 	var property image = gifFantasmaDerecha.first()
 	const random = [0,1,2,3,4,5]
-	const randomEscalera = [0,1,2,3]
 	
 	method siguienteFotograma() {
 		fotograma = (fotograma+1) % gifActual.size()
