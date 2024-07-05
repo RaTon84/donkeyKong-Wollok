@@ -85,7 +85,7 @@ object juego{
 	method controles(){
 		var contador = 0
 		
-		game.onTick(100,"validacion",{contador = contador + 1})
+		game.onTick(100,"validacion",{contador = contador + 1})////////ver
 		game.removeVisual(pantallaInicio)
 		game.addVisual(pantallaControles)
 		self.cambioImage(pantallaControles)
@@ -159,7 +159,7 @@ object juego{
 		})
 		kong.animacionStage1()
 		game.addVisual(barriles)
-		game.onTick(5550,"lanzamientoDeBarriles",{prograBarril.tirarBarriles()})	
+		//game.onTick(5550,"lanzamientoDeBarriles",{prograBarril.tirarBarriles()})	
 		game.addVisual(barrilAzul)
 		game.addVisual(fuegoBarril)
 		game.schedule(7000,{prograFueguito.aniadirFueguito()})
@@ -172,11 +172,11 @@ object juego{
 		kong.positionSegundoNivel()
 		kong.animacionStage2()
 		barriles.positionSegundoNivel()  
-		game.schedule(5000,{prograFantasma.aniadirFantasmas()})
-		game.schedule(10000,{prograFantasma.aniadirFantasmas()})
-		game.schedule(15000,{prograFantasma.aniadirFantasmas()})
-		game.schedule(20000,{prograFantasma.aniadirFantasmas()})
-		game.schedule(25000,{prograFantasma.aniadirFantasmas()})
+		//game.schedule(5000,{prograFantasma.aniadirFantasma()})
+		//game.schedule(10000,{prograFantasma.aniadirFantasma()})
+		//game.schedule(15000,{prograFantasma.aniadirFantasma()})
+		//game.schedule(20000,{prograFantasma.aniadirFantasma()})
+		//game.schedule(25000,{prograFantasma.aniadirFantasma()})
 		self.configuracion(2)
 		game.schedule(2000,{self.musicaFondoStage2().resume()})
 		}

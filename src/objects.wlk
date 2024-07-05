@@ -18,7 +18,7 @@ class Barril {
 	var property position = game.at(5,14)
 	var fotograma = 0
 	var direccion = "derecha"
-	var property velocidad = 175
+	var property velocidad = 170
 	const random = [0,1,2,3,4]
 	var property estoyBajandoEscalera = false
 	const property gifDerecha = ["assets/objects/82.png","assets/objects/83.png","assets/objects/84.png","assets/objects/85.png"]
@@ -26,13 +26,15 @@ class Barril {
 	const property gifEscalera = ["assets/objects/86.png","assets/objects/87.png"]
 	var gifActual = gifDerecha
 	var property image = gifDerecha.get(fotograma)	
+	const idAnimacion= self.identity().toString()+"a"
+	const idRecorrido= self.identity().toString()+"r"
 	
 	method siguienteFotograma(lista) {
 		fotograma = (fotograma + 1) % lista.size()
 		image = lista.get(fotograma)
 	}
-	
-	method animacion() {game.onTick(velocidad*0.8, "animacion-Barril", { self.siguienteFotograma(gifActual)})}
+		
+	method animacion() {game.onTick(velocidad*0.5, idAnimacion, { self.siguienteFotograma(gifActual)})}
 
 	method rodarDerecha() {position = game.at(position.x() + 1, position.y())}
 
@@ -42,12 +44,12 @@ class Barril {
 		
 	method cambiarDireccion() {
 		if (direccion == "derecha") {
-			game.removeTickEvent("animacion-Barril")
+			game.removeTickEvent(idAnimacion)
 			direccion = "izquierda"
 			gifActual = gifIzquierda			
 			self.animacion()
 		} else {
-			game.removeTickEvent("animacion-Barril")
+			game.removeTickEvent(idAnimacion)
 			direccion = "derecha"
 			gifActual = gifDerecha			
 			self.animacion()
@@ -68,11 +70,11 @@ class Barril {
 			estoyBajandoEscalera=false
 		}
 		else{
-			game.removeTickEvent("animacion-Barril")
+			game.removeTickEvent(idAnimacion)
 			gifActual = gifEscalera	
-			self.animacion()
 			self.caer()
 			estoyBajandoEscalera=true
+			self.animacion()			
 		}
 	}
 			
@@ -94,14 +96,15 @@ class Barril {
 		else self.rodarVigas()
 	}
 	
-	method recorrerEscenario(){game.onTick(velocidad, "recorrido-barril", {self.rodar()})}
+	method recorrerEscenario(){game.onTick(velocidad, idRecorrido, {self.rodar()})}
 		
 	method removerBarril(){
+		game.removeTickEvent(idAnimacion)
+		game.removeTickEvent(idRecorrido)
 		game.removeVisual(self)
 		position = game.at(5,14)
 		direccion = "derecha"
-		game.removeTickEvent("animacion-Barril")
-		game.removeTickEvent("recorrido-barril")		
+				
 	}
 	
     method colisionadoPor(personaje){
@@ -159,7 +162,9 @@ class ObejtoTipoFuego{
 	var property estoyBajandoEscalera = false
 	var property estoySubiendoEscalera = false
 	const property randomEscalera = [0,1,2,3]
-	
+	const idAnimacion= self.identity().toString()+"a"
+	const idRecorrido= self.identity().toString()+"r"
+		
 	method moverDerecha() {position = game.at(position.x() + 1, position.y())}
 	
 	method moverIzquierda() {position = game.at(position.x() - 1, position.y())}
@@ -187,16 +192,16 @@ class Fueguito inherits ObejtoTipoFuego {
 		image = gifActual.get(fotograma)
 	}
 	
-	method animacion() {game.onTick(250, "animacion-fueguito", {self.siguienteFotograma()})}
+	method animacion() {game.onTick(250, idAnimacion, {self.siguienteFotograma()})}
 				
 	method cambiarDireccion() {
 		if (direccion == "derecha"){
-			game.removeTickEvent("animacion-fueguito")
+			game.removeTickEvent(idAnimacion)
 			direccion = "izquierda"
 			gifActual = gifFueguitoIzquierda			
 			self.animacion()
 		} else{
-			game.removeTickEvent("animacion-fueguito")
+			game.removeTickEvent(idAnimacion)
 			direccion = "derecha"
 			gifActual = gifFueguitoDerecha
 			self.animacion()
@@ -251,13 +256,13 @@ class Fueguito inherits ObejtoTipoFuego {
 		else self.recorrerVigas()
 	}
 	
-	method recorrerEscenario() {game.onTick(velocidad, "recorrido-fueguito", {self.moverse()})}
+	method recorrerEscenario() {game.onTick(velocidad, idRecorrido, {self.moverse()})}
 	
 	method removerFueguito() {
 		game.removeVisual(self)
 		direccion = "derecha"
-		game.removeTickEvent("recorrido-fueguito")
-		game.removeTickEvent("animacion-fueguito")
+		game.removeTickEvent(idRecorrido)
+		game.removeTickEvent(idRecorrido)
 	}
 	
 	override method colisionadoPor(personaje) {
@@ -338,18 +343,18 @@ class Fantasma inherits ObejtoTipoFuego {
 		image = gifActual.get(fotograma)
 	}
 	
-	method animacion() {game.onTick(250, "animacion-fantasma", {self.siguienteFotograma()})}
+	method animacion() {game.onTick(150, idAnimacion, {self.siguienteFotograma()})}
 				
 	method cambiarDireccion() {
 		if (direccion == "derecha") {
-			game.removeTickEvent("animacion-fantasma")
-			direccion = "izquierda"
-			gifActual = gifFantasmaIzquierda			
+			game.removeTickEvent(idAnimacion)
+			gifActual = gifFantasmaIzquierda
+			direccion = "izquierda"						
 			self.animacion()
 		} else {
-			game.removeTickEvent("animacion-fantasma")
-			direccion = "derecha"
-			gifActual = gifFantasmaDerecha			
+			game.removeTickEvent(idAnimacion)
+			gifActual = gifFantasmaDerecha
+			direccion = "derecha"					
 			self.animacion()
 		}
 	}
@@ -403,22 +408,21 @@ class Fantasma inherits ObejtoTipoFuego {
 		else self.recorrerVigas()
 	}
 	
-	method recorrerEscenario(){game.onTick(velocidad, "recorrido-fantasma", {self.moverse()})}
+	method recorrerEscenario(){game.onTick(velocidad, idRecorrido, {self.moverse()})}
 		
 	method removerFantasma() {
-		game.removeVisual(self)
-		direccion = "derecha"
-		game.removeTickEvent("recorrido-fantasma")
-		game.removeTickEvent("animacion-fantasma")
+		try{ game.removeTickEvent(idAnimacion)
+			game.removeTickEvent(idRecorrido)
+			game.removeVisual(self)
+			direccion = "derecha"
+		} catch e : Exception{}
 	}
 	
 	override method colisionadoPor(personaje) {
 		if (personaje.tieneMazo()) {
-			game.sound("assets/sonidos/get-item.wav").play()	
-			//game.say(mario, "¡100 Puntos!")
-			//personaje.eliminarBarril()
+			game.sound("assets/sonidos/get-item.wav").play()			
 		} else  
-			personaje.esChocadoPor(self) ////añadir a mario
+			personaje.esChocadoPor(self)
 		self.removerFantasma()
 	}
 	
@@ -451,26 +455,33 @@ object prograFantasma {
 	}
 
 	method aniadirFantasma() {
-		try {
+		try {		
+			game.addVisual(nroFantasma)
+			nroFantasma.animacion()
+			nroFantasma.recorrerEscenario()
+			if(mazo.estaActivo())nroFantasma.transformacionAzul()
 			self.siguienteFantasma()
-			game.addVisual(nroFantasma)
-			nroFantasma.animacion()
-			nroFantasma.recorrerEscenario()
 			game.onCollideDo(mario, { elemento => elemento.colisionadoPor(mario)})
-			//game.onCollideDo(nroBarril, { personaje => personaje.esChocadoPor(nroFantasma)})
 		} catch e : Exception {
-			//nroFantasma.removerFantasma()
 			game.addVisual(nroFantasma)
 			nroFantasma.animacion()
 			nroFantasma.recorrerEscenario()
-		}
-		//game.onCollideDo(mario, { elemento => elemento.colisionadoPor(mario)})
-		//game.onCollideDo(nroFantasma, { personaje => personaje.esChocadoPor(nroFantasma)})
+		}		
+	}	
+	
+	method transformacionAzul(){
+		try {f1.transformacionAzul()} catch e : Exception{}
+		try {f2.transformacionAzul()} catch e : Exception{}
+		try {f3.transformacionAzul()} catch e : Exception{}
+		try {f4.transformacionAzul()} catch e : Exception{}
+		try {f5.transformacionAzul()} catch e : Exception{}
 	}
-
-	method aniadirFantasmas() {
-		self.aniadirFantasma()
-		self.siguienteFantasma()
+	method transformacionNormal(){
+		try {f1.transformacionNormal()} catch e : Exception{}
+		try {f2.transformacionNormal()} catch e : Exception{}
+		try {f3.transformacionNormal()} catch e : Exception{}
+		try {f4.transformacionNormal()} catch e : Exception{}
+		try {f5.transformacionNormal()} catch e : Exception{}
 	}
 }
 
@@ -479,19 +490,18 @@ object prograFantasma {
 object mazo {
 	var property position= game.at(2,7)
 	var property stageEnQueSeMueveMario= stage1
+	var property estaActivo = false
 
 	method image(){
 		return  "assets/objects/59.png"}
 	
 	method colisionadoPor(personaje){
-		try {prograFantasma.fantasmas().forEach({f=>f.transformacionAzul()})} catch e : Exception{}
-		try {
-			prograFueguito.fueguito().transformacionAzul()
-			prograFueguito.fueguito().cambiarDireccion()
-		} catch e : Exception{}
+		try {prograFantasma.transformacionAzul()} catch e : Exception{}/////////
+		try {prograFueguito.fueguito().transformacionAzul()} catch e : Exception{}
 		personaje.tieneMazo(true)
 		game.removeVisual(self)
-		self.activarMazo()}
+		self.activarMazo()
+	}
 	
 	method moverDerechaConMazo(){
 		mario.moverDerechaSiSePuede()
@@ -506,6 +516,7 @@ object mazo {
 	
 	method activarMazo(){
 		const rain = game.sound("assets/sonidos/background-3.mp3")	
+		estaActivo = true/////////////////////
 		
 		if (stageEnQueSeMueveMario==stage1)
 			{juego.musicaFondo().pause()}
@@ -513,12 +524,13 @@ object mazo {
 			{juego.musicaFondoStage2().pause()}
 		sonidoMario.deObjeto()
 		rain.play()
-		rain.shouldLoop(true)
+		rain.shouldLoop(true)		
 	 	game.schedule(8000,{
-	 		try {prograFantasma.fantasmas().forEach({f=>f.transformacionNormal()})} catch e : Exception{}
+	 		try {prograFantasma.transformacionNormal()} catch e : Exception{}//////
 	 		try {prograFueguito.fueguito().transformacionNormal()} catch e : Exception{}			
 	 		mario.tieneMazo(false)
 			rain.shouldLoop(false)
+			estaActivo = false////////////////////////
 			if (stageEnQueSeMueveMario==stage1){
 				juego.musicaFondo().resume()			
 			} else {
