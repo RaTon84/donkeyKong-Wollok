@@ -101,10 +101,9 @@ class Barril {
 	method removerBarril(){
 		game.removeTickEvent(idAnimacion)
 		game.removeTickEvent(idRecorrido)
-		game.removeVisual(self)
-		position = game.at(5,14)
 		direccion = "derecha"
-				
+		game.removeVisual(self)
+		position = game.at(5,14)				
 	}
 	
     method colisionadoPor(personaje){
@@ -115,7 +114,7 @@ class Barril {
 		}
 		else 
 			personaje.esChocadoPor(self)		
-		self.removerBarril()
+		try{self.removerBarril()}catch e : Exception {}//ponerlo en u try
 	}
 }
 
@@ -259,19 +258,17 @@ class Fueguito inherits ObejtoTipoFuego {
 	method recorrerEscenario() {game.onTick(velocidad, idRecorrido, {self.moverse()})}
 	
 	method removerFueguito() {
-		game.removeVisual(self)
+		game.removeTickEvent(idAnimacion)
+		game.removeTickEvent(idRecorrido)
 		direccion = "derecha"
-		game.removeTickEvent(idRecorrido)
-		game.removeTickEvent(idRecorrido)
+		game.removeVisual(self)				
 	}
 	
 	override method colisionadoPor(personaje) {
 		if (personaje.tieneMazo()) {
-			game.sound("assets/sonidos/get-item.wav").play()	
-			//game.say(mario, "¡100 Puntos!")
-			//personaje.eliminarBarril()
+			game.sound("assets/sonidos/get-item.wav").play()
 		} else 
-			personaje.esChocadoPor(self) ////añadir a mario
+			personaje.esChocadoPor(self)
 		self.removerFueguito()
 	}
 	
@@ -297,7 +294,6 @@ object prograFueguito {
 		fueguito.animacion()
 		fueguito.recorrerEscenario()
 		game.onCollideDo(mario, { elemento => elemento.colisionadoPor(mario)})
-		//game.onCollideDo(fueguito, { personaje => personaje.esChocadoPor(fueguito)})
 	}
 	
 	method fueguito(){
@@ -324,7 +320,8 @@ object fuegoBarril {
 	}
 		
 	method animacion() {game.onTick(200, "animacion-fuegoBarril", {self.siguienteFotograma()})}
-	//method colisionadoPor(personaje){}
+	
+	method colisionadoPor(personaje){}
 }
 
 class Fantasma inherits ObejtoTipoFuego {

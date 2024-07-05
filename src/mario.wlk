@@ -82,7 +82,7 @@ object mario {
  	method esChocadoPor(otro){
  	
    		if(self.tieneMazo())
-   			otro.removerBarril()
+   			otro.removerBarril()/////////////////////////////////////
    		else {
    			animacionMario.pierdeVida()
    			sonidoMario.pierdeVida()
