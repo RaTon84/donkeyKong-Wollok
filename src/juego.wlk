@@ -176,7 +176,7 @@ object juego{
 		//game.schedule(10000,{prograFantasma.aniadirFantasma()})
 		//game.schedule(15000,{prograFantasma.aniadirFantasma()})
 		//game.schedule(20000,{prograFantasma.aniadirFantasma()})
-		//game.schedule(25000,{prograFantasma.aniadirFantasma()})
+		game.schedule(25000,{prograFantasma.aniadirFantasma()})
 		self.configuracion(2)
 		game.schedule(2000,{self.musicaFondoStage2().resume()})
 		}
