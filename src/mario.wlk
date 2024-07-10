@@ -79,16 +79,17 @@ object mario {
 	
  	method esColisionadoPor(){}
    		
- 	method esChocadoPor(otro){
- 	
+ 	method esChocadoPor(otro){ 	
    		if(self.tieneMazo())
-   			otro.removerBarril()/////////////////////////////////////
+   			otro.remover()
    		else {
    			animacionMario.pierdeVida()
    			sonidoMario.pierdeVida()
    			game.say(self, "¡Auch!")
    			//vidas= vidas - 1
-   			vidas.pierdeVida()}}
+   			vidas.pierdeVida()
+   		}
+   }
    	
 		
 		//MOVIMIENTO

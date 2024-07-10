@@ -10,8 +10,12 @@ import juego.*
 object barriles {
 	var property position=game.at(0,14)	
 	method image() = "assets/objects/2.png"
+	
 	method positionSegundoNivel(){self.position(game.at(6,14))}
+	
 	method positionPrimerNivel(){self.position(game.at(0,14))}
+	
+	method colisionadoPor(personaje){}
 }
 
 class Barril {
@@ -46,15 +50,16 @@ class Barril {
 		if (direccion == "derecha") {
 			game.removeTickEvent(idAnimacion)
 			direccion = "izquierda"
-			gifActual = gifIzquierda			
+			gifActual = gifIzquierda
 			self.animacion()
 		} else {
 			game.removeTickEvent(idAnimacion)
 			direccion = "derecha"
-			gifActual = gifDerecha			
+			gifActual = gifDerecha
 			self.animacion()
 		}
 	}
+	
 	method hayVigaAbajo(){return stage1.vigas().any({v=>v==game.at(position.x(),position.y()-1)})}
 	
 	method puedoCaer(){return stage1.caidaBarril().any({v=>v==game.at(position.x(),position.y())})}
@@ -90,7 +95,7 @@ class Barril {
 	}
 	
 	method rodar(){
-		if(position==game.at(0,1)){self.removerBarril()}				
+		if(position==game.at(0,1)){self.remover()}				
 		else if(estoyBajandoEscalera)self.bajarEscalera()
 		else if(self.puedoCaer())self.dicidir()
 		else self.rodarVigas()
@@ -98,7 +103,7 @@ class Barril {
 	
 	method recorrerEscenario(){game.onTick(velocidad, idRecorrido, {self.rodar()})}
 		
-	method removerBarril(){
+	method remover() {
 		game.removeTickEvent(idAnimacion)
 		game.removeTickEvent(idRecorrido)
 		direccion = "derecha"
@@ -106,15 +111,13 @@ class Barril {
 		position = game.at(5,14)				
 	}
 	
-    method colisionadoPor(personaje){
+    method colisionadoPor(personaje) {
 		if(personaje.tieneMazo()){
-			game.sound("assets/sonidos/get-item.wav").play()	
-			//game.say(mario, "¡100 Puntos!")
-			//personaje.eliminarBarril()
+			game.sound("assets/sonidos/get-item.wav").play()
 		}
 		else 
 			personaje.esChocadoPor(self)		
-		try{self.removerBarril()}catch e : Exception {}//ponerlo en u try
+		try{self.remover()}catch e : Exception {}
 	}
 }
 
@@ -139,7 +142,7 @@ object prograBarril {
 			nroBarril.animacion()
 			nroBarril.recorrerEscenario()
 		} catch e : Exception {
-			nroBarril.removerBarril()
+			nroBarril.remover()
 			game.addVisual(nroBarril)
 			nroBarril.animacion()
 			nroBarril.recorrerEscenario()
@@ -161,8 +164,8 @@ class ObejtoTipoFuego{
 	var property estoyBajandoEscalera = false
 	var property estoySubiendoEscalera = false
 	const property randomEscalera = [0,1,2,3]
-	const idAnimacion= self.identity().toString()+"a"
-	const idRecorrido= self.identity().toString()+"r"
+	const idAnimacion = self.identity().toString()+"a"
+	const idRecorrido = self.identity().toString()+"r"
 		
 	method moverDerecha() {position = game.at(position.x() + 1, position.y())}
 	
@@ -213,7 +216,7 @@ class Fueguito inherits ObejtoTipoFuego {
 	
 	method hayVigaDerecha() {return stage1.vigas().any({ v => v == game.at(position.x() + 1, position.y() - 1) })}
 	
-	method hayEscalera() {return stage1.escaleras().any({ v => v == game.at(position.x(), position.y()+1) })}// el +1 porque uso las escaleras de mario
+	method hayEscalera() {return stage1.escaleras().any({ v => v == game.at(position.x(), position.y()+1) })}
 	
 	method hayEscaleraAbajo() {return stage1.escaleras().any({ v => v == game.at(position.x(), position.y()-1) })}
 	
@@ -257,11 +260,11 @@ class Fueguito inherits ObejtoTipoFuego {
 	
 	method recorrerEscenario() {game.onTick(velocidad, idRecorrido, {self.moverse()})}
 	
-	method removerFueguito() {
+	method remover() {
 		game.removeTickEvent(idAnimacion)
 		game.removeTickEvent(idRecorrido)
 		direccion = "derecha"
-		game.removeVisual(self)				
+		game.removeVisual(self)			
 	}
 	
 	override method colisionadoPor(personaje) {
@@ -269,7 +272,7 @@ class Fueguito inherits ObejtoTipoFuego {
 			game.sound("assets/sonidos/get-item.wav").play()
 		} else 
 			personaje.esChocadoPor(self)
-		self.removerFueguito()
+		self.remover()
 	}
 	
 	method transformacionAzul(){
@@ -407,7 +410,7 @@ class Fantasma inherits ObejtoTipoFuego {
 	
 	method recorrerEscenario(){game.onTick(velocidad, idRecorrido, {self.moverse()})}
 		
-	method removerFantasma() {
+	method remover() {
 		try{ game.removeTickEvent(idAnimacion)
 			game.removeTickEvent(idRecorrido)
 			game.removeVisual(self)
@@ -420,7 +423,7 @@ class Fantasma inherits ObejtoTipoFuego {
 			game.sound("assets/sonidos/get-item.wav").play()			
 		} else  
 			personaje.esChocadoPor(self)
-		self.removerFantasma()
+		self.remover()
 	}
 	
 	method transformacionAzul(){
@@ -436,12 +439,12 @@ class Fantasma inherits ObejtoTipoFuego {
 	}
 }
 
-object prograFantasma {
-	const f1 = new Fantasma(position=game.at(5,4))
+object prograFantasma {	
+	const f1 = new Fantasma(position=game.at(5,11))
 	const f2 = new Fantasma(position=game.at(16,7))
-	const f3 = new Fantasma(position=game.at(1,7))
-	const f4 = new Fantasma(position=game.at(5,11))
-	const f5 = new Fantasma(position=game.at(5,7))
+	const f3 = new Fantasma(position=game.at(5,7))
+	const f4 = new Fantasma(position=game.at(2,11))
+	const f5 = new Fantasma(position=game.at(5,4))	
 	const property fantasmas = [f1,f2,f3,f4,f5]
 	var posicion = 0
 	var nroFantasma = fantasmas.first()
@@ -463,7 +466,7 @@ object prograFantasma {
 			game.addVisual(nroFantasma)
 			nroFantasma.animacion()
 			nroFantasma.recorrerEscenario()
-		}		
+		}
 	}	
 	
 	method transformacionAzul(){

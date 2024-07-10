@@ -46,4 +46,6 @@ object kong{
 		self.position(game.at(8,14))
 		image = gifKongStage2.get(fotograma)
 	}
+	
+	method colisionadoPor(personaje){}
 }
